@@ -1,0 +1,110 @@
+<app-loader *ngIf="loadingReport"></app-loader>
+<div *ngIf="!loadingReport">
+    <div class="text-center text-muted mt-4 mb-4"><h3>DEBTORS REPORT</h3></div>
+    <!-- <div class="row mb-1">
+        <div class="col-lg-2 col-sm-2 col-md-2 ">
+            <a target="_blank" class="btn btn-primary mr-1 mt-4" style="color:white" (click)="print()">
+                <i class="fa fa-print"></i> Print
+            </a>
+        </div>
+    </div> -->
+
+    <div class="form-row">
+        <div class="form-group">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-control" [(ngModel)]="startDate">
+        </div>
+        <div class="form-group">
+            <label class="form-label">End Date</label>
+            <input type="date" class="form-control" [(ngModel)]="endDate">
+        </div>
+        <div class="form-group mt-4 ml-2">
+            <button class="form-control btn btn-outline-primary" (click)="filterReport()"><i class="fa fa-calendar"></i> Filter</button>
+        </div>
+        <div class="form-group mt-4 ml-2">
+            <button class="form-control btn btn-outline-success" (click)="reset()"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+        <div class="form-group mt-4 ml-2">
+            <button class="form-control btn btn-primary" (click)="print()"><i class="fa fa-print"></i> Print</button>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label class="form-label">Filter by customer:</label>
+            <ng-select
+                [items]="customers"
+                bindLabel="fullName"
+                (change)="filterReportByCutomer($event)"
+            >
+            </ng-select>
+        </div>
+        <div class="form-group mt-4 ml-2 col-md-3">
+            <button class="form-control btn btn-outline-success" (click)="reset()"><i class="fa fa-refresh"></i> Reset</button>
+        </div>
+    </div>
+    
+    <div class="table-responsive mt-2">
+    <table class="table table-striped card-table" id="tableRecord">
+        <thead>
+            <th>S/N</th>
+            <th>Customer<i class="ion text-muted ml-2"></i></th>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+            <th>Total <i class="ion text-muted ml-2"></i></th>
+            <th>Amount paid <i class="ion text-muted ml-2"></i></th>
+            <th>Balance <i class="ion text-muted ml-2"></i></th>
+        </thead>
+        <tbody>
+        <!-- <ng-template *ngIf="!customerFilterMode"> -->
+            <!-- <tr *ngFor="let debtor of debtorsReport; index as i" >
+                <td>{{i+1}}</td>
+                <td>{{getCustomerName(debtor.customerID)}}</td>
+                <td>{{debtor.invoiceDate.split('T')[0]}}</td>
+                <td>{{debtor.invoiceNo}}</td>  
+                <td>‎₦{{debtor.amount}}</td>  
+                <td>‎₦{{debtor.amountPaid}}</td>
+                <td>‎₦{{debtor.balance}}</td>
+            </tr> -->
+        <!-- </ng-template> -->
+        <!-- <ng-template *ngIf="customerFilterMode"> -->
+            <tr *ngFor="let debtor of debtorsReportByCustomer; index as i" >
+                <td>{{i+1}}</td>
+                <td>{{getCustomerName(debtor.customerID)}}</td>
+                <td>{{debtor.invoiceDate.split('T')[0]}}</td>
+                <td>{{debtor.invoiceNo}}</td>  
+                <td>‎₦{{debtor.amount}}</td>  
+                <td>‎₦{{debtor.amountPaid}}</td>
+                <td>‎₦{{debtor.balance}}</td>
+            </tr>
+        <!-- </ng-template> -->
+        </tbody>
+    </table>
+    </div>
+</div>
+
+
+<div id="toPrint" class="d-none">
+    <h3>DEBTORS REPORT</h3>
+    <table  *ngIf="!loadingReport" class="tabl table-stripe card-tabl" id="tableRecord">
+        <thead>
+            <th>S/N</th>
+            <th>Customer<i class="ion text-muted ml-2"></i></th>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+            <th>Total <i class="ion text-muted ml-2"></i></th>
+            <th>Amount paid <i class="ion text-muted ml-2"></i></th>
+            <th>Balance <i class="ion text-muted ml-2"></i></th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let debtor of debtorsReport; index as i" >
+            <td>{{i+1}}</td>
+            <td>{{getCustomerName(debtor.customerID)}}</td>
+            <td>{{debtor.invoiceDate.split('T')[0]}}</td>
+            <td>{{debtor.invoiceNo}}</td>  
+            <td>‎₦{{debtor.amount}}</td>  
+            <td>‎₦{{debtor.amountPaid}}</td>
+            <td>‎₦{{debtor.balance}}</td>    
+        </tr>
+        </tbody>
+    </table>
+</div>

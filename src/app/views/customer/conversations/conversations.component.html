@@ -1,0 +1,27 @@
+<app-loader *ngIf="loading"></app-loader>
+
+<div *ngIf="!loading">
+    <div class="card p-4 mt-4">
+        <div class="text-center">
+            <h3><i class="fa fa-user"></i> {{lead.firstName}} {{lead.lastName}}</h3>
+        </div>
+        <div class="text-center">
+            <p><i class="fa fa-envelope"></i> {{lead.email}} | <i class="fa fa-phone"></i> {{lead.phone}} </p>
+        </div>
+        <hr>
+        <div>
+            <ul>
+                <li *ngFor="let convo of lead.message" class="convo">{{convo.summary}} <span class="date text-muted"><i class="fa fa-clock"></i> {{convo.dateCreated.split('T')[0]}}</span></li>
+            </ul>
+            <hr>
+            <div class="form-group">
+                <label>Add a new message</label>
+                <textarea class="form-control" [(ngModel)]="leadMessage"></textarea>
+            </div>
+            <button class="btn btn-primary float-right" (click)="addMessage()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="savingLeadMessage"></span>                 
+                Add
+            </button>
+        </div>
+    </div>
+</div>

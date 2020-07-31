@@ -1,0 +1,42 @@
+  <div class="text-center text-muted mt-2"><h3>INVENTORY</h3></div>
+  
+  <div> 
+   
+    <div class="row mb-1">
+        <div class="col-sm-6 col-md-6 d-inline-flex">
+            <input type="text"
+            [(ngModel)]="filterVal"
+            (input)="searchTable()"
+            class="form-control w-auto"
+            placeholder="Search...">
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 ">
+          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
+              <i class="ion ion-md-print"></i>&nbsp; Print
+          </a>
+        </div>
+      </div>
+  <div class="table-responsive mt-2">
+      <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+      <thead>
+            <th>Product <i class="ion text-muted ml-2"></i></th>
+            <th>Quantity <i class="ion text-muted ml-2"></i></th>
+            <th>Sell price <i class="ion text-muted ml-2"></i></th>
+            <th>Status</th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let item of products" >
+          <td>{{ item.productName }}</td>
+          <td>{{item.stockCount}}</td>
+          <td><span>&#8358;</span>{{item.sellPrice}}</td>
+          <td class="align-middle">
+            <span *ngIf="item.stockCount>0" class="badge badge-outline-success in-stock">In Stock</span>
+            <span *ngIf="item.stockCount===0" class="badge badge-outline-danger out-stock">Out of Stock</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  

@@ -1,0 +1,53 @@
+<app-loader *ngIf="loading"></app-loader>
+<div>
+    <div class="mt-2">
+        <h3 class="text-center text-muted">QUALIFICATIONS</h3>
+    </div>
+    <div>
+        <button class="btn btn-success float-right" (click)="open(topModal)">Add Qualification</button>
+    </div><br>
+    <br>
+
+    <div>
+        <div class="row">
+            <div class="col-md-3 mt-2" *ngFor="let lead of filteredLeads">
+                <div class="card p-4 lead-card text-center cursor-pointer">
+                    <h5>{{qualification.name}}</h5>
+                    <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+                        <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                            <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                            <span class="fa fa-ellipsis-v"></span>
+                            </button>   
+                        </div>
+                        <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                            <a class="dropdown-item" (click)="open(convo)">Update</a>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        New Qualification
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card p-2">
+            <div class="form-group">
+                <label class="form-label">Name:<small class="text-danger">*</small></label>
+                <input type="text" class="form-control" [(ngModel)]="name">
+            </div> 
+        </div>    
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="saveQualification()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="savingQualification"></span> 
+            Save
+        </button>
+        </div>
+        </div>    
+</ng-template>
+    

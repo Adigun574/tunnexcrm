@@ -1,0 +1,48 @@
+<app-loader *ngIf="loadingProduct"></app-loader>
+<div class="body" *ngIf="!loadingProduct">
+    <div class="text-center">
+        <h3 class="header">{{product.name}}</h3>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="product.name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" [(ngModel)]="product.quantity">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cost Price</label>
+                    <input type="number" class="form-control" [(ngModel)]="product.costPrice">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sale Price</label>
+                    <input type="number" class="form-control" [(ngModel)]="product.salePrice">
+                </div>
+                <!-- <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control">
+                </div> -->
+            </div>
+            <div class="col-sm-6">
+                <!-- <img src="../../../../assets/img/cart.jpg" alt="no image" width="100%" height="90%" class="image" *ngIf="product.image=='string' || '' "> -->
+                <img [src]="product.image" alt="no image" width="100%" height="90%" class="image">
+            </div>
+        </div>
+        
+        <div>
+            <button class="btn btn-danger mr-2 ml-2 pull-right" (click)="deleteProduct(product.id)">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="deleting"></span> 
+                <i class="fa fa-trash"></i>
+                Delete
+            </button>
+            <button class="btn btn-success pull-right" (click)="updateProduct()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="updating"></span> 
+                Update
+            </button>
+        </div>
+    </div>
+</div>

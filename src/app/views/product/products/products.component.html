@@ -1,0 +1,104 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="body">
+<div class="d-block mt-2">
+    <h3 class="text-center text-muted">PRODUCTS</h3>
+</div>
+<div class="d-block">
+    <button class="btn btn-primary pull-right d-block mr-1" (click)="open(bulkModal)"><i class="fa fa-upload"></i> Bulk Upload</button>
+    <button class="btn btn-success pull-right d-block mr-2" (click)="open(addProductModal)">Add Product</button>
+</div>
+<br>
+<div class="mb-2">
+    <input type="search" 
+    class="form-control"
+    [(ngModel)]="searchKey"
+    (input)="filterProduct()"
+    placeholder="filter by name"
+    style="width:250px; margin-left:40px;"
+    >
+</div>
+<div class="container">
+    <div class="row m-auto">
+        <!-- <div class="col-sm-3" *ngFor="let product of displayedProducts" (click)="viewProduct(product.id)">
+            <div class="mb-2 mr-2 mt-1 inner-card product-card">
+                <p class="name">{{product.name}}</p>
+                <p class="price">₦{{product.salePrice}}.00</p>
+            </div>
+        </div> -->
+        <div class="col-sm-3" *ngFor="let product of displayedProducts" (click)="viewProduct(product.id)">
+            <div class="mb-2 mr-2 mt-1 inner-card product-card" style="background-image: url({{product.image}});">
+                <p class="name">{{product.name}}</p>
+                <p class="price">₦{{product.salePrice}}.00</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #bulkModal>
+    <div class="bulk-modal">
+        <img src="../../../../assets/img/excel_img.PNG" height="250px" width="350px">
+        <p><b>Please upload an excel file in the exact format as shown in the picture above</b></p>
+        <div class="form-group">
+            <label class="form-label">Select an excel file</label>
+            <input type="file" (change)="onFileChange($event)" multiple="false" class="form-control"/><br>
+        </div>
+        <div class="uploading-spinner">
+            <span class="spinner-grow spinner-grow-sm text-center" *ngIf="uploading"></span>  
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #addProductModal>
+    <div class="card p-2">
+        <div class="card-header">
+            <h5>Add Product</h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="addProductForm">
+                <div class="text-center" *ngIf="submitted && addProductForm.invalid">
+                    <small class="text-danger">Please fill all required fields</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" formControlName="quantity">
+                </div>
+                <div class="form-row d-flex" style="justify-content: space-between">
+                    <div class="form-group">
+                        <label class="form-label">Cost Price</label>
+                        <!-- <input type="number" class="form-control" [(ngModel)]="CostPrice" [ngModelOptions]="{standalone:true}"> -->
+                        <input type="number" class="form-control" formControlName="costPrice">
+                    </div>            
+                    <div class="form-group">
+                        <label class="form-label">Sell Price</label>
+                        <!-- <input type="number" class="form-control" [(ngModel)]="SalePrice" [ngModelOptions]="{standalone:true}"> -->
+                        <input type="number" class="form-control" formControlName="salePrice">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control" formControlName="description">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text" class="form-control" formControlName="location">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Image</label>
+                    <input type="file" class="form-control" (change)="selectImage($event)">
+                </div>
+            </form>
+        </div>        
+        <div class="card-footer">
+            <button class="btn btn-primary pull-right" (click)="uploadPicture()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="saving"></span> 
+                Save
+            </button>
+        </div>
+    </div>
+</ng-template>
+</div>

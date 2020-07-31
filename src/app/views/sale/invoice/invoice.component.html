@@ -1,0 +1,91 @@
+<app-loader *ngIf="loading"></app-loader>
+<div *ngIf="!loading">
+    <div>
+        <div class="text-center mt-4 header-details">
+            <h3><b>TUNNEX LAB</b></h3>
+            <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
+            <p>+2348104403054</p>
+            <p>sales@tunnexlab.com.ng</p>
+        </div>
+        <hr>
+        <div class="details-table">
+            <table>
+                <tr>
+                    <td>Invoice No.</td>
+                    <td><b>#{{invoice.invoiceNo}}</b></td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td><b>{{invoice.dateCreated.split('T')[0]}}</b></td>
+                </tr>
+                <tr>
+                    <td>Customer</td>
+                    <td *ngIf="!fetchingCustomers"><b>{{getCustomerName(invoice.customerID)}}</b></td>
+                </tr>
+                <tr>
+                    <td>Payment Status</td>
+                    <td *ngIf="invoice.isPaid"><b><span class="paid">Paid</span></b></td>
+                    <td *ngIf="!invoice.isPaid"><b><span class="unpaid">Unpaid</span></b></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>Amount.</td>
+                    <td><b>₦{{invoice.amount}}</b></td>
+                </tr>
+                <tr>
+                    <td>Amount Paid</td>
+                    <td><b>₦{{invoice.amountPaid}}</b></td>
+                </tr>
+                <tr>
+                    <td>Balance</td>
+                    <td><b>₦{{invoice.balance}}</b></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+        <div>
+            <!-- <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>Product1</td>
+                    <td>100</td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>Product1</td>
+                    <td>100</td>
+                    <td>5000</td>
+                </tr>
+            </table> -->
+            <!-- TABLE FOR CART WILL BE HERE!!!<br>
+                        TABLE FOR CART WILL BE HERE!!! -->
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-primary pull-right mr-2" (click)="open(payment)" [disabled]="invoice.balance<1">Add Payment</button>
+            <button class="btn btn-success pull-right mr-2" [routerLink]="['/main/sales-history']">Back</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #payment>
+    <div class="p-4">
+        <div>
+            <h5>Add Payment for #{{invoice.invoiceNo}}</h5>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Amount</label>
+            <input class="form-control" type="number" [(ngModel)]="amount" min="0" [max]="invoice.balance">
+        </div>
+        <div>
+            <button class="btn btn-primary pull-right" (click)="pay()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="paying"></span>                 
+                Pay
+            </button>
+        </div>
+    </div>
+</ng-template>

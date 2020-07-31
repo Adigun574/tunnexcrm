@@ -1,0 +1,111 @@
+<h2 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+    <div>Skill Monitioring</div>
+    <div><button class="btn btn-primary brkdown-btn" (click)="showTable=!showTable" *ngIf="showTable">View Breakdown</button></div>
+    <div><button class="btn btn-primary brkdown-btn" (click)="showTable=!showTable" *ngIf="!showTable">View Pie Chart</button></div>
+  </h2>
+  
+  <div> 
+      <div class="container" *ngIf="showTable">
+        <div class="card">
+            <ngx-charts-pie-chart
+                [view]="view"
+                [scheme]="colorScheme"
+                [results]="skillsChart"
+                [gradient]="gradient"
+                [legend]="showLegend"
+                [legendPosition]="legendPosition"
+                [labels]="showLabels"
+                [doughnut]="isDoughnut"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                >
+            </ngx-charts-pie-chart>
+        </div>
+      </div>
+
+    
+ <div *ngIf="!showTable">  
+    <div class="row mb-1" >
+        <div class="col-sm-6 col-md-6 d-inline-flex">
+            <input type="text"
+            [(ngModel)]="filterVal"
+            class="form-control w-auto"
+            placeholder="Search...">
+        </div>
+        <div class="col-lg-6 col-sm-6 col-md-6 ">
+          <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white">
+              <i class="fa fa-print"></i>&nbsp; Print
+          </a>
+        </div>
+      </div>
+  <div class="table-responsive mt-2">
+      <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+      <thead>
+            <th>Employee Name <i class="ion text-muted ml-2"></i></th>
+            <th>Number of skills <i class="ion text-muted ml-2"></i></th>
+            <th>Certified Skills <i class="ion text-muted ml-2"></i></th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let skill of skills" >
+          <td (click)="open(topModal, { windowClass: 'modal-top' })"><span class="employee-name">{{skill.employeeName }}</span></td>
+          <td>{{skill.numberOfSkills}}</td>
+          <td>{{skill.numberOfCertifiedSkills}}</td>
+
+          <ng-template #topModal let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                New Employee
+              </h5>
+            </div>
+              <div class="modal-body" >
+                <div  class="card mb-4 save-customer-card container">
+                    <h3>Skills</h3>
+                    <ul>
+                      <li *ngFor="let skill of skill.skills">{{skill}}</li>
+                    </ul>
+                    <hr>
+                    <h3>Certified Skills</h3>
+                    <ul>
+                      <li *ngFor="let skill of skill.certifiedSkills">{{skill}}</li>
+                    </ul>          
+                </div>
+            
+               <div class="modal-footer">
+               </div>
+              </div>    
+          </ng-template>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      New Employee
+    </h5>
+  </div>
+    <div class="modal-body" >
+      <div  class="card mb-4 save-customer-card">
+          <h3>Skills</h3>
+          <ul>
+            <li *ngFor="let skill of skill.skills">{{skill}}</li>
+          </ul>
+          <hr>
+          <h3>Certified Skills</h3>
+
+      </div>
+  
+     <div class="modal-footer">
+       <button class="btn btn-primary" (click)="saveEmployee()">Save</button>
+     </div>
+    </div>    
+</ng-template>
+
+  

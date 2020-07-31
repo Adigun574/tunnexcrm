@@ -1,0 +1,265 @@
+<div class="pos-body"> 
+    <div class="row">
+        <div class="col-md-5">
+            
+            <div class="orderScreen">
+                <table class="table table-striped">
+                  <thead style="border-bottom: 2px solid black; border-top: 2px solid black">
+                    <td>
+                      <b>Qty</b>
+                    </td>
+                    <td>
+                      <b>Item</b>
+                    </td>
+                    <td>
+                      <b>Price</b>
+                    </td>
+                    <td></td>
+                  </thead>
+                  <tr *ngFor="let order of orders; index as i">
+                    <td>
+                      <input type="number" style="width:50px" (input)="setQuantity(quantity.value,i)" #quantity [(ngModel)]="order.quantity">
+                    </td>
+                    <td>
+                      {{order.name}}
+                    </td>
+                    <td>
+                      ₦{{order.salePrice * order.quantity}}.00
+                    </td>
+                    <td>
+                      <i class="fa fa-trash" (click)="removeItem(i)"></i>
+                    </td>
+                  </tr>
+                </table>
+                <div class="orderScreen" *ngIf="orders.length==0" style="opacity:0.3; text-align: center">
+                    <h1><i class="fa fa-shopping-cart"></i></h1>
+                    <h3>Your shopping cart is empty!!!</h3>
+                </div>
+                <div style="position:absolute; top:220px; right:40px" class="total-display"><b>Total: ₦{{total}}.00</b></div>
+            </div>
+
+          <div class="calculator" style="width:90%; margin-left:auto; margin-right:auto">    
+            <div>              
+              <div class="pr-4 pl-4 pb-2 pt-1">
+  <div class="row">
+    <div class="col-6">
+                <div class="form-group">
+                  <label class="form-label text-danger" *ngIf="!selectedCustomer">Select a customer!</label>
+                  <ng-select
+                    [items]="customers"
+                    bindLabel="fullName"
+                    [(ngModel)]="selectedCustomer"
+                  >                    
+                  </ng-select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label text-danger">Enter Amount</label>
+                  <input type="number" class="form-control" 
+                  [(ngModel)]="currentAmount" 
+                  (change)="addPayment()"
+                  [disabled]="!selectedCustomer"
+                  >
+                </div>
+      </div>
+    <div class="col-6">
+                <div class="row btn-stuff mt-2">
+                  <div class="ol-4 mr-1">
+                    <button class="btn btn-primary" (click)="paymentMethod('cash')" [disabled]="!selectedCustomer">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
+                      <small><i class="fa fa-money"></i> Cash</small>
+                    </button>
+                  </div>
+                  <div class="ol-4 mr-1">
+                    <button class="btn btn-success" [disabled]="!selectedCustomer" (click)="paymentMethod('credit')">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCredit"></span>
+                      <small><i class="fa fa-credit-card"></i> Credit</small>
+                    </button>
+                  </div>
+                </div>
+                <div class="row btn-stuff mt-3">
+                  <div class="ol-4 mr-">
+                      <button class="btn btn-danger" (click)="resetSales()">
+                        <small><i class="fa fa-refresh"></i> Reset</small>
+                      </button>
+                  </div>
+                  <button class="btn btn-warning" (click)="print()"><small><i class="fa fa-print"></i> Receipt</small></button>
+                </div>
+                <div class="row btn-stuff mt-3">
+                  <div>
+                    <button class="btn btn-info" [disabled]="!selectedCustomer" (click)="paymentMethod('cheque')">
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCheque"></span>
+                      <small><i class="fa fa-credit-card"></i> Cheque</small>
+                    </button>
+                  </div>
+                  <div>
+                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount)>0"> 
+                      <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
+                        <span class="sr-only">Loading...</span>
+                      </div>
+                      Complete
+                    </button>
+                  </div>
+                </div>
+    </div>
+  </div>
+          
+                <!-- <hr> -->
+
+                <div class="order-display-screen mt-2">
+                    <table>
+                      <!-- <tr>
+                        <td>Customer:</td>
+                        <td><code>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</code></td>
+                      </tr> -->
+                      <tr>
+                        <td>Amount Due:</td>
+                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount+totalChequeAmount)}}.00</code></td>
+                      </tr>
+                      <tr>
+                        <td>Mode:</td>
+                        <td><code>{{currentPaymentMode | titlecase}}</code></td>
+                      </tr>
+                      <tr>
+                        <td>Cash || Cheque:</td>
+                        <td><code>₦{{totalCashAmount}}.00 || ₦{{totalChequeAmount}}.00</code></td>
+                      </tr>
+                      <tr>
+                        <td>Credit:</td>
+                        <td><code>₦{{totalCreditAmount}}.00</code></td>
+                      </tr>
+                    </table>
+                </div>
+
+              </div>
+            </div>            
+            
+          </div>
+          
+        </div>
+    
+        <div class="col-md-7 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
+            <input type="search" style="width:100%; height:40px; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" #food (input)="searchProducts(food.value)">
+            <div  style="height:100vh">
+                <!-- <div class="loader" *ngIf="loadProducts"></div> -->
+                <app-loader *ngIf="loadProducts"></app-loader>
+                <div class="row">
+                  <div class="col-sm-3" *ngFor="let product of products">
+                      <div class="food cursor-pointer mt-3" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left; background-image: url({{product.image}});" (click)="addToCart(product)">
+                          <div class="mb-2 mr-2 mt-1 product-div">
+                            <p class="name">{{product.name}}</p>
+                            <p class="price">₦{{product.salePrice}}.00</p>
+                          </div>
+                      </div>
+                  </div>                                 
+                </div>
+            </div>
+        </div>
+      </div>
+    
+      <div id="bill" class="d-none">
+        <table class="table table-striped">
+          <thead>
+            <td>
+              <b>Qty</b>
+            </td>
+            <td>
+              <b>Item</b>
+            </td>
+            <td>
+              <b>Price</b>
+            </td>
+          </thead>
+          <tr *ngFor="let order of orders; index as i">
+            <td>
+              {{order.quantity}}
+            </td>
+            <td>
+              {{order.name}}
+            </td>
+            <td>
+              ₦{{order.sellPrice}}
+            </td>
+          </tr>
+        </table>
+        <div style="position:absolute; top:200px; right:30px"><b>Total:₦{{total}}</b></div>
+        <!-- <code>You were served by: <b>{{cashierName}}</b></code> -->
+    </div> 
+</div>
+
+
+<div id="toPrint" class="d-none" style="background-color: white; display:none;">
+  <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
+    <table style="width:100%; text-align:center; border-collapse: collapse;">
+      <thead style="border-bottom:1px solid black">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <b>Qty</b>
+        </td>
+        <td>
+          <b>Item</b>
+        </td>
+        <td>
+          <b>Price</b>
+        </td>
+        <td></td>
+      </thead>
+      <tr *ngFor="let order of orders; index as i" style="border-bottom:1px dotted black">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          {{order.quantity}}
+        </td>
+        <td>
+          {{order.name}}
+        </td>
+        <td>
+          ₦{{order.salePrice * order.quantity}}.00
+        </td>
+        
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Cash</b></td>
+        <td><b>₦{{totalCashAmount}}.00</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Credit</b></td>
+        <td><b>₦{{totalCreditAmount}}.00</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Cheque</b></td>
+        <td><b>₦{{totalChequeAmount}}.00</b></td>
+      </tr>
+      <tr  style="border-top:1px dotted black; border-bottom: 1px dotted black;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Customer</b></td>
+        <td><b>{{selectedCustomer?.firstName}} {{selectedCustomer?.lastName}}</b></td>
+      </tr>
+      <tr style="border-top:1px dotted black; border-bottom: 1px dotted black;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Total</b></td>
+        <td><b>₦{{total}}.00</b></td>
+      </tr>
+    </table>
+  </div>
+</div>

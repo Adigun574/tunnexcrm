@@ -1,0 +1,97 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="pt-4 d-block mb-4">
+    <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Customer</button>
+    <button mat-raised-button class="add-button" (click)="open(bulkModal, { windowClass: 'modal-top' })"><i class="fa fa-upload"></i> Bulk Upload</button>
+</div>
+
+<div class="mb-2">
+    <input type="search" 
+    class="form-control"
+    [(ngModel)]="searchKey"
+    (input)="filterCustomer()"
+    placeholder="filter by firstname or lastname"
+    >
+</div>
+
+<div class="container-fluid mt-4 mb-4">
+    <div class="row">
+      <div class="col-md-3 mt-4 mb-2" *ngFor="let customer of filteredCustomers" (click)="showCustomer(customer.id)">
+        <div class="contact shadow cursor-pointer">
+          <h4><i class="fas fa-user"></i></h4><br>
+          <h4 class="mb-0 mt-0">{{customer.firstName}} {{customer.lastName}}</h4>
+          <p class="mb-0 mt-0 text-muted"><i class="fa fa-phone"></i> {{customer.phone}}</p>
+          <p class="mb-0 mt-0 text-muted"><i class="fa fa-envelope"></i> {{customer.email}}</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #bulkModal>
+    <div class="bulk-modal">
+        <img src="../../../../assets/img/excel_img2.PNG" height="250px" width="350px">
+        <p><b>Please upload an excel file in the exact format as shown in the picture above</b></p>
+        <div class="form-group">
+            <label class="form-label">Select an excel file</label>
+            <input type="file" (change)="onFileChange($event)" multiple="false" class="form-control"/><br>
+        </div>
+        <div class="uploading-spinner">
+            <span class="spinner-grow spinner-grow-sm text-center" *ngIf="uploading"></span>  
+        </div>
+    </div>
+
+</ng-template>
+
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h5 class="modal-title">
+        New Customer
+      </h5>
+    </div>
+      <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card">
+            <form [formGroup]="addCustomerForm">
+                <div class="text-center" *ngIf="submitted && addCustomerForm.invalid">
+                    <small class="text-danger">Please fill all required fields</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> First Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="FirstName">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Last Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="LastName">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Phone Number:</label>
+                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="Phone">
+                </div>  
+                <div class="form-group">
+                    <label class="form-label"> Email:</label>
+                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="Email">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Address:</label>
+                    <textarea  class="form-control" placeholder="123 main str, Isolo" formControlName="Address"></textarea>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Gender:</label>
+                    <ng-select
+                        [items]="genders"
+                        bindValue="name"
+                        bindLabel="name"
+                        formControlName="Gender"
+                    >
+                    </ng-select>
+                </div> 
+            </form>
+        </div>
+    
+       <div class="modal-footer">
+         <button class="btn btn-primary" (click)="saveCustomer()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="savingCustomer"></span> 
+            Save
+        </button>
+       </div>
+      </div>    
+</ng-template>

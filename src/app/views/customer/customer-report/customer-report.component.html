@@ -1,0 +1,55 @@
+<app-loader *ngIf="loadingReport"></app-loader>
+<div *ngIf="!loadingReport">
+    <div class="text-center text-muted mt-4 mb-4"><h3>TOP CUSTOMERS</h3></div>
+    <div class="row mb-1">
+        <div class="col-lg-2 col-sm-2 col-md-2 ">
+            <a target="_blank" class="btn btn-primary mr-1 mt-4" style="color:white" (click)="print()">
+                <i class="fa fa-print"></i>&nbsp; Print
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-2">
+    <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+    <thead>
+            <th>S/N</th>
+            <th>Name <i class="ion text-muted ml-2"></i></th>
+            <th>Phone No. <i class="ion text-muted ml-2"></i></th>
+            <th>Email <i class="ion text-muted ml-2"></i></th>
+            <th>Total Sales</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers; index as i" >
+        <td>{{i+1}}</td>
+        <td>{{customer.firstName}} {{customer.lastName}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.totalSales}}</td>
+        </tr>
+    </tbody>
+    </table>
+    </div>
+</div>
+
+<div id="toPrint" class="d-none">
+    <h3>TOP CUSTOMERS</h3>
+    <table>
+    <thead>
+            <th>S/N</th>
+            <th>Name <i class="ion text-muted ml-2"></i></th>
+            <th>Phone No. <i class="ion text-muted ml-2"></i></th>
+            <th>Email <i class="ion text-muted ml-2"></i></th>
+            <th>Total Sales</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers; index as i" >
+        <td>{{i+1}}</td>
+        <td>{{customer.firstName}} {{customer.lastName}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.totalSales}}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>

@@ -1,0 +1,42 @@
+<!-- <div class="container">
+    <h2 id="title">Login</h2>
+
+    <div class="items">
+        <input type="text" id="form-text" placeholder="Username" />
+        <input type="password" id="form-password" placeholder="Password" />
+
+        <button id="button">Send</button>
+        <a id="sign" type="submit" href="#">Sign Up</a>
+    </div>
+</div> -->
+<div class="login-box">
+    <div class="login-img-div">
+        <img src="../../../assets/img/tunnexlab.jpeg" width="60px" height="60px" class="login-img">
+    </div>
+    <h2 style="text-decoration: underline">Login</h2>
+    <p class="text-center text-white" *ngIf="invalidCredentials">Wrong username/pasword</p>
+    <form action="">
+        <div class="user-box">
+            <input type="text" name="" required="" [(ngModel)]="username" [ngModelOptions]="{standalone:true}">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" [(ngModel)]="password" [ngModelOptions]="{standalone:true}">
+            <label for="">Password</label>
+        </div>
+        <!-- <a href="">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Invia
+        </a> -->
+        <p class="cursor-pointer" (click)="login()">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Login
+        </p>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+<app-loader *ngIf="loadingReport"></app-loader>
+<div *ngIf="!loadingReport">
+    <div class="text-center text-muted mt-4 mb-4"><h3>BEST SELLING PRODUCTS</h3></div>
+    <div class="row mb-1">
+        <div class="col-lg-2 col-sm-2 col-md-2 ">
+            <a target="_blank" class="btn btn-primary mr-1 mt-4" style="color:white" (click)="print()">
+                <i class="fa fa-print"></i> Print
+            </a>
+        </div>
+    </div>
+    
+    <div class="table-responsive mt-2">
+        <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+        <thead>
+            <th>S/N</th>
+            <th>Name <i class="ion text-muted ml-2"></i></th>
+            <th>SellPrice <i class="ion text-muted ml-2"></i></th>
+            <th>Total Sold <i class="ion text-muted ml-2"></i></th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products; index as i" >
+            <td>{{i+1}}</td>
+            <td>{{product.name}}</td>
+            <td>‎₦{{product.salePrice}}</td>
+            <td>{{product.totalSold}}</td>    
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+
+<div id="toPrint" class="d-none">
+    <h3>BEST SELLING PRODUCTS</h3>
+    <table  *ngIf="!loading" class="tabl table-stripe card-tabl" id="tableRecord">
+        <thead>
+            <th class="marg-10">S/N</th>
+            <th class="marg-10">Name</th>
+            <th class="marg-10">SellPrice</th>
+            <th class="marg-10">Total Sold</th>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of products; index as i" >
+            <td class="marg-10">{{i+1}}</td>
+            <td class="marg-10">{{product.name}}</td>
+            <td class="marg-10">‎₦{{product.salePrice}}</td>
+            <td class="marg-10">{{product.totalSold}}</td>    
+        </tr>
+        </tbody>
+    </table>
+</div>

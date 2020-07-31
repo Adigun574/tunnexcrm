@@ -1,0 +1,29 @@
+.lead-card{
+    width:90%;
+    margin:auto;
+    height:100%;
+}
+.lead-card:hover{
+    transform:scale(1.02,1.02)
+}
+.dropdown-div{
+    position:absolute;
+    right:25px;
+    top:10px;
+}
+
+/* .side-ellipsis{
+    position: absolute;
+    right:25px;
+  } */
+  .dropdown-toggle:empty::after{
+    display:none
+  }
+  .dropdown-toggle::after{
+    display:none
+  }
+  
+  *:focus {
+   box-shadow:none;
+ }
+ 

@@ -1,0 +1,28 @@
+/* .regular{
+    border:2px solid rgb(23, 192, 23);
+    padding:1px;
+    border-radius:2px;
+    background-color:rgb(23, 192, 23);
+    color:white;
+}
+.average{
+    border:1px solid rgb(201, 182, 18);
+    padding:1px;
+    border-radius: 2px;
+    color:white;
+    background-color: rgb(201, 182, 18);
+} */
+.in-stock{
+    border:2px solid rgb(23, 192, 23);
+    padding:1px;
+    border-radius:2px;
+    background-color:rgb(23, 192, 23);
+    color:white;
+}
+.out-stock{
+    border:2px solid rgb(238, 36, 36);
+    padding:1px;
+    border-radius:2px;
+    background-color:rgb(238, 36, 36);
+    color:white;
+}

@@ -1,0 +1,613 @@
+// Here you can add other styles
+
+
+// button styles
+
+// .button {
+//   padding: 10px;
+//   text-align: center;
+//   text-transform: uppercase;
+//   font-weight: 600;
+//   cursor: pointer;
+//   display: inline-block;
+//   outline: none;
+//   border-radius: 5px;
+//   border: none;
+//   min-width: 150px;
+//   color: white;
+// }
+.button {
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  min-width: 200px;
+}
+
+.button:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.button:before {
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-star-2:before {
+  content: "\e00c";
+}
+
+.button-orange {
+  background: #fcad26;
+  color: #fff;
+}
+
+.button-orange:hover {
+  background: #f29e0d;
+}
+
+.button-orange:active {
+  background: #f58500;
+  top: 2px;
+}
+
+.button-orange:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+  font-size: 140%;
+  width: 60px;
+}
+
+.button-orange-1 {
+  padding: 25px 60px 25px 120px;
+
+}
+
+.button-orange-1:before {
+  border-right: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+
+
+.icon-cog:before {
+  content: "\e010";
+}
+
+/*  */
+.button-blue-sec {
+  background: #0873eb;
+  color: #fff;
+  box-shadow: 0 6px #4978ad;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+
+.button-blue-sec:hover {
+  box-shadow: 0 4px #0873eb;
+  top: 2px;
+}
+
+.button-blue-sec:active {
+  box-shadow: 0 0 #0873eb;
+  top: 6px;
+}
+
+.button-white {
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px #8dc5eb;
+  padding: 15px;
+
+}
+
+
+
+.button-submit {
+  background: rgb(67, 190, 243);
+  color: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px #8dc5eb;
+  padding: 15px;
+}
+
+/* Icon only style */
+.button-icon-only {
+  font-size: 0;
+  padding: 25px 30px;
+}
+
+.button-icon-only:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 26px;
+  line-height: 54px;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+.icon-envelope:before {
+  content: "\e000";
+}
+
+.button-submit-1:before {
+  position: absolute;
+  left: 0;
+  width: 40%;
+  font-size: 160%;
+  line-height: 0.8;
+  color: #009DDF;
+}
+
+
+
+// end of button styles
+
+.skyblue {
+  background-color: lavender;
+}
+
+.nav-pills {
+  margin: 10px 10px;
+
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  background-color: $blue;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  padding: 10px 0;
+}
+
+table td,
+table thead th {
+  padding: 10px;
+}
+
+// search fields for the tables
+.search-filter {
+  position: relative;
+  margin: 10px auto;
+  width: 100%;
+  max-width: 380px;
+}
+
+.search-filter .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: 'Amarante', Tahoma, sans-serif;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+.search-filter .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: #FEBD2A;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+
+.search-filter input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid #c8ccd4;
+  background: none;
+  border-radius: 0;
+
+  transition: all 0.15s ease;
+}
+
+.search-filter input:hover {
+  background: rgba(34, 50, 84, 0.03);
+}
+
+.search-filter input:not(:placeholder-shown)+span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.search-filter input:focus {
+  background: none;
+  outline: none;
+}
+
+.search-filter input:focus+span {
+  color: #FEBD2A;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.search-filter input:focus+span+.border {
+  transform: scaleX(1);
+}
+
+
+
+// end of search input
+// tabs
+.tab-content {
+
+  border: none;
+}
+
+.bold {
+  font-size: 1.2em;
+}
+
+
+// for generic input fields
+.input {
+  padding: 15px 12px;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .1);
+  padding: 10px;
+  width: 260px;
+}
+
+
+// for generic button styles
+.sm-button {
+  background: #fdc133;
+  color: #fff;
+
+}
+
+
+
+
+// FOR BIG TEXTS
+.text-bg {
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+.text-md {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.text-sm {
+  font-size: 0.9em;
+
+}
+
+
+// input validation
+
+.is-invalid {
+  border-left: 5px solid red;
+}
+
+.invalid-feedback {
+  color: red;
+}
+
+
+// general shared styles for leave and grade
+.leave-img {
+  float: right;
+}
+
+.leave-img img {
+  width: 300px;
+  height: 170px;
+}
+
+.page-title {
+  line-height: 0.5;
+  text-align: left;
+}
+
+.page-title span {
+  display: inline-block;
+  position: relative;
+}
+
+.page-title span::before {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 2px solid orange;
+  padding: 0.15em;
+  top: 0;
+  width: 50px;
+}
+
+.page-title span::before {
+  right: 100%;
+  margin-right: 7px;
+}
+
+.header {
+  margin: 10px 20px;
+  padding: 8px;
+}
+
+// table
+.responsive-table li {
+  border-radius: 3px;
+  padding: 25px 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.responsive-table .table-header {
+  background-color: #eaeffa;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+@media all and (max-width: 767px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+
+  .responsive-table li {
+    display: block;
+  }
+
+  .responsive-table .column {
+    flex-basis: 100%;
+  }
+
+  .responsive-table .column {
+    display: flex;
+    padding: 10px 0;
+  }
+
+  .responsive-table .column:before {
+    color: #6C7A89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
+
+// end of styles
+
+
+// btn transition for loaders shown on the button
+/* Success and error */
+
+.button-success,
+.button-error {
+  color: transparent;
+}
+
+.button-success:after,
+.button-error:after {
+  z-index: 1;
+  color: #fff;
+  left: 40%;
+}
+
+.button-success:before {
+  content: "\e001";
+}
+
+.button-success:after {
+  content: "Success!";
+  -webkit-animation: moveUp 0.5s;
+  -moz-animation: moveUp 0.5s;
+  animation: moveUp 0.5s;
+}
+
+@-webkit-keyframes moveUp {
+  0% {
+    -webkit-transform: translateY(50%);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-moz-keyframes moveUp {
+  0% {
+    -moz-transform: translateY(50%);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0);
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.button-error {
+  -webkit-animation: shake 0.5s;
+  -moz-animation: shake 0.5s;
+  animation: shake 0.5s;
+}
+
+/* From Dan Eden's animate.css: http://daneden.me/animate/ */
+@-webkit-keyframes shake {
+
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translateX(10px);
+  }
+}
+
+@-moz-keyframes shake {
+
+  0%,
+  100% {
+    -moz-transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -moz-transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -moz-transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.button-error:before {
+  content: "\e002";
+}
+
+.button-error:after {
+  content: "Error!";
+  -webkit-animation: scaleFromUp 0.5s;
+  -moz-animation: scaleFromUp 0.5s;
+  animation: scaleFromUp 0.5s;
+}
+
+@-webkit-keyframes scaleFromUp {
+  0% {
+    -webkit-transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+
+@-moz-keyframes scaleFromUp {
+  0% {
+    -moz-transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    -moz-transform: scale(1);
+  }
+}
+
+@keyframes scaleFromUp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// end of btn transitions

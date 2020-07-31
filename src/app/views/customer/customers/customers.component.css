@@ -1,0 +1,63 @@
+.save-customer-card{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+body{
+  background: #fff;
+  height: 100vh;
+}
+a{
+  text-decoration: none!important;
+}
+h4 i{
+  color: #28B463;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-right: 10px;
+}
+.contact{
+  margin-top: 10px;
+  padding: 15px;
+  position: relative;
+  border-left: 6px solid #28B463;
+  transform: scale(1);
+  background: #fff;
+  transition: 1s;
+  text-align: center;
+  /*---*/
+  height:100%;
+}
+.contact::before{
+  content: '';
+  position: absolute;
+  background: #28B463;
+  visibility: hidden;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: .7s;
+}
+.contact:hover:before{
+  visibility: visible;
+  transform: scaleX(1);
+}
+.contact a:hover{
+  color: #28B463!important;
+}
+.contact:hover{
+  transform: scale(1.05);
+}
+.add-button{
+    /* float:right; */
+}
+.bulk-modal{
+  padding:30px;
+}
+.uploading-spinner{
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,133 @@
+<app-loader *ngIf="loadingSkills"></app-loader>
+<div *ngIf="!loadingSkills">
+<div class="pt-4 d-block mb-4">
+    <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Skill</button>
+    <button mat-raised-button class="add-button pull-right" [routerLink]="['/main/assessment']">View Staff Skill</button>
+</div>
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        New Skill
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card container">
+            <form [formGroup]="addProgramForm">
+                <div class="form-group">
+                    <label class="form-label"> Program Name:</label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                    <small class="text-danger">Name is required</small>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Program Description:</label>
+                    <input type="text" class="form-control" placeholder="A program ..." formControlName="description">
+                </div> 
+            </form>
+        </div>
+    
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="saveProgram()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="saving"></span>                 
+                Save
+            </button>
+        </div>
+        </div>    
+</ng-template>
+
+<div class="row">        
+    <div class="col-md-3 mt-2 mb-4" *ngFor="let program of programs">
+        <div class="contact shadow">
+            <!-- <div (click)="open(topModal2, { windowClass: 'modal-top' })"> -->
+            <div (click)="open(updateModal, { windowClass: 'modal-top' }); selectSkillToUpdate(program)">
+                <h4><span class="name-initial">{{program.name.split('')[0] | uppercase}}</span></h4><br>
+                <div class="program-name mt-2"><h3><b>{{program.name}}</b></h3></div>
+                <p class="mb-0 mt-0">{{program.description}}</p>
+            </div>            
+            <div class="enroll-btn">
+                <button mat-raised-button (click)="open(topModal3, { windowClass: 'modal-top' }); selectSkill(program)">
+                    Enroll Staff
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #updateModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        Update Skill
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card container">
+                <div class="form-group">
+                    <label class="form-label"> Skill Name:</label>
+                    <input type="text" class="form-control" [(ngModel)]="skillToUpdate.name">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Skill Description:</label>
+                    <input type="text" class="form-control" [(ngModel)]="skillToUpdate.description">
+                </div> 
+        </div>
+    
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="updateSkill()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="updatingSkill"></span>                 
+                Update
+            </button>
+        </div>
+        </div>    
+</ng-template>
+
+<!-- <ng-template #topModal2 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        Enrolled Employees
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card">
+            <ul>
+                <li>Adigun Ibrahim</li>
+                <li>Adigun Adedotun</li>
+                <li>Adigun Akanni</li>
+                <li>Curtis Manning</li>
+                <li>Edgar Stiles</li>
+            </ul>
+        </div>
+        </div>    
+</ng-template> -->
+
+<ng-template #topModal3 let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h5 class="modal-title">
+        Certify Staff
+        </h5>
+    </div>
+        <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card p-2">
+            <small class="text-danger text-center" *ngIf="invalidDetails">Invalid Details</small>
+            <div class="form-group">
+                <label class="form-label"> Select Employee:</label>
+                <ng-select
+                    [items]="employees"
+                    bindLabel="firstName" 
+                    [(ngModel)]="selectedEmployee"                   
+                >
+                </ng-select>
+            </div> 
+            <!-- <div class="form-group">
+                <label class="form-label"> Competency Level <small>(on a scale of 0 -5)</small>:</label>
+                <input type="number" min="0" max="5" [(ngModel)]="sas">
+            </div>  -->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" (click)="addStaffSkill()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="addingStaffSkill"></span> 
+                Enroll
+            </button>
+        </div>
+        </div>    
+</ng-template>
+</div>

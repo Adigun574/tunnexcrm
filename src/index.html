@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+  <base href="./">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keyword" content="Bootstrap,Admin,Template,Free,Angular,Dashboard,Typescript">
+  <!-- <link rel="shortcut icon" href="assets/favicon.ico"> -->
+  <link rel="shortcut icon" href="assets/img/tunnexlab.jpeg">
+  <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <link href="./assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+  <title>Tunnex Lab</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    // Shared ID
+    gtag('config', 'UA-118965717-3');
+    // Angular ID
+    gtag('config', 'UA-118965717-4');
+
+  </script>
+  <!-- <script src="./app/models/animation.js"></script> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="app">
+  <!-- App Loading.. -->
+  <div class="app-loading-mask" id="alm">
+    <div>
+      <span class="alm__app-name">TUNNEX CRM APP</span>
+      <div class="alm__progress-bar"><div></div></div>
+      <div class="alm__brand-label">Loading...</div>
+    </div>
+  </div>
+  <div class="app-demo-container">
+    <!-- <h1>Hello World!</h1>
+    <h3>Your app goes here!</h3> -->
+  </div>
+  
+</body>
+
+<style>
+  .app-loading-mask {
+  display: flex;
+  z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+}
+.app-loading-mask > div {
+  margin: auto;
+}
+.alm__app-name {
+  font-size: 32px;
+}
+.alm__brand-label {
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 14px;
+  text-align: right;
+}
+.alm__progress-bar {
+  margin: 0 auto;
+  height: 2px;
+  background: #0097cc;
+  overflow-x: hidden;
+}
+.alm__progress-bar > div {
+  position: relative;
+  width: 25px;
+  height: 100%;
+  background: #fff;
+  animation: ani-bar 2s infinite;
+}
+.alm-hide-ani {
+  animation: bkl-hide-ani 1s 1;
+}
+@keyframes ani-bar {
+  from {
+    left: -100%;
+    width: 100%;
+  }
+  to {
+    left: 100%;
+    width: 0;
+  }
+}
+@keyframes bkl-hide-ani {
+  to {
+    opacity: 0;
+  }
+}
+
+/*Demo css*/
+.app-demo-container{
+  text-align: center;
+  color: #0097cc;
+}
+</style>
+
+</html>

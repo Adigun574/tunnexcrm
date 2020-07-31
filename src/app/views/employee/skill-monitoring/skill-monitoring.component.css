@@ -1,0 +1,19 @@
+.in-stock{
+    border:2px solid rgb(23, 192, 23);
+    padding:1px;
+    border-radius:2px;
+    background-color:rgb(23, 192, 23);
+    color:white;
+}
+.out-stock{
+    border:2px solid red;
+    padding:1px;
+    border-radius:2px;
+    background-color:red;
+    color:white;
+}
+.employee-name:hover{
+    text-decoration: underline;
+    opacity:0.7;
+    cursor:pointer;
+}

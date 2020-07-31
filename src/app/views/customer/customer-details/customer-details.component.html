@@ -1,0 +1,111 @@
+<div class="customer-detail-body">
+<ngb-tabset [justify]="currentJustify">
+    <ngb-tab>
+        <ng-template ngbTabTitle>Customer Details</ng-template>
+        <ng-template ngbTabContent>
+                <div class="form-group">
+                    <label for="name">Firstname</label>
+                    <input type="text" class="form-control" 
+                        id="firstName" aria-describedby="emailHelp" 
+                        placeholder="Enter name" 
+                        [(ngModel)]="selectedCustomer.firstName">
+                </div>
+                <div class="form-group">
+                    <label for="name">Lastname</label>
+                    <input type="text" class="form-control" 
+                        id="lastName" aria-describedby="emailHelp" 
+                        placeholder="Enter name" [(ngModel)]="selectedCustomer.lastName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNo">Phone No</label>
+                    <input type="text" class="form-control" 
+                        id="phoneNo" placeholder="Enter Phone No"
+                        [(ngModel)]="selectedCustomer.phone">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" 
+                        id="email" placeholder="Enter Email"
+                        [(ngModel)]="selectedCustomer.email">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea  class="form-control" 
+                        [(ngModel)]="selectedCustomer.address"
+                    ></textarea>
+                    
+                </div>
+                <button class="btn btn-danger ml-2 mr-2" (click)="deleteCustomer(selectedCustomer.id)">
+                    <span class="spinner-grow spinner-grow-sm" *ngIf="deletingCustomer"></span> 
+                    <i class="fa fa-trash"></i>
+                    Delete
+                </button>
+                <button type="submit" class="btn btn-primary" (click)="updateCustomer()">
+                    <span class="spinner-grow spinner-grow-sm" *ngIf="updatingCustomer"></span> 
+                    Update
+                </button>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Conversations">
+        <ng-template ngbTabContent>
+            <ul class="conversations">
+                <li *ngFor="let convo of selectedCustomer.customerMessages">{{convo.summary}} <span class="date">{{convo.dateCreated.split('T')[0]}}</span></li>
+            </ul>
+            <hr>
+            <div class="form-row">
+                <div class="col-sm-10 mb-3">
+                  <label for="validationTooltip01">Enter Conversation</label>
+                  <input type="text" class="form-control" id="validationTooltip01" 
+                  placeholder="lorem ipsum dolor" required
+                  [(ngModel)]="customerMessage"
+                  >
+                  <div class="valid-tooltip">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="col-sm-2 mb-3">
+                    <label for="validationTooltip01">.</label>
+                    <button class="btn btn-primary form-control" (click)="addMessage()">
+                        <span class="spinner-grow spinner-grow-sm" *ngIf="savingCustomerMessage"></span>                                        
+                        Add
+                    </button>
+                </div>
+            </div>
+        <!-- <button class="btn btn-danger clear-btn"><i class="fa fa-trash"></i> Clear Conversations</button> -->
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Customer Sales Record" *ngIf="false">
+        <ng-template ngbTabContent>
+            <!-- <h2 class="d-flex justify-content-between align-items-center w-100 font-weight-bold py-3 mb-4">
+                <div>{{selectedCustomer.name}}</div>
+              </h2>
+              
+              <div> 
+               
+                <div class="mb-4">
+                    <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white"(click) = "printTable()">
+                        <i class="fa fa-print"></i>&nbsp; Print
+                    </a>
+                </div>
+              <div class="table-responsive mt-2">
+                  <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+                <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+                  <thead>
+                        <th>Product <i class="ion text-muted ml-2"></i></th>
+                        <th>Quantity <i class="ion text-muted ml-2"></i></th>
+                        <th>Total price <i class="ion text-muted ml-2"></i></th>
+                   </thead>
+                  <tbody>
+                    <tr *ngFor="let item of products" >
+                      <td>{{ item.productName }}</td>
+                      <td>{{item.quantity}}</td>
+                      <td><span>&#8358;</span>{{item.totalPrice}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              </div>             -->
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
+</div>

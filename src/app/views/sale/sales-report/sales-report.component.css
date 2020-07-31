@@ -1,0 +1,9 @@
+.card-body:hover{
+    background-color:rgb(223, 224, 223);
+    box-shadow: 5px 5px 5px rgb(150, 149, 149);
+}
+.click:hover{
+    text-decoration: underline;
+    cursor:pointer;
+    color:rgb(118, 187, 219)
+}

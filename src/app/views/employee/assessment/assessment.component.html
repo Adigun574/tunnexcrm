@@ -1,0 +1,39 @@
+<app-loader *ngIf="loading"></app-loader>
+<div *ngIf="!loading && loadedStaff && loadedSkills">
+    <h3 class="text-center mt-4 mb-4">Staff Skills</h3>
+    <div class="table-responsive mt-2">
+        <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+      <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+        <thead>
+              <th>Staff <i class="ion text-muted ml-2"></i></th>
+              <th>Skill <i class="ion text-muted ml-2"></i></th>
+              <th>Competency <i class="ion text-muted ml-2"></i></th>
+              <th>Action<i class="ion text-muted ml-2"></i></th>
+         </thead>
+        <tbody>
+          <tr *ngFor="let staffSkill of staffSkills" >
+            <td>{{getStaffName(staffSkill.staffID)}}</td>
+            <td>{{getSkillName(staffSkill.skillID)}}</td>
+            <td>{{staffSkill.competencyValue}}%</td>
+            <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<ng-template #grade>
+    <div class="card p-3">
+        <small class="text-center text-danger" *ngIf="invalidGrade">Enter a value between 0-5</small>
+        <div class="form-group">
+            <label class="form-label">{{getSkillName(selectedStaffSkill.skillID)}} <small>(0-5)</small></label>
+            <input type="number" class="form-control" [(ngModel)]="sas" max="5">
+        </div>
+        <div> 
+            <button class="btn btn-success pull-right" (click)="assess()">
+                <span class="spinner-grow spinner-grow-sm" *ngIf="grading"></span>                                 
+                Grade
+            </button>
+        </div>
+    </div>
+</ng-template>

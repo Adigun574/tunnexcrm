@@ -1,0 +1,127 @@
+/* body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#loader-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 10em;
+  height: 10em;
+}
+
+.loader {
+  margin: 250px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 1.1em solid rgba(0, 255, 255, 0.2);
+  border-right: 1.1em solid rgba(0, 255, 255, 0.2);
+  border-bottom: 1.1em solid rgba(0, 255, 255, 0.2);
+  border-left: 1.1em solid #00ffff;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s infinite linear;
+  animation: load8 1.1s infinite linear;
+  display: block;
+  width: 150px;
+  height: 150px;
+}
+
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+} */
+.app-loading-mask {
+  display: flex;
+  z-index: 3;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f5f5f5;
+}
+.app-loading-mask > div {
+  margin: auto;
+}
+.alm__app-name {
+  font-size: 32px;
+}
+.alm__brand-label {
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 14px;
+  text-align: right;
+}
+.alm__progress-bar {
+  margin: 0 auto;
+  height: 2px;
+  background: #0097cc;
+  overflow-x: hidden;
+}
+.alm__progress-bar > div {
+  position: relative;
+  width: 25px;
+  height: 100%;
+  background: #fff;
+  animation: ani-bar 2s infinite;
+}
+.alm-hide-ani {
+  animation: bkl-hide-ani 1s 1;
+}
+@keyframes ani-bar {
+  from {
+    left: -100%;
+    width: 100%;
+  }
+  to {
+    left: 100%;
+    width: 0;
+  }
+}
+@keyframes bkl-hide-ani {
+  to {
+    opacity: 0;
+  }
+}
+
+/*Demo css*/
+.app-demo-container{
+  text-align: center;
+  color: #0097cc;
+}

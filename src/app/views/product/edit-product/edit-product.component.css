@@ -1,0 +1,10 @@
+.body{
+    padding:10px 50px;
+}
+.header{
+    text-decoration: underline;
+}
+.image{
+    border:1px solid rgb(114, 113, 113);
+    border-radius:5px;
+}

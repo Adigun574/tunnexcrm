@@ -1,0 +1,162 @@
+<app-loader *ngIf="loadingUsers"></app-loader>
+<div *ngIf="!loadingUsers">
+    <div class="mt-2">
+        <h3 class="text-center text-muted">USERS</h3>
+    </div>
+    <div>
+        <button class="btn btn-success pull-right" (click)="open(topModal)" [disabled]="canAddUser">Add User</button>
+    </div>
+    <br>
+    <br>
+    <div>
+        <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+        
+            <!-- Weight Column -->
+            <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+                <i class="fa fa-edit cursor-pointer mr-2" (click)="openEditModal(editModal,element)"></i><span></span> 
+                <i class="fa fa-trash cursor-pointer" (click)="deleteUser(element)"></i><span></span>                 
+            </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>                  
+    </div>
+</div>
+
+<ng-template #topModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+    <h5 class="modal-title">
+        New User
+    </h5>
+    </div>
+    <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card">
+            <form [formGroup]="addUserForm">
+                <div class="text-center" *ngIf="submitted && addUserForm.invalid">
+                    <small class="text-danger">Please fill all required fields</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Username:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" placeholder="Name" formControlName="username">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Phone Number:</label>
+                    <input type="text" class="form-control" placeholder="+234XXXXXXXX" formControlName="phone">
+                </div>  
+                <div class="form-group">
+                    <label class="form-label"> Email:</label>
+                    <input type="text" class="form-control" placeholder="example@gmail.com" formControlName="email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Password:</label>
+                    <input type="password" class="form-control" formControlName="password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Role:</label>
+                    <ng-select 
+                        [items]="roles"
+                        bindValue=""
+                        bindLabel="name"
+                        (change)="selectRole($event)"
+                    >
+                    </ng-select>
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Post:</label>
+                    <input type="text" class="form-control" formControlName="post">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Gender:</label>
+                    <ng-select
+                        [items]="genders"
+                        bindValue="name"
+                        bindLabel="name"
+                        formControlName="gender"
+                    >
+                    </ng-select>
+                </div> 
+            </form>
+        </div>
+    
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="saveUser()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="savingUser"></span> 
+            Save
+        </button>
+    </div>
+    </div>    
+</ng-template>
+
+<ng-template #editModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+    <h5 class="modal-title">
+        New User
+    </h5>
+    </div>
+    <div class="modal-body" >
+        <div  class="card mb-4 save-customer-card">
+                <div class="form-group">
+                    <label class="form-label"> Name:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.name">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Username:<small class="text-danger">*</small></label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.username">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Phone Number:</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.phone">
+                </div>  
+                <div class="form-group">
+                    <label class="form-label"> Email:</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.email">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Post:</label>
+                    <input type="text" class="form-control" [(ngModel)]="selectedUser.post">
+                </div> 
+                <div class="form-group">
+                    <label class="form-label"> Gender:</label>
+                    <ng-select
+                        [items]="genders"
+                        bindValue="name"
+                        bindLabel="name"
+                        [(ngModel)]="selectedUser.gender"
+                    >
+                    </ng-select>
+                </div> 
+        </div>
+    
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="updateUser()">
+            <span class="spinner-grow spinner-grow-sm" *ngIf="updatingUser"></span> 
+            Update
+        </button>
+    </div>
+    </div>    
+</ng-template>
+    
+

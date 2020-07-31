@@ -1,0 +1,47 @@
+.delete-btn{
+    border:1px solid rgb(153, 151, 151);
+    padding:5px;
+    border-radius:3px;
+}
+.delete-btn:hover{
+    opacity:0.6;
+}
+/* .conversations{
+    list-style-type: none;
+} */
+/* .conversations li{
+    margin-bottom:10px;
+    background-color:rgb(215, 243, 215);
+    padding:5px;
+    border-radius:5px;
+} */
+.date{
+    float:right;
+    font-size:12px;
+    font-weight: bold;
+}
+.clear-btn{
+    margin-left:40px;
+}
+.in-stock{
+    border:2px solid rgb(23, 192, 23);
+    padding:1px;
+    border-radius:2px;
+    background-color:rgb(23, 192, 23);
+    color:white;
+}
+.out-stock{
+    border:2px solid red;
+    padding:1px;
+    border-radius:2px;
+    background-color:red;
+    color:white;
+}
+.customer-detail-body{
+    padding-top:20px;
+}
+
+
+/* .conversations li:hover{
+    text-decoration: underline;
+} */

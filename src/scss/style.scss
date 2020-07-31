@@ -1,0 +1,36 @@
+// @import '../assets/css/argon-dashboard.css';
+
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+//  @import "~@ng-select/ng-select/themes/material.theme.css";
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+
+
+// @charset "UTF-8";
+/**
+ * Computes a CSS calc function that betweens a value from
+ * A to B over viewport-width A to viewport-width B.
+ * Requires a media query to cap the value at B.
+ */
+ .sidebar{
+    background-color:green
+ }
+ .sidebar .nav-link.active{
+     background-color:green
+ }
+ .cursor-pointer{
+     cursor:pointer;
+ }
+ .underline-hover:hover{
+     text-decoration: underline;
+ }

@@ -1,0 +1,125 @@
+<app-loader *ngIf="loadingRoles"></app-loader>
+
+<div *ngIf="!loadingRoles">
+    <div class="mt-2">
+        <h3 class="text-center text-muted">ROLES</h3>
+    </div>
+    <div class="mb-4">
+        <button class="btn btn-success float-right mb-4" (click)="open(addRoleModal)">Add Role</button>
+    </div><br>
+
+    <div>
+        <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> <i class="fa fa-trash cursor-pointer" (click)="deleteRole(element.id)"></i> </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>                  
+    </div>
+</div>
+
+<ng-template #addRoleModal>
+    <div>
+        <div class="card p-4">
+            <div class="card-header">
+                <h3>Add Role</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input class="form-control" type="text" [(ngModel)]="roleName">
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <thead>
+                        <td><b>Menu</b></td>
+                        <td><b>Access</b></td>
+                    </thead>
+                    <tr>
+                        <td>Customers</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[0].Write">
+                    </tr>
+                    <tr>
+                        <td>Products</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[1].Write">
+                    </tr>
+                    <tr>
+                        <td>Roles</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[2].Write">
+                    </tr>
+                    <tr>
+                        <td>POS</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[3].Write">
+                    </tr>
+                    <tr>
+                        <td>Employees</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[4].Write">
+                    </tr>
+                    <tr>
+                        <td>Sales History</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[5].Write">
+                    </tr>
+                    <tr>
+                        <td>Users</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[6].Write">
+                    </tr>
+                    <tr>
+                        <td>Leads</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[7].Write">
+                    </tr>
+                    <tr>
+                        <td>Products Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[8].Write">
+                    </tr>
+                    <tr>
+                        <td>Customers Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[9].Write">
+                    </tr>
+                    <tr>
+                        <td>Inventory</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[10].Write">
+                    </tr>
+                    <tr>
+                        <td>Training Programmes</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[11].Write">
+                    </tr>
+                    <tr>
+                        <td>Skill Monitoring</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[12].Write">
+                    </tr>
+                    <tr>
+                        <td>Messages</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="roleObj.Privileges[13].Write">
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success pull-right" (click)="saveRole()">
+                    <span class="spinner-grow spinner-grow-sm" *ngIf="savingRole"></span> 
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

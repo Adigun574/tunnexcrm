@@ -1,0 +1,75 @@
+/* .program-card{
+    height:250px;
+    box-shadow:5px 5px 5px rgb(126, 125, 125);
+    border-left:10px solid steelblue;
+}
+.name-initial{
+    color:white;
+    background-color:steelblue;
+    border-radius:50%;
+    padding: 5px 10px;
+}
+.enroll-btn{
+    position:absolute;
+    bottom:10px;
+} */
+
+
+
+/* .save-customer-card{
+    padding-left:10px;
+    padding-right:10px;
+}
+
+body{
+  background: #fff;
+  height: 100vh;
+} */
+a{
+  text-decoration: none!important;
+}
+/* i{
+  color: #28B463;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-right: 10px;
+} */
+.contact{
+  margin-top: 10px;
+  padding: 15px;
+  position: relative;
+  border-left: 6px solid steelblue;
+  transform: scale(1);
+  background: #fff;
+  transition: 1s;
+  text-align: center;
+  height:100%;
+}
+.contact::before{
+  content: '';
+  position: absolute;
+  background: steelblue;
+  visibility: hidden;
+  height: 3px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: .7s;
+}
+.contact:hover:before{
+  visibility: visible;
+  transform: scaleX(1);
+}
+.contact a:hover{
+  color: steelblue !important;
+}
+.contact:hover{
+  transform: scale(1.05);
+}
+.name-initial{
+    color:white;
+    background-color:steelblue;
+    border-radius:50%;
+    padding: 5px 10px;
+}
