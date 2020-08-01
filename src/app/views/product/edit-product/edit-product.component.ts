@@ -34,6 +34,7 @@ export class EditProductComponent implements OnInit {
     this.productService.getProductById(this.productId).subscribe(data=>{
       this.product = <Product>data
       this.loadingProduct = false
+      // console.log(this.product)
     },
       err=>{
         this.loadingProduct = false
@@ -45,6 +46,7 @@ export class EditProductComponent implements OnInit {
     this.product.quantity = +this.product.quantity
     this.product.salePrice = +this.product.salePrice
     this.product.costPrice = +this.product.costPrice
+    // console.log(this.product)
     this.productService.updateProduct(this.product).subscribe(data=>{
       this.updating = false
       this.router.navigateByUrl('main/products')

@@ -278,33 +278,33 @@ export class PosComponent implements OnInit {
       })
       this.sale.payment = newPaymentArray
       // this.sale.payment = this.paymentArray
-      console.log(this.sale)
-      // this.saleService.saveSale(this.sale).subscribe(data=>{
-      //   this.savingSaleInvoice = false
-      //   this.savingSale = false
-      //   this.savingSaleCredit = false
-      //   // this.resetSales()
-      //   Swal.fire(
-      //     'Success',
-      //     'Sale completed',
-      //     'success'
-      //   )
-      // },
-      //   err=>{
-      //     this.savingSaleInvoice = false
-      //     this.savingSale = false
-      //     this.savingSaleCredit = false
-      //     Swal.fire(
-      //       'Oops',
-      //       'Something went wrong',
-      //       'error'
-      //     )
-      //   })
+      // console.log(this.sale)
+      this.saleService.saveSale(this.sale).subscribe(data=>{
+        this.savingSaleInvoice = false
+        this.savingSale = false
+        this.savingSaleCredit = false
+        // this.resetSales()
+        Swal.fire(
+          'Success',
+          'Sale completed',
+          'success'
+        )
+      },
+        err=>{
+          this.savingSaleInvoice = false
+          this.savingSale = false
+          this.savingSaleCredit = false
+          Swal.fire(
+            'Oops',
+            'Something went wrong',
+            'error'
+          )
+        })
     }
 
   setQuantity(qnt,i){
-    this.orders[i].quantity = qnt
-    this.apiorders[i].quantity = qnt
+    this.orders[i].quantity = +qnt
+    this.apiorders[i].quantity = +qnt
     this.calculateTotal()
   }
 
