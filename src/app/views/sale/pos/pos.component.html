@@ -154,6 +154,17 @@
                 </div>
             </div>
         </div>
+        <button class="btn btn-danger free-sale-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+        <ng-template #freeSaleModal>
+          <div class="free-sale-modal">
+            <h3><i class="fa fa-exclamation-triangle"></i></h3>
+            <p>Are you sure you want to make this a free sale?</p>
+            <div>
+              <button class="btn btn-primary" (click)="yesToFreeSale()">Yes</button>
+              <button class="btn btn-danger" (click)="noToFreeSale()">No</button>
+            </div>
+          </div>
+        </ng-template>
       </div>
     
       <div id="bill" class="d-none">

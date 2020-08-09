@@ -73,6 +73,11 @@ export const navItems: INavData[] = [
         url: '/main/sales-history',
         icon: 'icon-speedometer'
       },
+      {
+        name: 'Sales History2',
+        url: '/main/sales-history2',
+        icon: 'icon-speedometer'
+      },
       // {
       //   name: 'Inventory',
       //   url: '/main/inventory',
@@ -94,6 +99,16 @@ export const navItems: INavData[] = [
         icon: 'icon-puzzle'
       }
     ]
+  },
+  {
+    name: 'Quotation',
+    url: '/main/quotation',
+    icon: 'icon-speedometer'
+  },
+  {
+    name: 'Waybill',
+    url: '/main/waybill',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Training Programs',

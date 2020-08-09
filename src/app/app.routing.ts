@@ -36,6 +36,9 @@ import { ConversationsComponent } from './views/customer/conversations/conversat
 import { AssessmentComponent } from './views/employee/assessment/assessment.component';
 import { InvoiceComponent } from './views/sale/invoice/invoice.component';
 import { DebtorsReportComponent } from './views/sale/debtors-report/debtors-report.component';
+import { QuotationComponent } from './views/sale/quotation/quotation.component';
+import { WaybillComponent } from './views/sale/waybill/waybill.component';
+import { SalesHistory2Component } from './views/sale/sales-history2/sales-history2.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -183,6 +186,14 @@ export const routes: Routes = [
         canActivate:[AuthGuard]
       },
       {
+        path:'sales-history2',
+        component:SalesHistory2Component,
+        data: {
+          title: 'saleshistory'
+        },
+        canActivate:[AuthGuard]
+      },
+      {
         path:'leads',
         component:LeadsComponent,
         data: {
@@ -205,6 +216,14 @@ export const routes: Routes = [
       {
         path:'debtors-report',
         component:DebtorsReportComponent,
+      },
+      {
+        path:'quotation',
+        component:QuotationComponent,
+      },
+      {
+        path:'waybill',
+        component:WaybillComponent,
       },
       {
         path:'**',

@@ -160,3 +160,12 @@ orderScreen li:nth-child(even){
 .complete-btn{
     width:100%;
 }
+.free-sale-btn{
+    position: absolute;
+    bottom:20px;
+    right:20px;
+}
+.free-sale-modal{
+    padding:30px;
+    text-align: center;
+}

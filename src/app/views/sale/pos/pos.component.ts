@@ -8,6 +8,8 @@ import { date } from '../../../classes/date';
 import { User } from '../../../models/user';
 import { Formats } from '../../../classes/print';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-pos',
@@ -55,12 +57,15 @@ export class PosComponent implements OnInit {
   totalCashAmount = 0
   totalCreditAmount = 0
   totalChequeAmount = 0
+  freeSaleActivated:boolean = false
+
   
 
   constructor(
     private productService:ProductService,
     private customerService:CustomerService,
-    private saleService:SaleService
+    private saleService:SaleService,
+    private modalService:NgbModal
   ) {
     this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
    }
@@ -70,6 +75,10 @@ export class PosComponent implements OnInit {
     this.getCustomers()
     // this.selectedCustomer = this.guestCustomer
     console.log('WTF!!! Why are you here???')
+  }
+
+  open(content){
+    this.modalService.open(content,{centered:true})
   }
 
   resetSales(){
@@ -89,6 +98,7 @@ export class PosComponent implements OnInit {
     this.sale = new Sale()
     this.sale.cart = new Cart()
     this.apiorders = []
+    this.freeSaleActivated = false
   }
 
 
@@ -277,12 +287,16 @@ export class PosComponent implements OnInit {
         }
       })
       this.sale.payment = newPaymentArray
+      if(this.freeSaleActivated){
+        this.sale.payment = []
+      }
       // this.sale.payment = this.paymentArray
       // console.log(this.sale)
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
         this.savingSale = false
         this.savingSaleCredit = false
+        this.freeSaleActivated = false
         // this.resetSales()
         Swal.fire(
           'Success',
@@ -294,6 +308,7 @@ export class PosComponent implements OnInit {
           this.savingSaleInvoice = false
           this.savingSale = false
           this.savingSaleCredit = false
+          this.freeSaleActivated = false
           Swal.fire(
             'Oops',
             'Something went wrong',
@@ -361,6 +376,16 @@ export class PosComponent implements OnInit {
 
   print(){
     this.format.printDiv('toPrint')
+  }
+
+  yesToFreeSale(){
+    this.freeSaleActivated = true
+    this.completeSale()
+    this.modalService.dismissAll()
+  }
+
+  noToFreeSale(){
+    this.modalService.dismissAll()
   }
 
 }

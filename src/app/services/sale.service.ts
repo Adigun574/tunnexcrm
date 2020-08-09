@@ -25,6 +25,10 @@ export class SaleService {
     return this.httpClient.get(`${this.generalService.api}Sale/GetSingleDaySales/${date}`)
   }
 
+  getSalesHistoryByCustomerStarDateEndDate(customerID,startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Sale/GetSalesReportByDate/${startDate}/${endDate}?customerID=${customerID}`)
+  }
+
   getInvoiceByCIDandInvoiceNo(invoiceNo,cID){
     return this.httpClient.get(`${this.generalService.api}Invoice/GetInvoice/${invoiceNo}/${cID}`)
   }
@@ -35,5 +39,9 @@ export class SaleService {
 
   getDebtorsReport(startDate,endDate){
     return this.httpClient.get(`${this.generalService.api}Invoice/GetDebtorsList/${startDate}/${endDate}`)
+  }
+
+  saveQuotation(obj){
+    return this.httpClient.post(`${this.generalService.api}Quotation/CreateQuotation`,obj)
   }
 }

@@ -169,15 +169,33 @@ export class ProductsComponent implements OnInit {
       this.data.forEach(prod=>{
         products.push({
           name: prod[0],
-          quantity: prod[1],
+          quantity: +prod[1],
           image: null,
           costPrice: prod[2],
           salePrice: prod[3],
           userCreated: this.currentUser.userCreated,
         })
       })
+      products.forEach(prod=>{
+        if(!prod.costPrice){
+          prod.costPrice = 0
+        }
+        if(!prod.salePrice){
+          prod.salePrice = 0
+        }
+        if(isNaN(prod.costPrice)){
+          prod.costPrice = 0
+        }
+        if(isNaN(prod.salePrice)){
+          prod.salePrice = 0
+        }
+        if(isNaN(prod.quantity)){
+          prod.quantity = 0
+        }
+      })
       products.splice(0,1)
       this.uploading = true
+      console.log(products)
       this.productService.saveMultipleProducts(products).subscribe(data=>{
         this.uploading = false
         this.getAllProducts()

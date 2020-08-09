@@ -1,0 +1,75 @@
+<app-loader *ngIf="loading"></app-loader>
+<div>
+    <h3 class="text-muted">Waybill</h3>
+    <div>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="form-label">Search for a product</label>
+                    <ng-select
+                        [items]="products"
+                        bindLabel="name"
+                        placeholder="Select Product"
+                        (change)="quickSelect($event)"
+                    >
+                    </ng-select>
+                </div>
+                <hr>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6" *ngFor="let product of products" (click)="addToCart(product)">
+                            <div class="product-card">
+                                <!-- <p class="item-price">₦{{product.salePrice}}</p> -->
+                                <p class="item-name">{{product.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-7" style="display: flex;justify-content: center;">
+                <div class="products-table" style="min-width:400px; margin: auto;">
+                    <h3>Waybill</h3>
+                    <hr>
+                    <table>
+                        <tr>
+                            <td><b>Qty</b></td>
+                            <td><b>Product</b></td>
+                            <td></td>
+                        </tr>
+                        <tr *ngFor="let item of cart; index as i">
+                            <td>
+                                <input type="number" 
+                                    style="width:50px"
+                                    [(ngModel)]="qtyArray[i]"
+                                    (change)="calculateTotal()"
+                                >
+                            </td>
+                            <td>{{item.name}}</td>
+                            <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <div class="button-group">
+                        <button class="btn btn-danger mr-2" (click)="reset()"><i class="fa fa-refresh"></i> Reset</button>
+                        <button class="btn btn-primary" (click)="print()"><i class="fa fa-print"></i> Print</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="toPrint" class="d-none" style="background-color: white;">
+    <div class="products-table">
+        <table style="width:100%; text-align:center; border-collapse: collapse;">
+            <tr style="border-bottom: 1px dotted black;">
+                <td><b>Product</b></td>
+            </tr>
+            <tr *ngFor="let item of cart; index as i" style="border-bottom: 1px dotted black;">
+                <td>{{item.name}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
