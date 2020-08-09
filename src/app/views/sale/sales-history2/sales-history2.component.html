@@ -20,21 +20,19 @@
         <div class="form-group mr-2">
             <label class="form-label">Start date</label>
             <input type="date"
-            [(ngModel)]="filterVal"
+            [(ngModel)]="startDate"
             class="form-control w-auto"
-            (change)="filterSales()"
             >
         </div>
         <div class="form-group mr-2">
             <label class="form-label">End date</label>
             <input type="date"
-            [(ngModel)]="filterVal"
+            [(ngModel)]="endDate"
             class="form-control w-auto"
-            (change)="filterSales()"
             >
         </div>
-        <div clas="col-lg-3 col-sm-3 col-md-4 ">
-          <button class="btn btn-success mr-2" (click)="refresh()"><i class="fa fa-refresh"> Filter</i></button>
+        <div clas="col-lg-3 col-sm-3 col-md-4" style="position: relative; top:29px">
+          <button class="btn btn-success mr-2" (click)=" filterSales()"><i class="fa fa-filter"> Filter</i></button>
           <button class="btn btn-success mr-2" (click)="refresh()"><i class="fa fa-refresh"> Reset</i></button>
           <a target="_blank" class="btn btn-primary mr-1 pull-right" style="color:white" (click)="test()">
               <i class="fa fa-print"></i>; Print
@@ -93,7 +91,7 @@
 
 <div id="toPrint">
 <table id="tableRecordToPrint" class="d-none">
-    <thead>
+    <thead style="border-bottom: 1px solid black;">
           <th>S/N <i class="ion text-muted ml-2"></i></th>
           <th>Date <i class="ion text-muted ml-2"></i></th>
           <!-- <th>Items <i class="ion text-muted ml-2"></i></th> -->
@@ -102,7 +100,7 @@
           <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
      </thead>
     <tbody>
-      <tr *ngFor="let sale of sales; index as i">
+      <tr *ngFor="let sale of sales; index as i" style="border-bottom: 1px dotted black;">
         <td>{{i+1}}</td>
         <td>{{ sale.dateCreated.split('T')[0] }}</td>
         <!-- <td>

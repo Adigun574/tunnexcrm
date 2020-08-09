@@ -68,13 +68,13 @@ export const navItems: INavData[] = [
     url: '/base',
     icon: 'icon-puzzle',
     children: [
+      // {
+      //   name: 'Sales History',
+      //   url: '/main/sales-history',
+      //   icon: 'icon-speedometer'
+      // },
       {
         name: 'Sales History',
-        url: '/main/sales-history',
-        icon: 'icon-speedometer'
-      },
-      {
-        name: 'Sales History2',
         url: '/main/sales-history2',
         icon: 'icon-speedometer'
       },

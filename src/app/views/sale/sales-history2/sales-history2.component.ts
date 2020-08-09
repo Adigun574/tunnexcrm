@@ -17,6 +17,9 @@ export class SalesHistory2Component implements OnInit {
   format = new Formats()
   today
   filterVal
+  startDate = `0000-00-00`
+  endDate = `0000-00-00`
+  selectedCustomer
 
   constructor(
     private saleService:SaleService,
@@ -60,6 +63,26 @@ export class SalesHistory2Component implements OnInit {
     this.getSalesByCustStartandEndDate(0,0,0)
   }
 
+  filterSales(){
+    // console.log(this.startDate,this.endDate)
+    if(!this.selectedCustomer){
+      this.selectedCustomer = {id:0}
+    }
+    let d = this.startDate.split('-')
+    let startDate = `${d[2]}-${d[1]}-${d[0]}`
+    let e = this.endDate.split('-')
+    let endDate = `${e[2]}-${e[1]}-${e[0]}`
+    // console.log(this.selectedCustomer.id,startDate,endDate)
+    if(startDate == '00-00-0000'){
+      startDate = '0'
+    }
+    if(endDate == '00-00-0000'){
+      endDate = '0'
+    }
+    // console.log(this.selectedCustomer.id,startDate,endDate)  
+    this.getSalesByCustStartandEndDate(this.selectedCustomer.id,startDate,endDate)
+  }
+
   test(){
     this.format.printDiv('toPrint')
   }
@@ -68,11 +91,11 @@ export class SalesHistory2Component implements OnInit {
   //   this.getSalesByDate(this.today)
   // }
 
-  filterSales(){
-    let d = this.filterVal.split('-')
-    let newDate = `${d[2]}-${d[1]}-${d[0]}`
-    this.getSalesByDate(newDate)
-  }
+  // filterSales(){
+  //   let d = this.filterVal.split('-')
+  //   let newDate = `${d[2]}-${d[1]}-${d[0]}`
+  //   this.getSalesByDate(newDate)
+  // }
 
   getSalesByDate(date){
     this.loadingReport = true
