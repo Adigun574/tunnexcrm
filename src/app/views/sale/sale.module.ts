@@ -15,11 +15,13 @@ import { DebtorsReportComponent } from './debtors-report/debtors-report.componen
 import { QuotationComponent } from './quotation/quotation.component';
 import { WaybillComponent } from './waybill/waybill.component';
 import { SalesHistory2Component } from './sales-history2/sales-history2.component';
+import { Waybill2Component } from './waybill2/waybill2.component';
+import { ViewWaybillComponent } from './view-waybill/view-waybill.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

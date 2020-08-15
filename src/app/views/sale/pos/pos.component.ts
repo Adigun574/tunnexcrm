@@ -288,7 +288,15 @@ export class PosComponent implements OnInit {
       })
       this.sale.payment = newPaymentArray
       if(this.freeSaleActivated){
-        this.sale.payment = []
+        this.sale.payment = [{
+          id: 0,
+          customerID: this.selectedCustomer.id,
+          amount: this.total - tempTotal,
+          method: 'FOC',
+          reference: null,
+          invoiceNo: null,
+          userCreated: this.currentUser.id
+        }]
       }
       // this.sale.payment = this.paymentArray
       // console.log(this.sale)

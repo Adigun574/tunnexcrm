@@ -44,6 +44,7 @@ export class InvoiceComponent implements OnInit {
   getInvoice(){
     this.saleService.getInvoiceByCIDandInvoiceNo(this.invoiceNo,this.customerID).subscribe(data=>{
       this.invoice = data
+      console.log(this.invoice)
       this.loading = false
     },
       err=>{

@@ -1,0 +1,73 @@
+<app-loader *ngIf="loadingReport"></app-loader>
+
+<div *ngIf="!loadingReport">
+  <div class="mt-2 mb-4">
+    <h3 class="text-center text-muted">WAYBILLS</h3>
+  </div>
+  
+  <div> 
+   
+        <div class="row mb-4">
+            <div class="form-group mr-2 ml-4">
+                <label class="form-label">Start date</label>
+                <input type="date"
+                [(ngModel)]="startDate"
+                class="form-control w-auto"
+                >
+            </div>
+            <div class="form-group mr-2">
+                <label class="form-label">End date</label>
+                <input type="date"
+                [(ngModel)]="endDate"
+                class="form-control w-auto"
+                >
+            </div>
+            <div clas="col-lg-3 col-sm-3 col-md-4" style="position: relative; top:29px">
+              <button class="btn btn-success mr-2" (click)="filterWaybill()"><i class="fa fa-filter"> Filter</i></button>
+              <button class="btn btn-success mr-2" (click)="refresh()"><i class="fa fa-refresh"> Reset</i></button>
+            </div>
+          </div>
+  <div class="table-responsive mt-2" id="toprint">
+    <table class="table table-striped card-table" id="tableRecord">
+      <thead>
+            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Items <i class="ion text-muted ml-2"></i></th>
+            <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+            <th></th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let waybill of waybills; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{ waybill.dateCreated.split('T')[0] }}</td>
+          <td style="display:inline-flex">Items
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item" *ngFor="let item of waybill.waybillProducts">{{getProductName(item.productID)}}</a>
+              </div>
+            </div>         
+          </td>
+          <td>{{waybill.invoiceNo}}</td>
+          <td style="display:inline-flex">Actions
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item cursor-pointer" (click)="openInvoice(waybill.id)">View Waybill</a>
+              </div>
+            </div>         
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>

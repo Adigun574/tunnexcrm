@@ -105,9 +105,14 @@ export const navItems: INavData[] = [
     url: '/main/quotation',
     icon: 'icon-speedometer'
   },
+  // {
+  //   name: 'Generate Waybill',
+  //   url: '/main/waybill',
+  //   icon: 'icon-speedometer'
+  // },
   {
-    name: 'Waybill',
-    url: '/main/waybill',
+    name: 'Waybills',
+    url: '/main/showwaybills',
     icon: 'icon-speedometer'
   },
   {

@@ -1,0 +1,75 @@
+<app-loader *ngIf="loading"></app-loader>
+<div *ngIf="!loading">
+    <div>
+        <div class="text-center mt-4 header-details">
+            <h3><b>TUNNEX LAB</b></h3>
+            <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
+            <p>+2348104403054</p>
+            <p>sales@tunnexlab.com.ng</p>
+            <h5><b>Waybill</b></h5>
+        </div>
+        <hr>
+        <div class="details-table">
+            <table>
+                <tr>
+                    <td>Invoice No.</td>
+                    <td><b>#{{waybill.invoiceNo}}</b></td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td><b>{{waybill.dateCreated.split('T')[0]}}</b></td>
+                </tr>
+            </table>
+            <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
+                <table style="width:100%; text-align:center; border-collapse: collapse;">
+                  <thead>
+                    <td style="border-bottom:1px solid black">
+                      <b>Item</b>
+                    </td>
+                  </thead>
+                  <tr *ngFor="let order of waybill.waybillProducts; index as i">
+                    <td>
+                      {{getProductName(order.productID)}}
+                    </td>          
+                  </tr>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div>
+        </div>
+    </div>
+</div>
+<div class="pull-right">
+    <button class="btn btn-primary" [routerLink]="['/main/showwaybills']">Back</button>
+    <button class="btn btn-success" (click)="print()"><i class="fa fa-print"></i> Print</button>
+</div>
+
+
+
+<div id="toPrint" class="d-none" style="background-color: white; display:none;" *ngIf="!loading">
+    <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
+    <table style="width:100%; text-align:left; border-collapse: collapse;">
+        <tr>
+            <td>Invoice No.: <b>#{{waybill.invoiceNo}}</b></td>
+            <!-- <td><b>#{{waybill.invoiceNo}}</b></td> -->
+        </tr>
+        <tr>
+            <td>Date: <b>{{waybill.dateCreated.split('T')[0]}}</b></td>
+            <!-- <td><b>{{waybill.dateCreated.split('T')[0]}}</b></td> -->
+        </tr>
+    </table>
+      <table style="width:100%; text-align:center; border-collapse: collapse;">
+        <thead style="border-bottom:1px solid black">
+          <td>
+            <b>Item</b>
+          </td>
+        </thead>
+        <tr *ngFor="let order of waybill.waybillProducts; index as i" style="border-bottom:1px dotted black">
+          <td>
+            {{getProductName(order.productID)}}
+          </td>          
+        </tr>
+      </table>
+    </div>
+  </div>

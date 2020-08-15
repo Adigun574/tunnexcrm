@@ -44,4 +44,8 @@ export class SaleService {
   saveQuotation(obj){
     return this.httpClient.post(`${this.generalService.api}Quotation/CreateQuotation`,obj)
   }
+
+  getWaybill(startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Sale/GetWaybillByDate/${startDate}/${endDate}`)
+  }
 }
