@@ -97,6 +97,11 @@ export const navItems: INavData[] = [
         name: 'Debtors Report',
         url: '/main/debtors-report',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'Free Sales',
+        url: '/main/free-sales',
+        icon: 'icon-puzzle'
       }
     ]
   },

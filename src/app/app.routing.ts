@@ -41,6 +41,7 @@ import { WaybillComponent } from './views/sale/waybill/waybill.component';
 import { SalesHistory2Component } from './views/sale/sales-history2/sales-history2.component';
 import { Waybill2Component } from './views/sale/waybill2/waybill2.component';
 import { ViewWaybillComponent } from './views/sale/view-waybill/view-waybill.component';
+import { FreeProductsComponent } from './views/sale/free-products/free-products.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -234,6 +235,10 @@ export const routes: Routes = [
       {
         path:'view-waybill/:id',
         component:ViewWaybillComponent
+      },
+      {
+        path:'free-sales',
+        component:FreeProductsComponent
       },
       {
         path:'**',

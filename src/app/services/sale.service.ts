@@ -48,4 +48,8 @@ export class SaleService {
   getWaybill(startDate,endDate){
     return this.httpClient.get(`${this.generalService.api}Sale/GetWaybillByDate/${startDate}/${endDate}`)
   }
+
+  getFreeSales(customerID,startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Payment/GetFreePayments?customerID=${customerID}&sDate=${startDate}&eDate=${endDate}`)
+  }
 }
