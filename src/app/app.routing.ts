@@ -45,6 +45,7 @@ import { FreeProductsComponent } from './views/sale/free-products/free-products.
 import { SupplierComponent } from './views/sale/supplier/supplier.component';
 import { KpiComponent } from './views/employee/kpi/kpi.component';
 import { KpiDetailsComponent } from './views/employee/kpi-details/kpi-details.component';
+import { PurchaseComponent } from './views/sale/purchase/purchase.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -254,6 +255,10 @@ export const routes: Routes = [
       {
         path:'kpi-details',
         component:KpiDetailsComponent
+      },
+      {
+        path:'purchase',
+        component:PurchaseComponent
       },
       {
         path:'**',

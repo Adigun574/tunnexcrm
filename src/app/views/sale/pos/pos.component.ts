@@ -9,6 +9,7 @@ import { User } from '../../../models/user';
 import { Formats } from '../../../classes/print';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProformaInvoice } from '../../../models/proformaInvoice';
 
 
 @Component({
@@ -60,6 +61,7 @@ export class PosComponent implements OnInit {
   freeSaleActivated:boolean = false
   discount
   lpo
+  proformaInvoice = new ProformaInvoice()
 
   
 
@@ -106,64 +108,6 @@ export class PosComponent implements OnInit {
 
   
 
-  // completeSale(method){
-  //   if(method == 'cash'){
-  //     this.savingSale = true
-  //   }
-  //   else{
-  //     this.savingSaleCredit = true
-  //   }
-  //   if(this.selectedCustomer){
-  //     this.sale.customerID = this.selectedCustomer.id
-  //   }
-  //   else{
-  //     this.sale.customerID = 1
-  //     this.selectedCustomer = this.guestCustomer
-  //   }
-  //   this.sale.cart = null
-  //   if(method=='cash'){
-  //     this.sale.payment = [
-  //       {
-  //         id: 0,
-  //         customerID: this.selectedCustomer.id,
-  //         amount: this.total,
-  //         method: 'cash',
-  //         reference: null,
-  //         // DatePaid: date(),
-  //         invoiceNo: null,
-  //         userCreated: this.currentUser.id
-  //       }
-  //     ]
-  //   }
-  //   else{
-  //     this.sale.payment = []
-  //   }
-  //   this.sale.userCreated = this.currentUser.id
-  //   this.sale.invoice = new Invoice()
-  //   this.sale.invoice.cashier = new Cashier()
-  //   this.sale.invoice.cashier.id = this.currentUser.id
-  //   this.sale.invoice.customerID = this.selectedCustomer.id
-  //   this.sale.invoice.amount = this.total
-  //   this.sale.invoice.amountPaid = this.total
-  //   this.sale.invoice.cashier.userCreated = this.currentUser.id
-  //   this.sale.invoice.userCreated = this.currentUser.id
-  //   this.sale.cart = new Cart()
-  //   this.sale.cart.amount = this.total
-  //   this.sale.cart.items = this.apiorders
-  //   this.sale.cart.userCreated = this.currentUser.id
-  //   // console.log(this.sale)
-  //   // console.log(JSON.stringify(this.sale))
-  //   this.saleService.saveSale(this.sale).subscribe(data=>{
-  //     this.savingSale = false
-  //     this.savingSaleCredit = false
-  //     this.resetSales()
-  //   },
-  //     err=>{
-  //       this.savingSale = false
-  //       this.savingSaleCredit = false
-  //     })
-  // }
-
   paymentMethod(method){
     this.currentPaymentMode = method
     this.currentAmount = 0
@@ -197,24 +141,6 @@ export class PosComponent implements OnInit {
     })
   }
 
-  // completeSale(){
-  //   let tempTotal = 0
-  //   this.paymentArray.forEach((pay)=>{
-  //     tempTotal += pay.amount
-  //   })
-  //   if(tempTotal < this.total){
-  //     this.paymentArray.push({
-  //       id: 0,
-  //       customerID: this.selectedCustomer.id,
-  //       amount: this.total - tempTotal,
-  //       method: 'credit',
-  //       reference: null,
-  //       invoiceNo: null,
-  //       userCreated: this.currentUser.id
-  //     })
-  //   }
-  //   console.log(this.paymentArray)
-  // }
 
   completeSale(){
     this.savingSaleInvoice = true
@@ -402,7 +328,74 @@ export class PosComponent implements OnInit {
   }
 
   generateProformaInvoice(){
-
+    if(this.selectedCustomer){
+      this.proformaInvoice.customerID = this.selectedCustomer.id
+    }
+    else{
+      this.proformaInvoice.customerID = 1
+      this.selectedCustomer = this.guestCustomer
+    }
+    this.proformaInvoice.type = 'proforma'
+    this.proformaInvoice.userCreated = this.currentUser.userCreated
+    this.proformaInvoice.userModified = this.currentUser.userModified
+    this.proformaInvoice.discountPercent = this.discount
+    this.proformaInvoice.cashier = this.currentUser
+    this.proformaInvoice.extData = "string"
+    this.proformaInvoice.tax = 0
+    this.proformaInvoice.taxPercent = 0
+    this.proformaInvoice.taxName = "string"
+    this.proformaInvoice.taxInclusive = true
+    this.proformaInvoice.discountPercent = 0
+    this.proformaInvoice.type = "string"
+    this.proformaInvoice.id = 0
+    this.proformaInvoice.userCreated = 0
+    this.proformaInvoice.userModified = 0
+    this.proformaInvoice.invoiceNo = ""
+    this.proformaInvoice.cartID = 0
+    this.proformaInvoice.amount = 0
+    this.proformaInvoice.amountPaid = 0
+    this.proformaInvoice.balance = 0
+    this.proformaInvoice.isPaid = true
+    let items = []
+    let cart = {
+      code:"string",
+      items,
+      amount: 0,
+      transactionType: true,
+      id: 0,
+      userCreated: 0,
+      userModified: 0,
+    }
+    console.log(this.orders)
+    this.orders.forEach(order=>{
+      items.push({
+        id: 0,
+        cartID: 0,
+        name: order.name,
+        code: "",
+        quantity: order.quantity,
+        amount: order.salePrice,
+        productID: order.id
+      })
+    })
+    this.proformaInvoice.cart = cart
+    console.log(this.proformaInvoice)
+    this.saleService.saveProformaInvoice(this.proformaInvoice).subscribe(data=>{
+      console.log(data)
+      Swal.fire(
+        'Success',
+        'Proforma Invoice Generated',
+        'success'
+      )
+    },
+      err=>{
+        console.log(err)
+        Swal.fire(
+          'Oops',
+          'Something went wrong',
+          'error'
+        )
+    })
   }
 
 }

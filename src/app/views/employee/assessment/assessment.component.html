@@ -27,7 +27,7 @@
     <div class="card p-3">
         <small class="text-center text-danger" *ngIf="invalidGrade">Enter a value between 0-5</small>
         <div class="form-group">
-            <label class="form-label">{{getSkillName(selectedStaffSkill.skillID)}} <small>(0-5)</small></label>
+            <label class="form-label">{{getSkillName(selectedStaffSkill.skillorKPIID)}} <small>(0-5)</small></label>
             <input type="number" class="form-control" [(ngModel)]="sas" max="5">
         </div>
         <div> 

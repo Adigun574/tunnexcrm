@@ -27,4 +27,8 @@ export class RoleService {
   deleteRole(id){
     return this.httpClient.post(`${this.generalService.api}Role/DeleteRole/${id}`,null)
   }
+
+  updateRole(obj){
+    return this.httpClient.post(`${this.generalService.api}Role/UpdateRole`,obj)
+  }
 }

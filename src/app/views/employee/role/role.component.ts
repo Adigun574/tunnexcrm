@@ -23,11 +23,11 @@ export class RoleComponent implements OnInit {
   currentUser:User
   roleObj:Role
   savingRole:boolean = false
-
+  selectedRole
 
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'action', 'edit'];
   dataSource = new MatTableDataSource<Role>(this.roles);  
 
 
@@ -271,6 +271,27 @@ export class RoleComponent implements OnInit {
       DateCreated: date(),
       DateModified: date()
     }
+  }
+
+
+  edit(role,modal){
+    this.selectedRole = role
+    this.open(modal)
+    console.log(this.selectedRole)
+  }
+
+  updateRole(){
+    this.savingRole = true
+    console.log(this.selectedRole)
+    this.roleService.updateRole(this.selectedRole).subscribe(data=>{
+      console.log(data)
+      this.savingRole = false
+      this.getAllRoles()
+    },
+      err=>{
+        console.log(err)
+        this.savingRole = false
+      })
   }
 
 }

@@ -24,6 +24,11 @@
             <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"> <i class="fa fa-edit cursor-pointer" (click)="edit(element,editRoleModal)"></i> </td>
+            </ng-container>
+
             <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> <i class="fa fa-trash cursor-pointer" (click)="deleteRole(element.id)"></i> </td>
@@ -118,6 +123,94 @@
                 <button class="btn btn-success pull-right" (click)="saveRole()">
                     <span class="spinner-grow spinner-grow-sm" *ngIf="savingRole"></span> 
                     Save
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<!--EDIT-->
+<ng-template #editRoleModal>
+    <div>
+        <div class="card p-4">
+            <div class="card-header">
+                <h3>Add Role</h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input class="form-control" type="text" [(ngModel)]="selectedRole.name">
+                </div>
+            </div>
+            <div class="card">
+                <table>
+                    <thead>
+                        <td><b>Menu</b></td>
+                        <td><b>Access</b></td>
+                    </thead>
+                    <tr>
+                        <td>Customers</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[0].write">
+                    </tr>
+                    <tr>
+                        <td>Products</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[1].write">
+                    </tr>
+                    <tr>
+                        <td>Roles</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[2].write">
+                    </tr>
+                    <tr>
+                        <td>POS</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[3].write">
+                    </tr>
+                    <tr>
+                        <td>Employees</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[4].write">
+                    </tr>
+                    <tr>
+                        <td>Sales History</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[5].write">
+                    </tr>
+                    <tr>
+                        <td>Users</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[6].write">
+                    </tr>
+                    <tr>
+                        <td>Leads</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[7].write">
+                    </tr>
+                    <tr>
+                        <td>Products Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[8].write">
+                    </tr>
+                    <tr>
+                        <td>Customers Report</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[9].write">
+                    </tr>
+                    <tr>
+                        <td>Inventory</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[10].write">
+                    </tr>
+                    <tr>
+                        <td>Training Programmes</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[11].write">
+                    </tr>
+                    <tr>
+                        <td>Skill Monitoring</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[12].write">
+                    </tr>
+                    <tr>
+                        <td>Messages</td>
+                        <input type="checkbox" class="ml-4" [(ngModel)]="selectedRole.privileges[13].write">
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-success pull-right" (click)="updateRole()">
+                    <span class="spinner-grow spinner-grow-sm" *ngIf="savingRole"></span> 
+                    Update
                 </button>
             </div>
         </div>

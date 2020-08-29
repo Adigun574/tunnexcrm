@@ -52,4 +52,12 @@ export class SaleService {
   getFreeSales(customerID,startDate,endDate){
     return this.httpClient.get(`${this.generalService.api}Payment/GetFreePayments?customerID=${customerID}&sDate=${startDate}&eDate=${endDate}`)
   }
+
+  saveProformaInvoice(obj){
+    return this.httpClient.post(`${this.generalService.api}Invoice/CreateProformaInvoice`,obj)
+  }
+
+  savePurchaeOrder(obj){
+    return this.httpClient.post(`${this.generalService.api}Purchase/SavePurchase`,obj)
+  }
 }
