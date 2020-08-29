@@ -58,6 +58,8 @@ export class PosComponent implements OnInit {
   totalCreditAmount = 0
   totalChequeAmount = 0
   freeSaleActivated:boolean = false
+  discount
+  lpo
 
   
 
@@ -299,8 +301,10 @@ export class PosComponent implements OnInit {
         }]
       }
       // this.sale.payment = this.paymentArray
-      console.log(this.sale)
-      console.log(JSON.stringify(this.sale))
+      this.sale.discountPercent = this.discount
+      this.sale.lpo = this.lpo
+      // console.log(this.sale)
+      // console.log(JSON.stringify(this.sale))
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
         this.savingSale = false
@@ -395,6 +399,10 @@ export class PosComponent implements OnInit {
 
   noToFreeSale(){
     this.modalService.dismissAll()
+  }
+
+  generateProformaInvoice(){
+
   }
 
 }

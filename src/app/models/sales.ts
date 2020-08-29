@@ -9,7 +9,9 @@ export class Sale{
   userCreated: number;
   userModified: number = 0;
   dateCreated: string;
-  dateModified: string
+  dateModified: string;
+  discountPercent:number;
+  lpo:any;
 }
 
 export class Invoice{

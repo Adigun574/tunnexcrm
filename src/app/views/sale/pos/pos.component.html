@@ -1,6 +1,6 @@
 <div class="pos-body"> 
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
             
             <div class="orderScreen">
                 <table class="table table-striped">
@@ -114,10 +114,22 @@
                       <tr>
                         <td>Amount Due:</td>
                         <td><code>₦{{total - (totalCashAmount+totalCreditAmount+totalChequeAmount)}}.00</code></td>
+                        <!-- <td>
+                          <div class="form-group">
+                            <label class="form-label">Discount</label>
+                            <input type="number" class="form-control">
+                          </div>
+                        </td> -->
                       </tr>
                       <tr>
                         <td>Mode:</td>
                         <td><code>{{currentPaymentMode | titlecase}}</code></td>
+                        <!-- <td>
+                          <div class="form-group">
+                            <label class="form-label">LPO</label>
+                            <input type="text" class="form-control">
+                          </div>
+                        </td> -->
                       </tr>
                       <tr>
                         <td>Cash || Cheque:</td>
@@ -137,13 +149,13 @@
           
         </div>
     
-        <div class="col-md-7 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
+        <div class="col-md-6 order" style="background-color: rgb(225, 230, 230); border-top:2px solid red">
             <input type="search" style="width:100%; height:40px; border-radius:5px; text-align:center; border:none" placeholder="type in keyword to search" class="mt-2 mb-2" #food (input)="searchProducts(food.value)">
             <div  style="height:100vh">
                 <!-- <div class="loader" *ngIf="loadProducts"></div> -->
                 <app-loader *ngIf="loadProducts"></app-loader>
                 <div class="row">
-                  <div class="col-sm-3" *ngFor="let product of products">
+                  <div class="col-sm-4" *ngFor="let product of products">
                       <div class="food cursor-pointer mt-3" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left; background-image: url({{product.image}});" (click)="addToCart(product)">
                           <div class="mb-2 mr-2 mt-1 product-div">
                             <p class="name">{{product.name}}</p>
@@ -154,7 +166,37 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-danger free-sale-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+          <!-- <div style="background-color: black; height:60px;">
+            <button class="btn btn-danger free-sale-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+            <button class="btn btn-primary proforma-btn" (click)="generateProformaInvoice()">Proforma Invoice</button>
+          </div>
+          <div class="d-flex discount-lpo px-1" 
+                style="background-color:black; color:white; border-radius:5px">
+            <div class="form-group mr-1">
+              <label class="form-label">Discount(%)</label>
+              <input class="form-control" type="number">
+            </div>
+            <div>
+              <div class="form-group">
+                <label class="form-label">LPO</label>
+                <input class="form-control" type="text">
+              </div>
+            </div>
+          </div> -->
+          <div class="d-flex"
+            style="position: absolute; right:0; bottom: 0; background-color: black; border-radius: 5px; padding:5px; color:white">
+            <div class="form-group mr-1">
+              <label class="form-label">Discount(%)</label>
+              <input class="form-control" type="number" [(ngModel)]="discount">
+            </div>
+            <div class="form-group mr-1">
+              <label class="form-label">LPO</label>
+              <input class="form-control" type="text" [(ngModel)]="lpo">
+            </div>
+            <button class="btn btn-danger btn-sm mr-1 free-inv-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+            <button class="btn btn-primary free-inv-btn" (click)="generateProformaInvoice()">Invoice</button>
+          </div>
+
         <ng-template #freeSaleModal>
           <div class="free-sale-modal">
             <h3><i class="fa fa-exclamation-triangle"></i></h3>
@@ -273,4 +315,5 @@
       </tr>
     </table>
   </div>
+  <p class="text-align:left">You were served by: <b>{{currentUser.name}}</b></p>
 </div>

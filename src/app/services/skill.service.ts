@@ -64,4 +64,13 @@ export class SkillService {
   getStaffSkillByStaffID(id){
     return this.httpClient.get(`${this.generalService.api}StaffSkill/GetStaffSkillsByStaffID/${id}`)
   }
+
+  getAllKpi(){
+    return this.httpClient.get(`${this.generalService.api}Skill/GetAllKpis`)
+  }
+
+  getAllStaffKpi(){
+    return this.httpClient.get(`${this.generalService.api}StaffSkill/GetAllStaffKpi`)
+  }
+
 }

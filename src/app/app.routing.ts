@@ -42,6 +42,9 @@ import { SalesHistory2Component } from './views/sale/sales-history2/sales-histor
 import { Waybill2Component } from './views/sale/waybill2/waybill2.component';
 import { ViewWaybillComponent } from './views/sale/view-waybill/view-waybill.component';
 import { FreeProductsComponent } from './views/sale/free-products/free-products.component';
+import { SupplierComponent } from './views/sale/supplier/supplier.component';
+import { KpiComponent } from './views/employee/kpi/kpi.component';
+import { KpiDetailsComponent } from './views/employee/kpi-details/kpi-details.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -239,6 +242,18 @@ export const routes: Routes = [
       {
         path:'free-sales',
         component:FreeProductsComponent
+      },
+      {
+        path:'suppliers',
+        component:SupplierComponent
+      },
+      {
+        path:'kpi',
+        component:KpiComponent
+      },
+      {
+        path:'kpi-details',
+        component:KpiDetailsComponent
       },
       {
         path:'**',

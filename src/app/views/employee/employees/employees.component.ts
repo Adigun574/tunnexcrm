@@ -56,7 +56,17 @@ export class EmployeesComponent implements OnInit {
       userCreated: [this.currentUser.id],
       userModified: [0],
       dateCreated: [date()],
-      dateModified: [date()]
+      dateModified: [date()],
+      dateEmployed: [''],
+      nextofKin:[''],
+      nextofKinAddress:[''],
+      nextofKinPhone:[''],
+      maidenName:[''],
+      staffID:[''],
+      maritalStatus:[''],
+      yearofMarriage:[''],
+      designation:[''],
+      relationshipToNextofKin:['']
     })
   }
 
@@ -87,6 +97,8 @@ export class EmployeesComponent implements OnInit {
       return
     }
     else{
+      console.log(this.addEmployeeForm.value)
+      console.log(JSON.stringify(this.addEmployeeForm.value))
       this.savingEmployee = true
       this.addEmployeeForm.value.dateofBirth = `${this.addEmployeeForm.value.dateofBirth}T21:44:52.321`
       this.skillService.saveEmployee(this.addEmployeeForm.value).subscribe(data=>{

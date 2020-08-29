@@ -169,3 +169,18 @@ orderScreen li:nth-child(even){
     padding:30px;
     text-align: center;
 }
+.proforma-btn{
+    position: absolute;
+    bottom:20px;
+    right:120px;
+}
+.discount-lpo{
+    position: absolute;
+    bottom:20px;
+    right:260px;
+}
+.free-inv-btn{
+    height:35px;
+    position: relative;
+    top:30px;
+}

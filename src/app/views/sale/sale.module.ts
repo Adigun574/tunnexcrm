@@ -18,11 +18,12 @@ import { SalesHistory2Component } from './sales-history2/sales-history2.componen
 import { Waybill2Component } from './waybill2/waybill2.component';
 import { ViewWaybillComponent } from './view-waybill/view-waybill.component';
 import { FreeProductsComponent } from './free-products/free-products.component';
+import { SupplierComponent } from './supplier/supplier.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

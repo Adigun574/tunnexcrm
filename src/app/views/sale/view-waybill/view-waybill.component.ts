@@ -38,7 +38,7 @@ export class ViewWaybillComponent implements OnInit {
   getWaybills(startDate,endDate){
     this.loading = true
     this.saleService.getWaybill(startDate,endDate).subscribe(data=>{
-      // console.log(data)
+      console.log(data)
       this.waybills = <any[]>data
       this.waybill = this.waybills.find(x=>x.id == this.waybillID)
       this.loading = false

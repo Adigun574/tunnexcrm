@@ -1,0 +1,107 @@
+<app-loader *ngIf="loadingReport"></app-loader>
+
+<div *ngIf="!loadingReport">
+  <div class="mt-2 mb-4">
+    <h3 class="text-center text-muted">SUPPLIERS <small>{{today}}</small></h3>
+  </div>
+
+  <div class="d-flex" style="justify-content: space-between;">
+      <div class="form-group">
+          <input class="form-control" type="Search" [(ngModel)]="searchKey" (input)="filterSuppliers()" placeholder="Search by name">
+      </div>
+      <div>
+        <button class="btn btn-primary mr-2" (click)="open(addSupplier)">Add Supplier</button>
+        <button class="btn btn-success">Bulk Upload</button>
+      </div>
+  </div>
+  
+  <div> 
+   
+
+  <div class="table-responsive mt-2" id="toprint">
+      <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
+    <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
+      <thead>
+            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <th>Name <i class="ion text-muted ml-2"></i></th>
+            <th>Address <i class="ion text-muted ml-2"></i></th>
+            <th>Email <i class="ion text-muted ml-2"></i></th>
+            <th>Phone <i class="ion text-muted ml-2"></i></th>
+            <th></th>
+            <th></th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let supplier of displayedSuppliers; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{supplier.name}}</td>
+          <td>{{supplier.address}}</td>
+          <td>{{supplier.email}}</td>
+          <td>{{supplier.phone}}</td>
+          <td><i class="fa fa-edit" (click)="chooseSupplierToEdit(supplier); open(editSupplierModal)"></i></td>
+          <td><i class="fa fa-trash" (click)="deleteSupplier(supplier.id)"></i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<ng-template #addSupplier>
+    <div class="add-supplier-modal">
+        <h5>Add Supplier</h5>
+        <form [formGroup]="addSupplierForm">
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input class="form-control" type="text" formControlName="name">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Address</label>
+                <input class="form-control" type="text" formControlName="address">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="text" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone</label>
+                <input class="form-control" type="text" formControlName="phone">
+            </div>
+        </form>
+        <div>
+            <div class="spinner-border" role="status" *ngIf="saving">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <button class="btn btn-primary" (click)="saveSupplier()">Save</button>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #editSupplierModal>
+    <div class="add-supplier-modal">
+        <h5>Edit Supplier</h5>
+        <div class="form-group">
+            <label class="form-label">Name</label>
+            <input class="form-control" type="text" [(ngModel)]="selectedSupplier.name">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Address</label>
+            <input class="form-control" type="text" [(ngModel)]="selectedSupplier.address">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-control" type="text" [(ngModel)]="selectedSupplier.email">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input class="form-control" type="text" [(ngModel)]="selectedSupplier.phone">
+        </div>
+        <div>
+            <div class="spinner-border" role="status" *ngIf="saving">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <button class="btn btn-primary" (click)="editSupplier()">Update</button>
+        </div>
+    </div>
+</ng-template>
+

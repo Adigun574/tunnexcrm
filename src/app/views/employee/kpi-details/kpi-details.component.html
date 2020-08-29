@@ -1,6 +1,6 @@
 <app-loader *ngIf="loading"></app-loader>
 <div *ngIf="!loading && loadedStaff && loadedSkills">
-    <h3 class="text-center mt-4 mb-4">Staff Skills</h3>
+    <h3 class="text-center mt-4 mb-4">Staff KPI</h3>
     <div class="table-responsive mt-2">
         <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
       <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
@@ -13,7 +13,6 @@
         <tbody>
           <tr *ngFor="let staffSkill of staffSkills" >
             <td>{{getStaffName(staffSkill.staffID)}}</td>
-            <!-- <td>{{getSkillName(staffSkill.skillID)}}</td> -->
             <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
             <td>{{staffSkill.competencyValue}}%</td>
             <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>

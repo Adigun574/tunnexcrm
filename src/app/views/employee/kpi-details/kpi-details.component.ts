@@ -3,11 +3,11 @@ import { SkillService } from '../../../services/skill.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-assessment',
-  templateUrl: './assessment.component.html',
-  styleUrls: ['./assessment.component.css']
+  selector: 'app-kpi-details',
+  templateUrl: './kpi-details.component.html',
+  styleUrls: ['./kpi-details.component.css']
 })
-export class AssessmentComponent implements OnInit {
+export class KpiDetailsComponent implements OnInit {
 
   staffSkills = []
   staff = []
@@ -37,7 +37,7 @@ export class AssessmentComponent implements OnInit {
 
   getAllStaffSkill(){
     this.loading = true
-    this.skillService.getAllStaffSKil().subscribe(data=>{
+    this.skillService.getAllStaffKpi().subscribe(data=>{
       console.log(data)
       this.staffSkills = <any[]>data
       this.loading = false
@@ -59,9 +59,10 @@ export class AssessmentComponent implements OnInit {
   }
 
   getStaffSkills(){
-    this.skillService.getAllSkills().subscribe(data=>{
+    this.skillService.getAllKpi().subscribe(data=>{
       this.skills = <any[]>data
       this.loadedSkills = true
+      console.log(this.skills)
     },
       err=>{
 
@@ -118,5 +119,6 @@ export class AssessmentComponent implements OnInit {
         })
     }
   }
+
 
 }

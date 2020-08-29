@@ -5,12 +5,13 @@ import { SkillService } from '../../../services/skill.service';
 import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
 
+
 @Component({
-  selector: 'app-training-programs',
-  templateUrl: './training-programs.component.html',
-  styleUrls: ['./training-programs.component.css']
+  selector: 'app-kpi',
+  templateUrl: './kpi.component.html',
+  styleUrls: ['./kpi.component.css']
 })
-export class TrainingProgramsComponent implements OnInit {
+export class KpiComponent implements OnInit {
 
   addProgramForm:FormGroup
   programs:any[]
@@ -36,8 +37,8 @@ export class TrainingProgramsComponent implements OnInit {
     this.addProgramForm = this.fb.group({
       name:['',Validators.required],
       // duration:[],
-      type:['skill'],
       description:[''],
+      type:['kpi'],
       id: [0],
       userCreated: [this.currentUser.id],
       userModified: [0],
@@ -64,6 +65,7 @@ export class TrainingProgramsComponent implements OnInit {
     }
     else{
       this.saving = true
+      console.log(this.addProgramForm.value)
       this.skillService.saveSkill(this.addProgramForm.value).subscribe(data=>{
         this.saving = false
         this.getSkills()
@@ -79,7 +81,7 @@ export class TrainingProgramsComponent implements OnInit {
 
   getSkills(){
     this.loadingSkills = true
-    this.skillService.getAllSkills().subscribe(data=>{
+    this.skillService.getAllKpi().subscribe(data=>{
       this.programs = <any[]>data
       this.loadingSkills = false
     },
@@ -111,20 +113,6 @@ export class TrainingProgramsComponent implements OnInit {
     else{
       this.invalidDetails = false
       this.addingStaffSkill = true
-      // let obj = {
-      //   id: 0,
-      //   staffID: this.selectedEmployee.id,
-      //   skillID: this.selectedSkill.id,
-      //   assessments: [
-      //     {
-      //       id: 0,
-      //       staffSkillID: 0,
-      //       sas: this.sas,
-      //       dateCreated: '2020-06-04T09:52:53.345Z'
-      //     }
-      //   ],
-      //   supervisorID: 0,
-      //   competencyValue: this.currentUser.id
       let obj = {
         id: 0,
         staffID: this.selectedEmployee.id,
@@ -163,5 +151,6 @@ export class TrainingProgramsComponent implements OnInit {
       })
   }
 
-  
+
+
 }

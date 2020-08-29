@@ -1,0 +1,43 @@
+a{
+    text-decoration: none!important;
+  }
+  .contact{
+    margin-top: 10px;
+    padding: 15px;
+    position: relative;
+    border-left: 6px solid #008000;
+    transform: scale(1);
+    background: #fff;
+    transition: 1s;
+    text-align: center;
+    height:100%;
+  }
+  .contact::before{
+    content: '';
+    position: absolute;
+    background: #008000;
+    visibility: hidden;
+    height: 3px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transition: .7s;
+  }
+  .contact:hover:before{
+    visibility: visible;
+    transform: scaleX(1);
+  }
+  .contact a:hover{
+    color: #008000 !important;
+  }
+  .contact:hover{
+    transform: scale(1.05);
+  }
+  .name-initial{
+      color:white;
+      background-color:#008000;
+      border-radius:50%;
+      padding: 5px 10px;
+  }
+  

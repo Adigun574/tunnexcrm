@@ -15,6 +15,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { UserComponent } from './user/user.component';
 import { QualificationsComponent } from './qualifications/qualifications.component';
 import { AssessmentComponent } from './assessment/assessment.component';
+import { KpiComponent } from './kpi/kpi.component';
+import { KpiDetailsComponent } from './kpi-details/kpi-details.component';
 
 
 
@@ -27,7 +29,9 @@ import { AssessmentComponent } from './assessment/assessment.component';
     RoleComponent,
     UserComponent,
     QualificationsComponent,
-    AssessmentComponent
+    AssessmentComponent,
+    KpiComponent,
+    KpiDetailsComponent
   ],
   imports: [
     CommonModule,

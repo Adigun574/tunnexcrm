@@ -121,9 +121,32 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer'
   },
   {
-    name: 'Training Programs',
-    url: '/main/training-programs',
+    name: 'Suppliers',
+    url: '/main/suppliers',
     icon: 'icon-speedometer'
+  },
+  // {
+  //   name: 'HR',
+  //   url: '/main/training-programs',
+  //   icon: 'icon-speedometer'
+  // },
+  //
+  {
+    name: 'HR',
+    url: '/base',
+    icon: 'icon-puzzle',
+    children: [
+      {
+        name: 'Skills',
+        url: '/main/training-programs',
+        icon: 'icon-speedometer'
+      },
+      {
+        name: 'KPI',
+        url: '/main/kpi',
+        icon: 'icon-speedometer'
+      },
+    ]
   },
   // {
   //   name: 'Skill Monitoring',
