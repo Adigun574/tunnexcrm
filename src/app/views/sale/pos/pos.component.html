@@ -82,7 +82,7 @@
                         <small><i class="fa fa-refresh"></i> Reset</small>
                       </button>
                   </div>
-                  <button class="btn btn-warning" (click)="print()"><small><i class="fa fa-print"></i> Receipt</small></button>
+                  <button class="btn btn-warning" (click)="print()" [disabled]="!invoiceNo"><small><i class="fa fa-print"></i> Receipt</small></button>
                 </div>
                 <div class="row btn-stuff mt-3">
                   <div>
@@ -92,7 +92,7 @@
                     </button>
                   </div>
                   <div>
-                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount)>0"> 
+                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount)>0"> 
                       <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
                         <span class="sr-only">Loading...</span>
                       </div>
@@ -113,7 +113,7 @@
                       </tr> -->
                       <tr>
                         <td>Amount Due:</td>
-                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount+totalChequeAmount)}}.00</code></td>
+                        <td><code>₦{{total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount)}}.00</code></td>
                         <!-- <td>
                           <div class="form-group">
                             <label class="form-label">Discount</label>
@@ -136,8 +136,8 @@
                         <td><code>₦{{totalCashAmount}}.00 || ₦{{totalChequeAmount}}.00</code></td>
                       </tr>
                       <tr>
-                        <td>Credit:</td>
-                        <td><code>₦{{totalCreditAmount}}.00</code></td>
+                        <td>Credit || Transfer:</td>
+                        <td><code>₦{{totalCreditAmount}}.00 || ₦{{totalTransferAmount}}.00</code></td>
                       </tr>
                     </table>
                 </div>
@@ -184,17 +184,29 @@
             </div>
           </div> -->
           <div class="d-flex"
-            style="position: absolute; right:0; bottom: 0; background-color: black; border-radius: 5px; padding:5px; color:white">
+            style="position: absolute; right:0; bottom: 0; background-color: black; border-radius: 5px; padding:5px; color:white; z-index: 2;">
+            <div class="form-group mr-1">
+              <label class="form-label">Delivery</label>
+              <input class="form-control" type="checkbox" [(ngModel)]="deliveryStatus">
+            </div>
+            <div class="form-group mr-1">
+              <label class="form-label">Delivery Fee</label>
+              <input class="form-control" type="number" [(ngModel)]="deliveryFee" style="width:70px">
+            </div>
+            <button class="btn btn-primary free-inv-btn mr-1" (click)="paymentMethod('transfer')" [disabled]="!selectedCustomer">
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
+              <small><i class="fa fa-money"></i> Transfer</small>
+            </button>
             <div class="form-group mr-1">
               <label class="form-label">Discount(%)</label>
-              <input class="form-control" type="number" [(ngModel)]="discount">
+              <input class="form-control" type="number" [(ngModel)]="discount" style="width:70px">
             </div>
             <div class="form-group mr-1">
               <label class="form-label">LPO</label>
-              <input class="form-control" type="text" [(ngModel)]="lpo">
+              <input class="form-control" type="text" [(ngModel)]="lpo" style="width:70px">
             </div>
             <button class="btn btn-danger btn-sm mr-1 free-inv-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
-            <button class="btn btn-primary free-inv-btn" (click)="generateProformaInvoice()">Invoice</button>
+            <button class="btn btn-primary free-inv-btn" (click)="generateProformaInvoice()" [disabled]="!selectedCustomer">Invoice</button>
           </div>
 
         <ng-template #freeSaleModal>
@@ -241,6 +253,12 @@
 
 
 <div id="toPrint" class="d-none" style="background-color: white; display:none;">
+  <table>
+    <tr>
+      <td>Invoice No:</td>
+      <td><b>#{{invoiceNo}}</b></td>
+    </tr>
+  </table>
   <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
     <table style="width:100%; text-align:center; border-collapse: collapse;">
       <thead style="border-bottom:1px solid black">
@@ -296,6 +314,14 @@
         <td></td>
         <td><b>Cheque</b></td>
         <td><b>₦{{totalChequeAmount}}.00</b></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><b>Delivery Fee</b></td>
+        <td><b>₦{{deliveryFee}}.00</b></td>
       </tr>
       <tr  style="border-top:1px dotted black; border-bottom: 1px dotted black;">
         <td></td>

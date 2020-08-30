@@ -46,28 +46,14 @@ export const navItems: INavData[] = [
       },
     ]
   },
-  {
-    name: 'Admin',
-    url: '/base',
-    icon: 'icon-puzzle',
-    children: [
-      {
-        name: 'Users',
-        url: '/main/user',
-        icon: 'icon-speedometer'
-      },
-      {
-        name: 'Employees',
-        url: '/main/employees',
-        icon: 'icon-speedometer'
-      },
-      {
-        name: 'Roles',
-        url: '/main/role',
-        icon: 'icon-speedometer'
-      }
-    ]
-  },
+  // {
+  //   name: 'Admin',
+  //   url: '/base',
+  //   icon: 'icon-puzzle',
+  //   children: [
+      
+  //   ]
+  // },
   {
     name: 'Reports',
     url: '/base',
@@ -107,6 +93,11 @@ export const navItems: INavData[] = [
         name: 'Free Sales',
         url: '/main/free-sales',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'Proforma Invoice',
+        url: '/main/proforma-invoice',
+        icon: 'icon-puzzle'
       }
     ]
   },
@@ -141,6 +132,21 @@ export const navItems: INavData[] = [
     url: '/base',
     icon: 'icon-puzzle',
     children: [
+      {
+        name: 'Users',
+        url: '/main/user',
+        icon: 'icon-speedometer'
+      },
+      {
+        name: 'Employees',
+        url: '/main/employees',
+        icon: 'icon-speedometer'
+      },
+      {
+        name: 'Roles',
+        url: '/main/role',
+        icon: 'icon-speedometer'
+      },
       {
         name: 'Skills',
         url: '/main/training-programs',

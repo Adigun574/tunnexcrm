@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../../../models/user';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
+import { Formats } from '../../../classes/print';
+
 
 @Component({
   selector: 'app-invoice',
@@ -22,6 +24,8 @@ export class InvoiceComponent implements OnInit {
   paying:boolean = false
   customers:Customer[] = []
   fetchingCustomers:boolean = true
+  format  = new Formats()
+
 
 
   constructor(
@@ -96,7 +100,14 @@ export class InvoiceComponent implements OnInit {
 
   getCustomerName(id){
     let cust = this.customers.find(x=>x.id == id)
+    if(!cust){
+      return `Guest Customer`
+    }
     return `${cust.firstName} ${cust.lastName}`
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
   }
 
 

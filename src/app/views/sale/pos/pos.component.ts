@@ -58,10 +58,14 @@ export class PosComponent implements OnInit {
   totalCashAmount = 0
   totalCreditAmount = 0
   totalChequeAmount = 0
+  totalTransferAmount = 0
   freeSaleActivated:boolean = false
   discount
   lpo
   proformaInvoice = new ProformaInvoice()
+  invoiceNo
+  deliveryStatus = false
+  deliveryFee = 0
 
   
 
@@ -93,6 +97,7 @@ export class PosComponent implements OnInit {
     this.totalChequeAmount = 0
     this.totalCashAmount = 0
     this.totalCreditAmount = 0
+    this.totalTransferAmount = 0
     this.disableCompleteSale = false
     this.currentPaymentMode = 'cash'
     this.paymentArray = []
@@ -103,6 +108,9 @@ export class PosComponent implements OnInit {
     this.sale.cart = new Cart()
     this.apiorders = []
     this.freeSaleActivated = false
+    this.invoiceNo = null
+    this.deliveryStatus = false
+    this.deliveryFee = 0
   }
 
 
@@ -127,9 +135,11 @@ export class PosComponent implements OnInit {
     let cashArray = this.paymentArray.filter(x=>x.method == 'cash')
     let creditArray = this.paymentArray.filter(x=>x.method == 'credit')
     let chequeArray = this.paymentArray.filter(x=>x.method == 'cheque')
+    let transferArray = this.paymentArray.filter(x=>x.method == 'transfer')
     this.totalCashAmount = 0
     this.totalCreditAmount = 0
     this.totalChequeAmount = 0
+    this.totalTransferAmount = 0
     cashArray.forEach(cash=>{
       this.totalCashAmount += cash.amount
     })
@@ -138,6 +148,9 @@ export class PosComponent implements OnInit {
     })
     chequeArray.forEach(cheque=>{
       this.totalChequeAmount += cheque.amount
+    })
+    transferArray.forEach(transfer=>{
+      this.totalTransferAmount += transfer.amount
     })
   }
 
@@ -204,6 +217,8 @@ export class PosComponent implements OnInit {
       this.sale.cart.amount = this.total
       this.sale.cart.items = this.apiorders
       this.sale.cart.userCreated = this.currentUser.id
+      this.sale.toDeliver = this.deliveryStatus
+      this.sale.deliveryFee = this.deliveryFee
       let newPaymentArray = []
       this.paymentArray.forEach(pay=>{
         if(pay.method == 'credit'){
@@ -229,9 +244,11 @@ export class PosComponent implements OnInit {
       // this.sale.payment = this.paymentArray
       this.sale.discountPercent = this.discount
       this.sale.lpo = this.lpo
-      // console.log(this.sale)
+      console.log(this.sale)
       console.log(JSON.stringify(this.sale))
       this.saleService.saveSale(this.sale).subscribe(data=>{
+        // console.log(data)
+        this.invoiceNo = data
         this.savingSaleInvoice = false
         this.savingSale = false
         this.savingSaleCredit = false
@@ -346,7 +363,6 @@ export class PosComponent implements OnInit {
     this.proformaInvoice.taxName = "string"
     this.proformaInvoice.taxInclusive = true
     this.proformaInvoice.discountPercent = 0
-    this.proformaInvoice.type = "string"
     this.proformaInvoice.id = 0
     this.proformaInvoice.userCreated = 0
     this.proformaInvoice.userModified = 0
@@ -380,6 +396,7 @@ export class PosComponent implements OnInit {
     })
     this.proformaInvoice.cart = cart
     console.log(this.proformaInvoice)
+    console.log(JSON.stringify(this.proformaInvoice))
     this.saleService.saveProformaInvoice(this.proformaInvoice).subscribe(data=>{
       console.log(data)
       Swal.fire(

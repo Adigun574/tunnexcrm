@@ -20,11 +20,13 @@ import { ViewWaybillComponent } from './view-waybill/view-waybill.component';
 import { FreeProductsComponent } from './free-products/free-products.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { ViewProformaComponent } from './view-proforma/view-proforma.component';
+import { ProformaDetailsComponent } from './proforma-details/proforma-details.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

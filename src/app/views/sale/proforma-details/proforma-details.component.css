@@ -1,0 +1,20 @@
+.header-details{
+    line-height: 5px;
+}
+.paid{
+    color:white;
+    background-color: rgb(5, 204, 5);
+    border-radius:5px;
+    padding:5px;
+}
+.unpaid{
+    color:white;
+    background-color: red;
+    border-radius:5px;
+    padding:5px;
+}
+.details-table{
+    display:flex;
+    justify-content: space-between;
+    line-height:5px;
+}

@@ -60,4 +60,8 @@ export class SaleService {
   savePurchaeOrder(obj){
     return this.httpClient.post(`${this.generalService.api}Purchase/SavePurchase`,obj)
   }
+
+  getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Invoice/GetProforma/${startDate}/${endDate}?customerID=${customerID}`)
+  }
 }

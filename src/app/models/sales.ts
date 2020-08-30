@@ -12,6 +12,8 @@ export class Sale{
   dateModified: string;
   discountPercent:number;
   lpo:any;
+  toDeliver?:boolean;
+  deliveryFee?:number
 }
 
 export class Invoice{

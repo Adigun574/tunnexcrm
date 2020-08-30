@@ -46,6 +46,8 @@ import { SupplierComponent } from './views/sale/supplier/supplier.component';
 import { KpiComponent } from './views/employee/kpi/kpi.component';
 import { KpiDetailsComponent } from './views/employee/kpi-details/kpi-details.component';
 import { PurchaseComponent } from './views/sale/purchase/purchase.component';
+import { ViewProformaComponent } from './views/sale/view-proforma/view-proforma.component';
+import { ProformaDetailsComponent } from './views/sale/proforma-details/proforma-details.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -283,6 +285,14 @@ export const routes: Routes = [
           title: 'purchase'
         },
         canActivate:[AuthGuard]
+      },
+      {
+        path:'proforma-invoice',
+        component:ViewProformaComponent,
+      },
+      {
+        path:'proforma-details/:id',
+        component:ProformaDetailsComponent,
       },
       {
         path:'**',
