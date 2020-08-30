@@ -29,6 +29,6 @@ export class RoleService {
   }
 
   updateRole(obj){
-    return this.httpClient.post(`${this.generalService.api}Role/UpdateRole`,obj)
+    return this.httpClient.post(`${this.generalService.api}Role/Update`,obj)
   }
 }

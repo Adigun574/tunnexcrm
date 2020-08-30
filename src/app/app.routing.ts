@@ -227,10 +227,18 @@ export const routes: Routes = [
       {
         path:'quotation',
         component:QuotationComponent,
+        data: {
+          title: 'quotation'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'waybill',
         component:WaybillComponent,
+        data: {
+          title: 'waybill'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'showwaybills',
@@ -242,15 +250,27 @@ export const routes: Routes = [
       },
       {
         path:'free-sales',
-        component:FreeProductsComponent
+        component:FreeProductsComponent,
+        data: {
+          title: 'freesales'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'suppliers',
-        component:SupplierComponent
+        component:SupplierComponent,
+        data: {
+          title: 'suppliers'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'kpi',
-        component:KpiComponent
+        component:KpiComponent,
+        data: {
+          title: 'kpi'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'kpi-details',
@@ -258,7 +278,11 @@ export const routes: Routes = [
       },
       {
         path:'purchase',
-        component:PurchaseComponent
+        component:PurchaseComponent,
+        data: {
+          title: 'purchase'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'**',

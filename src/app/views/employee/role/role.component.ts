@@ -263,6 +263,91 @@ export class RoleComponent implements OnInit {
           UserModified: 0,
           DateCreated: date(),
           DateModified: date()
+        },
+        //
+        {
+          Name: "skills",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "kpi",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "quotation",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "waybill",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "suppliers",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "purchase",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
+        },
+        {
+          Name: "freesales",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
         }
       ],
       ID: 0,

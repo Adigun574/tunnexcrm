@@ -57,3 +57,9 @@
     display: flex;
     justify-content: center;
 }
+.low-text{
+    color:white;
+    background-color:rgb(216, 27, 27);
+    border-radius:3px;
+    padding:3px;
+}

@@ -17,13 +17,20 @@ export class Formats{
         </style>
         <div class="pageToPrint">
             <div>
-            <div class="text-center mt-4 header-details">
-                <h3><b>TUNNEX LABORATORIES AND ENGINEERING LTD</b></h3>
-                <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
-                <p>+2348104403054</p>
-                <p>sales@tunnexlab.com.ng</p>
-            </div>
-            ${document.getElementById(divID).innerHTML}
+                <div class="text-center mt-4 header-details">
+                    <h3><b>TUNNEX LABORATORIES ENGINEERING LTD.</b></h3>
+                    <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
+                    <p>+2348104403054, +2348145119334, +2348033060580</p>
+                    <p> www.tunnexlab.com.ng, Sales@tunnexlab.com.ng</p>
+                </div>
+                ${document.getElementById(divID).innerHTML}
+                <div>
+                    <p>We receive returned product within 3 days 
+                        following the date of purchase. The returned 
+                        product must be unused, in its original 
+                        package, with attached invoice / receipt
+                    </p>
+                </div>
             </div>
         </div>
         `;

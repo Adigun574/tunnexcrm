@@ -26,10 +26,16 @@
                     <td style="border-bottom:1px solid black">
                       <b>Item</b>
                     </td>
+                    <td style="border-bottom:1px solid black">
+                      <b>Quantity</b>
+                    </td>
                   </thead>
                   <tr *ngFor="let order of waybill.waybillProducts; index as i">
                     <td>
                       {{getProductName(order.productID)}}
+                    </td>
+                    <td>
+                      {{order.quantity}}
                     </td>          
                   </tr>
                 </table>
@@ -64,10 +70,16 @@
           <td>
             <b>Item</b>
           </td>
+          <td>
+            <b>Quantity</b>
+          </td>
         </thead>
         <tr *ngFor="let order of waybill.waybillProducts; index as i" style="border-bottom:1px dotted black">
           <td>
             {{getProductName(order.productID)}}
+          </td>  
+          <td>
+            {{order.quantity}}
           </td>          
         </tr>
       </table>

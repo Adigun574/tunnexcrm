@@ -230,7 +230,7 @@ export class PosComponent implements OnInit {
       this.sale.discountPercent = this.discount
       this.sale.lpo = this.lpo
       // console.log(this.sale)
-      // console.log(JSON.stringify(this.sale))
+      console.log(JSON.stringify(this.sale))
       this.saleService.saveSale(this.sale).subscribe(data=>{
         this.savingSaleInvoice = false
         this.savingSale = false
