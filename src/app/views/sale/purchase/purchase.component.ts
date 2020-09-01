@@ -31,6 +31,7 @@ export class PurchaseComponent implements OnInit {
   nairaEquivalent
   currentUser
   saving:boolean = false
+  unitPrice = []
 
   constructor(
     private productService:ProductService,
@@ -62,11 +63,16 @@ export class PurchaseComponent implements OnInit {
   addProduct(e){
     this.cart.push(e)
     this.quantity.push(1)
+    this.unitPrice.push(0)
     // console.log(this.cart)
   }
 
   setQuantity(value,i){
     this.quantity[i] = value
+  }
+
+  setUnitPrice(value,i){
+    this.unitPrice[i] = value
   }
 
   selectSupplier(e){
@@ -94,14 +100,14 @@ export class PurchaseComponent implements OnInit {
           userCreated: this.currentUser.userCreated,
           userModified: this.currentUser.userModified,
     }
-    this.cart.forEach(product=>{
+    this.cart.forEach((product,index)=>{
       cart.items.push({
             id: 0,
             cartID: 0,
             name: product.name,
             code: 'string',
-            quantity: product.quantity,
-            amount: product.costPrice,
+            quantity: this.quantity[index],
+            amount: this.unitPrice[index],
             productID: product.id
       })
     })
@@ -125,6 +131,18 @@ export class PurchaseComponent implements OnInit {
           'error'
         )
       })
+  }
+
+  reset(){
+    this.cart = []
+    this.quantity = []
+    this.invoice = new Purchase()
+    this.invoiceNo = null
+    this.selectedSupplier = null
+    this.selectedCurrency = null
+    this.nairaEquivalent = null
+    this.saving = false
+    this.unitPrice = []
   }
 
 }

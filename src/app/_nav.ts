@@ -98,6 +98,11 @@ export const navItems: INavData[] = [
         name: 'Proforma Invoice',
         url: '/main/proforma-invoice',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'Purchase Report',
+        url: '/main/purchase-report',
+        icon: 'icon-puzzle'
       }
     ]
   },

@@ -6,6 +6,7 @@ import { User } from '../../../models/user';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
 import { Formats } from '../../../classes/print';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class InvoiceComponent implements OnInit {
   customers:Customer[] = []
   fetchingCustomers:boolean = true
   format  = new Formats()
+  users:User[] = []
 
 
 
@@ -33,7 +35,8 @@ export class InvoiceComponent implements OnInit {
     private router:Router,
     private saleService:SaleService,
     private modalService:NgbModal,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private userService:UserService
   ) { 
     this.customerID = +this.route.snapshot.params.customerID
     this.invoiceNo = this.route.snapshot.params.invoiceNo
@@ -43,12 +46,13 @@ export class InvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.getInvoice()
     this.getCustomers()
+    this.getUsers()
   }
 
   getInvoice(){
     this.saleService.getInvoiceByCIDandInvoiceNo(this.invoiceNo,this.customerID).subscribe(data=>{
       this.invoice = data
-      console.log(this.invoice)
+      // console.log(this.invoice)
       this.loading = false
     },
       err=>{
@@ -109,6 +113,25 @@ export class InvoiceComponent implements OnInit {
   print(){
     this.format.printDiv('toPrint')
   }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(data=>{
+      // console.log(data)
+      this.users = <User[]>data
+    },
+      err=>{
+        // console.log(err)
+      })
+  }
+
+  getUserName(id){
+    let user = this.users.find(x=>x.id == id)
+    if(!user){
+      return `- -`
+    }
+    return `${user.name}`
+  }
+
 
 
 

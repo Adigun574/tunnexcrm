@@ -103,8 +103,10 @@ export class AssessmentComponent implements OnInit {
       this.grading = true
       this.selectedStaffSkill.assessments.push({
         sas:this.sas,
-        staffSkillID:this.selectedStaffSkill.skillID
+        // staffSkillID:this.selectedStaffSkill.skillID,
+        staffSkillorKPIID:this.selectedStaffSkill.skillorKPIID
       })
+      // console.log(this.selectedStaffSkill)
       this.skillService.upDateStaffSkill(this.selectedStaffSkill).subscribe(data=>{
         this.getAllStaffSkill()
         this.grading = false

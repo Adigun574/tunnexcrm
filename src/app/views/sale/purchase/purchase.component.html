@@ -37,12 +37,13 @@
                 <input class="form-control" type="text" [(ngModel)]="invoiceNo">
             </div>
             <div>
-                <button class="btn btn-success" (click)="saveInvoice()">
+                <button class="btn btn-success mr-2" (click)="saveInvoice()">
                     <div class="spinner-border text-light" role="status" *ngIf="saving">
                         <span class="sr-only">Loading...</span>
                     </div>
                     Generate Invoice
                 </button>
+                <button class="btn btn-danger" (click)="reset()"><i class="fa fa-refresh"></i> Reset</button>
             </div>
         </div>
         <div class="col-sm-6">
@@ -60,7 +61,7 @@
                           <b>Item</b>
                         </td>
                         <td>
-                          <b>Price</b>
+                          <b>Unit Price</b>
                         </td>
                         <td></td>
                       </thead>
@@ -72,7 +73,7 @@
                           {{order.name}}
                         </td>
                         <td>
-                          ₦{{order.costPrice * order.quantity}}.00
+                          <input type="number" style="width:50px" [(ngModel)]="unitPrice[i]" #unitpricevalue (change)="setUnitPrice(unitpricevalue.value,i)">
                         </td>
                         <td>
                           <i class="fa fa-trash" (click)="removeItem(i)"></i>

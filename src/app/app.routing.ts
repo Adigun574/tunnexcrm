@@ -48,6 +48,8 @@ import { KpiDetailsComponent } from './views/employee/kpi-details/kpi-details.co
 import { PurchaseComponent } from './views/sale/purchase/purchase.component';
 import { ViewProformaComponent } from './views/sale/view-proforma/view-proforma.component';
 import { ProformaDetailsComponent } from './views/sale/proforma-details/proforma-details.component';
+import { PurchaseOrderReportComponent } from './views/sale/purchase-order-report/purchase-order-report.component';
+import { PurchaseOrderDetailComponent } from './views/sale/purchase-order-detail/purchase-order-detail.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -293,6 +295,14 @@ export const routes: Routes = [
       {
         path:'proforma-details/:id',
         component:ProformaDetailsComponent,
+      },
+      {
+        path:'purchase-report',
+        component:PurchaseOrderReportComponent,
+      },
+      {
+        path:'purchase-order/:id',
+        component:PurchaseOrderDetailComponent,
       },
       {
         path:'**',

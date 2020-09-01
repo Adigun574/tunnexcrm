@@ -64,4 +64,8 @@ export class SaleService {
   getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate){
     return this.httpClient.get(`${this.generalService.api}Invoice/GetProforma/${startDate}/${endDate}?customerID=${customerID}`)
   }
+
+  getPurchaseOrderBySupplierStartDateandEndDate(supplierID,startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Purchase/GetPurchasedByDate/${startDate}/${endDate}?supplierID=${supplierID}`)
+  }
 }
