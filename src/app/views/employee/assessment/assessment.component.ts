@@ -107,6 +107,7 @@ export class AssessmentComponent implements OnInit {
         staffSkillorKPIID:this.selectedStaffSkill.skillorKPIID
       })
       // console.log(this.selectedStaffSkill)
+      // console.log(JSON.stringify(this.selectedStaffSkill))
       this.skillService.upDateStaffSkill(this.selectedStaffSkill).subscribe(data=>{
         this.getAllStaffSkill()
         this.grading = false

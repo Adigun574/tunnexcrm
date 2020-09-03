@@ -207,7 +207,8 @@ export class PosComponent implements OnInit {
       this.sale.userCreated = this.currentUser.id
       this.sale.invoice = new Invoice()
       this.sale.invoice.cashier = new Cashier()
-      this.sale.invoice.cashier.id = this.currentUser.id
+      // this.sale.invoice.cashier.id = this.currentUser.id
+      this.sale.invoice.cashier = this.currentUser
       this.sale.invoice.customerID = this.selectedCustomer.id
       this.sale.invoice.amount = this.total
       this.sale.invoice.amountPaid = this.total

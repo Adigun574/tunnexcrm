@@ -86,7 +86,7 @@ export class PurchaseComponent implements OnInit {
   saveInvoice(){
     this.saving = true
     this.invoice.invoiceNo = this.invoiceNo
-    this.invoice.userCreated = this.currentUser.userCreated
+    this.invoice.userCreated = this.currentUser.id
     this.invoice.userModified = this.currentUser.userModified
     this.invoice.exchangeCurrency = this.selectedCurrency.name
     this.invoice.nairaEquivalent = this.nairaEquivalent
@@ -97,7 +97,7 @@ export class PurchaseComponent implements OnInit {
           amount: 0,
           transactionType: true,
           id: 0,
-          userCreated: this.currentUser.userCreated,
+          userCreated: this.currentUser.id,
           userModified: this.currentUser.userModified,
     }
     this.cart.forEach((product,index)=>{
@@ -107,12 +107,13 @@ export class PurchaseComponent implements OnInit {
             name: product.name,
             code: 'string',
             quantity: this.quantity[index],
-            amount: this.unitPrice[index],
+            amount: +this.unitPrice[index],
             productID: product.id
       })
     })
     this.invoice.cart = cart
     // console.log(this.invoice)
+    // console.log(JSON.stringify(this.invoice))
     this.saleService.savePurchaeOrder(this.invoice).subscribe(data=>{
       this.saving = false
       // console.log(data)
