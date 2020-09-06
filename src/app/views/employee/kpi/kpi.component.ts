@@ -101,6 +101,7 @@ export class KpiComponent implements OnInit {
 
   selectSkill(skill){
     this.selectedSkill = skill
+    console.log(this.selectedSkill)
   }
 
   addStaffSkill(){
@@ -116,7 +117,8 @@ export class KpiComponent implements OnInit {
       let obj = {
         id: 0,
         staffID: this.selectedEmployee.id,
-        skillID: this.selectedSkill.id,
+        skillorKPIID:this.selectedSkill.id,
+        // skillID: this.selectedSkill.id,
         assessments: [],
         supervisorID: this.currentUser.id,
         competencyValue: 0

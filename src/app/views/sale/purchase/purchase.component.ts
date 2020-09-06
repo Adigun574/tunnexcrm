@@ -20,7 +20,7 @@ export class PurchaseComponent implements OnInit {
     {name:'Naira'},
     {name:'US Dollar'},
     {name:'Pound'},
-    {name:'Euor'},
+    {name:'Euro'},
     {name:'Yen'}
   ]
   quantity = []
@@ -106,7 +106,7 @@ export class PurchaseComponent implements OnInit {
             cartID: 0,
             name: product.name,
             code: 'string',
-            quantity: this.quantity[index],
+            quantity: +this.quantity[index],
             amount: +this.unitPrice[index],
             productID: product.id
       })
@@ -114,6 +114,7 @@ export class PurchaseComponent implements OnInit {
     this.invoice.cart = cart
     // console.log(this.invoice)
     // console.log(JSON.stringify(this.invoice))
+    // return
     this.saleService.savePurchaeOrder(this.invoice).subscribe(data=>{
       this.saving = false
       // console.log(data)
@@ -144,6 +145,12 @@ export class PurchaseComponent implements OnInit {
     this.nairaEquivalent = null
     this.saving = false
     this.unitPrice = []
+  }
+
+  removeItem(i){
+    this.cart.splice(i,1)
+    this.quantity.splice(i,1)
+    this.unitPrice.splice(i,1)
   }
 
 }

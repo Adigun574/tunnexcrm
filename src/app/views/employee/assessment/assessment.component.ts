@@ -49,7 +49,7 @@ export class AssessmentComponent implements OnInit {
 
   getStaffs(){
     this.skillService.getAllEmployees().subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.staff = <any[]>data
       this.loadedStaff = true
     },

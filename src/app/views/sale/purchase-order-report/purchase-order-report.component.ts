@@ -48,7 +48,7 @@ export class PurchaseOrderReportComponent implements OnInit {
     this.loadingReport = true
     this.saleService.getPurchaseOrderBySupplierStartDateandEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loadingReport = false
-      // console.log(data)
+      console.log(data)
       this.sales = <any[]>data
     },
       err=>{
@@ -134,5 +134,29 @@ export class PurchaseOrderReportComponent implements OnInit {
   openInvoice(id){
     // console.log(customerID,invoiceNo)
     this.router.navigateByUrl(`/main/purchase-order/${id}`)
+  }
+
+  getCurrencySymbol(currencyName){
+    if(currencyName == 'Naira'){
+      return '₦'
+    }
+    else if(currencyName == 'US Dollar'){
+      return '$'
+    }
+    else if(currencyName == 'Pound'){
+      return '£'
+    }
+    else if(currencyName == 'Euro' || currencyName == 'Euor'){
+      return '€'
+    }
+    else if(currencyName == 'Yen'){
+      return '¥'
+    }
+    else{
+      return '₦'
+    }
+
+
+
   }
 }

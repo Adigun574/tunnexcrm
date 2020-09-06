@@ -27,6 +27,12 @@ export class InvoiceComponent implements OnInit {
   fetchingCustomers:boolean = true
   format  = new Formats()
   users:User[] = []
+  methods = [
+    {name:'cash'},
+    {name:'transfer'},
+    {name:'cheque'}
+  ]
+  paymentMode
 
 
 
@@ -74,9 +80,8 @@ export class InvoiceComponent implements OnInit {
         // id: 0,
         customerID: this.invoice.customerID,
         amount: +this.amount,
-        method: "cash",
+        method: this.paymentMode || 'cash',
         reference: this.invoice.invoiceNo,
-        // datePaid: 2020-06-10T22:27:32.041Z,
         invoiceNo: this.invoice.invoiceNo,
         userCreated: this.currentUser.id
       }
