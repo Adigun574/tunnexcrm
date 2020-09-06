@@ -38,7 +38,19 @@
                     <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.amount}}</td>
+                    <td>{{getCurrencySymbol(invoice.exchangeCurrency)}}{{item.amount}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>Total Amount({{getCurrencySymbol(invoice.exchangeCurrency)}})</td>
+                  <td><b>{{getCurrencySymbol(invoice.exchangeCurrency)}}{{invoice.totalAmountForeign}}</b></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>Total Amount(₦)</td>
+                  <td><b>₦{{invoice.totalAmountNaira}}</b></td>
                 </tr>
             </table>
        
@@ -95,6 +107,18 @@
           <td>
             ₦{{order.amount}}.00
           </td>          
+        </tr>
+        <tr style="border-bottom:1px dotted black">
+          <td></td>
+          <td></td>
+          <td>Total Amount({{getCurrencySymbol(invoice.exchangeCurrency)}})</td>
+          <td><b>{{getCurrencySymbol(invoice.exchangeCurrency)}}{{invoice.totalAmountForeign}}</b></td>
+        </tr>
+        <tr style="border-bottom:1px dotted black">
+          <td></td>
+          <td></td>
+          <td>Total Amount(₦)</td>
+          <td><b>₦{{invoice.totalAmountNaira}}</b></td>
         </tr>
       </table>
     </div>

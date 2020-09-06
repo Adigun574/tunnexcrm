@@ -53,6 +53,7 @@ export class PurchaseOrderDetailComponent implements OnInit {
       // console.log(data)
       let invoices = <any[]>data
       this.invoice = invoices.find(x=>x.id == this.purchaseID)
+      console.log(this.invoice)
     },
       err=>{
         this.loading = false
@@ -102,4 +103,26 @@ export class PurchaseOrderDetailComponent implements OnInit {
     }
     return `${user.name}`
   }
+
+  getCurrencySymbol(currencyName){
+    if(currencyName == 'Naira'){
+      return '₦'
+    }
+    else if(currencyName == 'US Dollar'){
+      return '$'
+    }
+    else if(currencyName == 'Pound'){
+      return '£'
+    }
+    else if(currencyName == 'Euro' || currencyName == 'Euor'){
+      return '€'
+    }
+    else if(currencyName == 'Yen'){
+      return '¥'
+    }
+    else{
+      return '₦'
+    }
+  }
+
 }
