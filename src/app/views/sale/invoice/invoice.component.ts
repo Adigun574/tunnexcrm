@@ -30,9 +30,11 @@ export class InvoiceComponent implements OnInit {
   methods = [
     {name:'cash'},
     {name:'transfer'},
-    {name:'cheque'}
+    {name:'cheque'},
+    {name:'pos'}
   ]
   paymentMode
+  reference
 
 
 
@@ -58,7 +60,7 @@ export class InvoiceComponent implements OnInit {
   getInvoice(){
     this.saleService.getInvoiceByCIDandInvoiceNo(this.invoiceNo,this.customerID).subscribe(data=>{
       this.invoice = data
-      // console.log(this.invoice)
+      console.log(this.invoice)
       this.loading = false
     },
       err=>{
@@ -81,7 +83,7 @@ export class InvoiceComponent implements OnInit {
         customerID: this.invoice.customerID,
         amount: +this.amount,
         method: this.paymentMode || 'cash',
-        reference: this.invoice.invoiceNo,
+        reference: this.reference || '',
         invoiceNo: this.invoice.invoiceNo,
         userCreated: this.currentUser.id
       }

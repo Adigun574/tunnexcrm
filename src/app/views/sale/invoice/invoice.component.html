@@ -91,6 +91,10 @@
           >
           </ng-select>
         </div>
+        <div class="form-group">
+          <label class="form-label">Reference</label>
+          <input class="form-control" type="text" [(ngModel)]="reference">
+        </div>
         <div>
             <button class="btn btn-primary pull-right" (click)="pay()">
                 <span class="spinner-grow spinner-grow-sm" *ngIf="paying"></span>                 
@@ -192,4 +196,5 @@
       </table>
     </div>
     <p>You were served by <b>{{ getUserName(invoice.userCreated)}}</b></p>
+    <p>Thanks for your patronage</p>
   </div>

@@ -60,7 +60,7 @@ export class PosComponent implements OnInit {
   totalChequeAmount = 0
   totalTransferAmount = 0
   freeSaleActivated:boolean = false
-  discount
+  discount = 0
   lpo
   proformaInvoice = new ProformaInvoice()
   invoiceNo
