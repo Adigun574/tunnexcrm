@@ -50,7 +50,7 @@ export class SalesHistory2Component implements OnInit {
     this.loadingReport = true
     this.saleService.getSalesHistoryByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loadingReport = false
-      console.log(data)
+      // console.log(data)
       this.sales = <any[]>data
     },
       err=>{
@@ -133,6 +133,15 @@ export class SalesHistory2Component implements OnInit {
   openInvoice(customerID,invoiceNo){
     console.log(customerID,invoiceNo)
     this.router.navigateByUrl(`/main/invoice/${customerID}/${invoiceNo}`)
+  }
+
+  deleteSale(invoiceNo){
+    // console.log(invoiceNo)
+    this.saleService.deleteSale(invoiceNo).subscribe(data=>{
+      this.getSalesByCustStartandEndDate(0,0,0)
+    },
+      err=>{
+      })
   }
 
 }

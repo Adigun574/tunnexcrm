@@ -88,5 +88,13 @@ export class FreeProductsComponent implements OnInit {
     this.format.printDiv('toPrint')
   }
 
+  cancelFoc(invoiceNo){
+    this.saleService.deleteFOCPayment(invoiceNo).subscribe(data=>{
+      this.getFreeSales(0,0,0)
+    },
+      err=>{
+      })
+  }
+
 
 }

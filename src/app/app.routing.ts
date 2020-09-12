@@ -50,6 +50,7 @@ import { ViewProformaComponent } from './views/sale/view-proforma/view-proforma.
 import { ProformaDetailsComponent } from './views/sale/proforma-details/proforma-details.component';
 import { PurchaseOrderReportComponent } from './views/sale/purchase-order-report/purchase-order-report.component';
 import { PurchaseOrderDetailComponent } from './views/sale/purchase-order-detail/purchase-order-detail.component';
+import { RefundComponent } from './views/sale/refund/refund.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -303,6 +304,10 @@ export const routes: Routes = [
       {
         path:'purchase-order/:id',
         component:PurchaseOrderDetailComponent,
+      },
+      {
+        path:'refund',
+        component:RefundComponent,
       },
       {
         path:'**',

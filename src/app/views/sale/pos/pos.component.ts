@@ -315,6 +315,12 @@ export class PosComponent implements OnInit {
   calculateTotal(){
     this.total = 0
     this.orders.forEach(order=>this.total += order.salePrice * order.quantity)
+    //if things go wrong, check the line below and above the next comment
+    this.total = this.total - ((this.discount/100)*this.total)    
+    if(this.deliveryStatus){
+      this.total += this.deliveryFee
+    }
+    //stop debugging here
     this.amountDue = this.total
   }
 

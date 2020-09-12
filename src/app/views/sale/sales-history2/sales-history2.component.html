@@ -79,7 +79,8 @@
               </div>
               <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
                   <a class="dropdown-item cursor-pointer" (click)="openInvoice(sale.customerID,sale.invoice.invoiceNo)">View Invoice</a>
-              </div>
+                  <a class="dropdown-item cursor-pointer" (click)="deleteSale(sale.invoice.invoiceNo)">Delete Sale</a>
+                </div>
             </div>         
           </td>
         </tr>

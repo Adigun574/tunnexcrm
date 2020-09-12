@@ -2,6 +2,10 @@
     <div class="row mt-4">
         <div class="col-sm-6">
             <div class="form-group">
+                <label class="form-label">Invoice No</label>
+                <input class="form-control" type="text" [(ngModel)]="invoiceNo">
+            </div>
+            <div class="form-group">
                 <label class="form-label">Products</label>
                 <ng-select
                     [items]="products"
@@ -10,38 +14,12 @@
                 >
                 </ng-select>
             </div>
-            <div class="form-group">
-                <label class="form-label">Suppliers</label>
-                <ng-select
-                    [items]="suppliers"
-                    bindLabel="name"
-                    (change)="selectSupplier($event)"
-                >
-                </ng-select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Currency</label>
-                <ng-select
-                    [items]="currency"
-                    bindLabel="name"
-                    (change)="selectCurrency($event)"
-                >
-                </ng-select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Exchange Rate</label>
-                <input class="form-control" type="number" [(ngModel)]="nairaEquivalent">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Invoice No.</label>
-                <input class="form-control" type="text" [(ngModel)]="invoiceNo">
-            </div>
             <div>
-                <button class="btn btn-success mr-2" (click)="saveInvoice()">
+                <button class="btn btn-success mr-2" (click)="saveRefund()">
                     <div class="spinner-border text-light" role="status" *ngIf="saving">
                         <span class="sr-only">Loading...</span>
                     </div>
-                    Generate Order
+                    Save
                 </button>
                 <button class="btn btn-danger" (click)="reset()"><i class="fa fa-refresh"></i> Reset</button>
             </div>
@@ -49,7 +27,7 @@
         <div class="col-sm-6">
             <div>
                 <div>
-                    <h5>SUPPLIER INVOICE</h5>
+                    <h5>RETURNED ITEMS</h5>
                 </div>
                 <div class="orderScreen">
                     <table class="table table-striped">
@@ -60,9 +38,9 @@
                         <td>
                           <b>Item</b>
                         </td>
-                        <td>
+                        <!-- <td>
                           <b>Unit Price</b>
-                        </td>
+                        </td> -->
                         <td></td>
                       </thead>
                       <tr *ngFor="let order of cart; index as i">
@@ -72,9 +50,9 @@
                         <td>
                           {{order.name}}
                         </td>
-                        <td>
+                        <!-- <td>
                           <input type="number" style="width:50px" [(ngModel)]="unitPrice[i]" #unitpricevalue (change)="setUnitPrice(unitpricevalue.value,i)">
-                        </td>
+                        </td> -->
                         <td>
                           <i class="fa fa-trash" (click)="removeItem(i)"></i>
                         </td>

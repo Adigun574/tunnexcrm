@@ -68,4 +68,16 @@ export class SaleService {
   getPurchaseOrderBySupplierStartDateandEndDate(supplierID,startDate,endDate){
     return this.httpClient.get(`${this.generalService.api}Purchase/GetPurchasedByDate/${startDate}/${endDate}?supplierID=${supplierID}`)
   }
+
+  deleteSale(invoiceNo){
+    return this.httpClient.post(`${this.generalService.api}Sale/DeleteSale/${invoiceNo}`,null)
+  }
+
+  deleteFOCPayment(invoiceNo){
+    return this.httpClient.post(`${this.generalService.api}Payment/DeleteFOCPayment/${invoiceNo}`,null)
+  }
+
+  salesRefund(obj){
+    return this.httpClient.post(`${this.generalService.api}Sale/ReturnProduct`,obj)
+  }
 }

@@ -24,11 +24,12 @@ import { ViewProformaComponent } from './view-proforma/view-proforma.component';
 import { ProformaDetailsComponent } from './proforma-details/proforma-details.component';
 import { PurchaseOrderReportComponent } from './purchase-order-report/purchase-order-report.component';
 import { PurchaseOrderDetailComponent } from './purchase-order-detail/purchase-order-detail.component';
+import { RefundComponent } from './refund/refund.component';
 
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent, RefundComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

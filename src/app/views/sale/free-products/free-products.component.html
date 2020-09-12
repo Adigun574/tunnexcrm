@@ -44,6 +44,7 @@
             <th>Date <i class="ion text-muted ml-2"></i></th>
             <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
             <th>Amount <i class="ion text-muted ml-2"></i></th>
+            <th></th>
         </thead>
         <tbody>
             <tr *ngFor="let debtor of debtorsReportByCustomer; index as i" >
@@ -52,6 +53,18 @@
                 <td>{{debtor.datePaid.split('T')[0]}}</td>
                 <td>{{debtor.invoiceNo}}</td>  
                 <td>‎₦{{debtor.amount}}</td>  
+                <td style="display:inline-flex">Actions
+                    <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+                      <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                          <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                          <span class="fa fa-ellipsis-v"></span>
+                          </button>   
+                      </div>
+                      <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                          <a class="dropdown-item cursor-pointer" (click)="cancelFoc(debtor.invoiceNo)">Cancel FOC</a>
+                      </div>
+                    </div>         
+                </td>
             </tr>
         </tbody>
     </table>

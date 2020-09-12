@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router' ;
 import { ProductService } from '../../../services/product.service' ;
 import { Product } from '../../../models/product';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,11 +18,17 @@ export class EditProductComponent implements OnInit {
   updating:boolean = false
   loadingProduct = true
   deleting:boolean = false
+  item={
+    image : null,
+    imageUrl: null
+  }
+  image
 
   constructor(
     private route:ActivatedRoute,
     private productService:ProductService,
-    private router:Router
+    private router:Router,
+    private http: HttpClient
   ) { 
     this.productId = +this.route.snapshot.params.id
   }
@@ -54,6 +61,40 @@ export class EditProductComponent implements OnInit {
       err=>{
         this.updating = false
       })
+  }
+
+  selectImage(e){
+    const file = e.target.files[0]
+    this.image = file
+    this.item.imageUrl = URL.createObjectURL(file)
+    // this.uploadPicture()
+  }
+
+  uploadPicture(){
+    this.updating = true
+    if(this.image){
+      // const CLOUDINARY_URL="https://api.cloudinary.com/v1_1/dk0ydrw94/upload"
+      // const CLOUDINARY_UPLOAD_PRESET="ym00sgsu"
+      const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dsfkplrl3/upload"
+      const CLOUDINARY_UPLOAD_PRESET="shdexw2p"
+      let formData = new FormData()
+      formData.append('file',this.image)
+      formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET)
+      this.http.post(CLOUDINARY_URL,formData).subscribe(data=>{
+        let res = <any>data
+        // console.log(res.secure_url)
+        this.product.image = res.secure_url
+        this.updateProduct()
+      },
+        err=>{
+          // console.log(err)
+          this.product.image = "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+          this.updateProduct()
+        })
+    }   
+    else{
+      this.updateProduct()
+    } 
   }
 
   deleteProduct(id){
