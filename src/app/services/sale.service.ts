@@ -80,4 +80,8 @@ export class SaleService {
   salesRefund(obj){
     return this.httpClient.post(`${this.generalService.api}Sale/ReturnProduct`,obj)
   }
+
+  getSalesWithInvoiceNo(invoiceNo){
+    return this.httpClient.get(`${this.generalService.api}Sale/GetSalewithInvoiceNo/${invoiceNo}`)
+  }
 }

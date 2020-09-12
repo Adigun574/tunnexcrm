@@ -35,6 +35,8 @@ export class InvoiceComponent implements OnInit {
   ]
   paymentMode
   reference
+  salesObj
+  loadingSalesObj:boolean = false
 
 
 
@@ -55,16 +57,35 @@ export class InvoiceComponent implements OnInit {
     this.getInvoice()
     this.getCustomers()
     this.getUsers()
+    this.getSalesObj()
   }
 
   getInvoice(){
     this.saleService.getInvoiceByCIDandInvoiceNo(this.invoiceNo,this.customerID).subscribe(data=>{
       this.invoice = data
-      console.log(this.invoice)
+      // console.log(this.invoice)
       this.loading = false
     },
       err=>{
         this.loading = false
+      })
+  }
+
+  getSalesObj(){
+    this.loadingSalesObj = true
+    this.saleService.getSalesWithInvoiceNo(this.invoiceNo).subscribe(data=>{
+      this.salesObj = <any>data
+      this.salesObj.payment.forEach((pay,i)=>{
+        if(pay.amount == 0){
+          this.salesObj.payment.splice(i,1)
+        }
+      })
+      this.loadingSalesObj = false
+      console.log(data)
+    },
+      err=>{
+        this.loadingSalesObj = false
+        console.log(err)
       })
   }
 

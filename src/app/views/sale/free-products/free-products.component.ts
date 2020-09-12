@@ -3,6 +3,7 @@ import { Formats } from '../../../classes/print';
 import { Customer } from '../../../models/customer';
 import { SaleService } from '../../../services/sale.service';
 import { CustomerService } from '../../../services/customer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-free-products',
@@ -21,10 +22,17 @@ export class FreeProductsComponent implements OnInit {
   debtorsReportByCustomer = []
   selectedCustomer:Customer
 
+  specialAccess:boolean = false
+
   constructor(
     private saleService:SaleService,
-    private customerService:CustomerService
-  ) { }
+    private customerService:CustomerService,
+    private router:Router
+  ) { 
+    if(this.router.url.includes('special')){
+      this.specialAccess = true
+    }
+  }
 
   ngOnInit(): void {
     this.getFreeSales(0,0,0)

@@ -20,6 +20,7 @@ export class SalesHistory2Component implements OnInit {
   startDate = `0000-00-00`
   endDate = `0000-00-00`
   selectedCustomer
+  specialAccess:boolean = false
 
   constructor(
     private saleService:SaleService,
@@ -37,6 +38,9 @@ export class SalesHistory2Component implements OnInit {
       month = `0${month}`
     }
     this.today = `${day}-${month}-${year}`
+    if(this.router.url.includes('special')){
+      this.specialAccess = true
+    }
   }
 
   ngOnInit(): void {

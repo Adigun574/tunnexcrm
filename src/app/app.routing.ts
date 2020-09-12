@@ -51,6 +51,7 @@ import { ProformaDetailsComponent } from './views/sale/proforma-details/proforma
 import { PurchaseOrderReportComponent } from './views/sale/purchase-order-report/purchase-order-report.component';
 import { PurchaseOrderDetailComponent } from './views/sale/purchase-order-detail/purchase-order-detail.component';
 import { RefundComponent } from './views/sale/refund/refund.component';
+import { SpecialComponent } from './views/sale/special/special.component';
 // import { HomeComponent } from './views/home/home.component';
 
 export const routes: Routes = [
@@ -304,6 +305,10 @@ export const routes: Routes = [
       {
         path:'purchase-order/:id',
         component:PurchaseOrderDetailComponent,
+      },
+      {
+        path:'special',
+        component:SpecialComponent,
       },
       {
         path:'refund',

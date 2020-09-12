@@ -348,6 +348,18 @@ export class RoleComponent implements OnInit {
           UserModified: 0,
           DateCreated: date(),
           DateModified: date()
+        },
+        {
+          Name: "special",
+          Code: "",
+          Read: true,
+          Write: true,
+          RoleID: 0,
+          ID: 0,
+          UserCreated: this.currentUser.id,
+          UserModified: 0,
+          DateCreated: date(),
+          DateModified: date()
         }
       ],
       ID: 0,
@@ -372,10 +384,12 @@ export class RoleComponent implements OnInit {
       console.log(data)
       this.savingRole = false
       this.getAllRoles()
+      this.modalService.dismissAll()
     },
       err=>{
         console.log(err)
         this.savingRole = false
+        this.modalService.dismissAll()
       })
   }
 

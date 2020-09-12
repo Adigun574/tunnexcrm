@@ -46,7 +46,7 @@
         </div>
         <hr>
         <div>
-            <table style="width:70%; text-align:center; border-collapse: collapse;">
+            <table style="width:70%; text-align:center; border-collapse: collapse; border-bottom: 1px dotted black;">
                 <tr>
                     <th>S/N</th>
                     <th>Product</th>
@@ -60,6 +60,46 @@
                     <td>{{item.amount}}</td>
                 </tr>
             </table>
+            <!--returned stock below-->
+            <div *ngIf="!loadingSalesObj">
+              <div *ngIf="salesObj.returnedStock && salesObj.returnedStock.cart.items.length>0">
+                <p>RETURNED STOCK</p>
+                <table style="width:70%; text-align:center; border-collapse: collapse; border-bottom: 1px dotted black;">
+                  <tr>
+                      <th>S/N</th>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Amount</th>
+                  </tr>
+                  <tr *ngFor="let item of salesObj.returnedStock.cart.items; index as i">
+                      <td>{{i+1}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.quantity}}</td>
+                      <td>{{item.amount}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <!--payment-->
+            <div *ngIf="!loadingSalesObj">
+                <p>PAYMENT</p>
+                <table style="width:70%; text-align:center; border-collapse: collapse; border-bottom: 1px dotted black;">
+                  <tr>
+                      <th>S/N</th>
+                      <th>Amount</th>
+                      <th>Method</th>
+                      <th>Reference</th>
+                      <th>Date</th>
+                  </tr>
+                  <tr *ngFor="let item of salesObj.payment; index as i">
+                      <td>{{i+1}}</td>
+                      <td>{{item.amount}}</td>
+                      <td>{{item.method}}</td>
+                      <td>{{item.reference}}</td>
+                      <td>{{item.datePaid.split('T')[0]}}</td>
+                  </tr>
+                </table>
+            </div>
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
                         TABLE FOR CART WILL BE HERE!!! -->
         <p>You were served by <b>{{ getUserName(invoice.userCreated)}}</b></p>
@@ -105,7 +145,7 @@
 </ng-template>
 
 
-<div id="toPrint" class="d-none" style="background-color: white; display:none;" *ngIf="!loading">
+<div id="toPrint" class="d-none" style="background-color: white; display:none;" *ngIf="!loading && !loadingSalesObj">
     <h4>INVOICE</h4>
     <table>
         <tr>
@@ -177,6 +217,20 @@
             </td>
             <td>
               ₦{{invoice.amountPaid}}.00
+            </td>          
+          </tr>
+          <tr style="border-bottom:1px dotted black" *ngFor="let pay of salesObj.payment">
+            <td>
+                
+              </td>
+            <td>
+              
+            </td>
+            <td>
+              {{pay.method}}
+            </td>
+            <td>
+              ₦{{pay.amount}}.00
             </td>          
           </tr>
           <tr style="border-bottom:1px dotted black">

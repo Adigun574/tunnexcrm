@@ -19,11 +19,11 @@ export const navItems: INavData[] = [
     url: '/main/pos',
     icon: 'icon-speedometer'
   }, 
-  {
-    name: 'Refund',
-    url: '/main/refund',
-    icon: 'icon-speedometer'
-  },  
+  // {
+  //   name: 'Refund',
+  //   url: '/main/refund',
+  //   icon: 'icon-speedometer'
+  // },  
   {
     name: 'Products',
     url: '/main/products',
@@ -110,6 +110,11 @@ export const navItems: INavData[] = [
         icon: 'icon-puzzle'
       }
     ]
+  },
+  {
+    name: 'Special',
+    url: '/main/special',
+    icon: 'icon-speedometer'
   },
   {
     name: 'Quotation',

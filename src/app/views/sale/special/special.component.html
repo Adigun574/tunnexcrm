@@ -1,0 +1,20 @@
+<ngb-tabset [justify]="currentJustify" class="mt-4">
+    <ngb-tab>
+        <ng-template ngbTabTitle>Sales History</ng-template>
+        <ng-template ngbTabContent>
+            <app-sales-history2></app-sales-history2>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>Free Sales</ng-template>
+        <ng-template ngbTabContent>
+            <app-free-products></app-free-products>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle>Sales Refund</ng-template>
+        <ng-template ngbTabContent>
+            <app-refund></app-refund>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>
