@@ -360,7 +360,7 @@ export class PosComponent implements OnInit {
       this.selectedCustomer = this.guestCustomer
     }
     this.proformaInvoice.type = 'proforma'
-    this.proformaInvoice.userCreated = this.currentUser.userCreated
+    // this.proformaInvoice.userCreated = this.currentUser.userCreated
     this.proformaInvoice.userModified = this.currentUser.userModified
     this.proformaInvoice.discountPercent = this.discount
     this.proformaInvoice.cashier = this.currentUser
@@ -371,7 +371,7 @@ export class PosComponent implements OnInit {
     this.proformaInvoice.taxInclusive = true
     this.proformaInvoice.discountPercent = 0
     this.proformaInvoice.id = 0
-    this.proformaInvoice.userCreated = 0
+    this.proformaInvoice.userCreated = this.currentUser.id
     this.proformaInvoice.userModified = 0
     this.proformaInvoice.invoiceNo = ""
     this.proformaInvoice.cartID = 0

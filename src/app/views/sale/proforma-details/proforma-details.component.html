@@ -44,6 +44,9 @@
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
                         TABLE FOR CART WILL BE HERE!!! -->
         </div>
+        <div>
+          <p>Served by <b *ngIf="users.length>0">{{getUserName(invoice.userCreated)}}</b></p>
+        </div>
         <div class="mt-4">
             <button class="btn btn-primary pull-right mr-2" (click)="print()">Print</button>
             <button class="btn btn-success pull-right mr-2" [routerLink]="['/main/proforma-invoice']">Back</button>
@@ -118,4 +121,8 @@
         </tr>
       </table>
     </div>
+    <div>
+      <p>Served by <b *ngIf="users.length>0">{{getUserName(invoice.userCreated)}}</b></p>
+    </div>
+    <p>Thanks for your patronage</p>
   </div>

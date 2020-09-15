@@ -1,4 +1,4 @@
-<app-loader *ngIf="loadingReport"></app-loader>
+<app-loader *ngIf="loadingReport && products.length>0"></app-loader>
 
 <div *ngIf="!loadingReport">
   <div class="mt-2 mb-4">

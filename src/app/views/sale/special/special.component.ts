@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpecialComponent implements OnInit {
 
+  currentJustify:any
+
+
   constructor() { }
 
   ngOnInit(): void {

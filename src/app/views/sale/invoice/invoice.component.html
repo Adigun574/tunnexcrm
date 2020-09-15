@@ -31,6 +31,14 @@
             </table>
             <table>
                 <tr>
+                  <td>Delivery fee</td>
+                  <td><b>₦{{invoice.deliveryFee}}</b></td>
+                </tr>
+                <tr>
+                  <td>Discount(%)</td>
+                  <td><b>{{invoice.discountPercent}}</b></td>
+                </tr>
+                <tr>
                     <td>Amount.</td>
                     <td><b>₦{{invoice.amount}}</b></td>
                 </tr>
@@ -63,7 +71,7 @@
             <!--returned stock below-->
             <div *ngIf="!loadingSalesObj">
               <div *ngIf="salesObj.returnedStock && salesObj.returnedStock.cart.items.length>0">
-                <p>RETURNED STOCK</p>
+                <p>RETURNED STOCK <b>{{salesObj.returnedStock.dateCreated.split('T')[0]}}</b></p>
                 <table style="width:70%; text-align:center; border-collapse: collapse; border-bottom: 1px dotted black;">
                   <tr>
                       <th>S/N</th>

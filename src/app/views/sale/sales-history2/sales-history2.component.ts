@@ -135,7 +135,7 @@ export class SalesHistory2Component implements OnInit {
   }
 
   openInvoice(customerID,invoiceNo){
-    console.log(customerID,invoiceNo)
+    // console.log(customerID,invoiceNo)
     this.router.navigateByUrl(`/main/invoice/${customerID}/${invoiceNo}`)
   }
 

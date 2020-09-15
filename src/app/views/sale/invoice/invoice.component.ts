@@ -81,7 +81,7 @@ export class InvoiceComponent implements OnInit {
         }
       })
       this.loadingSalesObj = false
-      console.log(data)
+      // console.log(data)
     },
       err=>{
         this.loadingSalesObj = false

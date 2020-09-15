@@ -120,7 +120,7 @@ export class PurchaseComponent implements OnInit {
       // console.log(data)
       Swal.fire(
         'Success',
-        'Purchase Order Raised',
+        'Supplier Invoice Created',
         'success'
       )
     },

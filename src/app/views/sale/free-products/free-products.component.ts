@@ -43,7 +43,7 @@ export class FreeProductsComponent implements OnInit {
     this.saleService.getFreeSales(customerID,startDate,endDate).subscribe(data=>{
       this.debtorsReport = <any[]>data
       this.debtorsReportByCustomer = this.debtorsReport
-      // console.log(this.debtorsReport)
+      console.log(this.debtorsReport)
       this.loadingReport = false
       this.getCustomers()
     },

@@ -5,6 +5,7 @@ import { Formats } from '../../../classes/print';
 import { ActivatedRoute } from '@angular/router';
 import { SaleService } from '../../../services/sale.service';
 import { CustomerService } from '../../../services/customer.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-proforma-details',
@@ -23,13 +24,15 @@ export class ProformaDetailsComponent implements OnInit {
   fetchingCustomers:boolean = true
   format  = new Formats()
   invoices
+  users = []
 
 
 
   constructor(
     private route:ActivatedRoute,
     private saleService:SaleService,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private userService:UserService
   ) { 
     this.invoiceID = +this.route.snapshot.params.id
     this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
@@ -38,15 +41,17 @@ export class ProformaDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getCustomers()
     this.getSalesByCustStartandEndDate(0,0,0)
+    this.getUsers()
   }
 
   getSalesByCustStartandEndDate(customerID,startDate,endDate){
     this.loading = true
     this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loading = false
-      console.log(data)
+      // console.log(data)
       this.invoices = <any[]>data
       this.invoice = this.invoices.find(x=>x.id == this.invoiceID)
+      // console.log(this.invoice)
     },
       err=>{
         this.loading = false
@@ -71,6 +76,24 @@ export class ProformaDetailsComponent implements OnInit {
       return `Guest Customer`
     }
     return `${cust.firstName} ${cust.lastName}`
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(data=>{
+      // console.log(data)
+      this.users = <any[]>data
+    },
+    err=>{
+      console.log(err)
+    })
+  }
+
+  getUserName(id){
+    let user = this.users.find(x=>x.id == id)
+    if(!user){
+      user = this.users[0]
+    }
+    return `${user.name}`
   }
 
   print(){
