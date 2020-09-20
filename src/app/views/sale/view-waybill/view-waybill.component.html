@@ -19,6 +19,10 @@
                     <td>Date</td>
                     <td><b>{{waybill.dateCreated.split('T')[0]}}</b></td>
                 </tr>
+                <tr>
+                  <td>Customer:</td>
+                  <td><b>{{getCustomerName(waybill.customerID)}}</b></td>
+                </tr>
             </table>
             <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
                 <table style="width:100%; text-align:center; border-collapse: collapse;">
@@ -64,6 +68,9 @@
         <tr>
             <td>Date: <b>{{waybill.dateCreated.split('T')[0]}}</b></td>
             <!-- <td><b>{{waybill.dateCreated.split('T')[0]}}</b></td> -->
+        </tr>
+        <tr>
+          <td>Customer: <b>{{getCustomerName(waybill.customerID)}}</b></td>
         </tr>
     </table>
       <table style="width:100%; text-align:center; border-collapse: collapse;">

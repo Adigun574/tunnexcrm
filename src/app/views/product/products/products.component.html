@@ -29,7 +29,7 @@
             <div class="mb-2 mr-2 mt-1 inner-card product-card" style="background-image: url({{product.image}});">
                 <small class="low-text" *ngIf="product.quantity<20">Low</small>
                 <p class="name">{{product.name}}</p>
-                <p class="price">₦{{product.salePrice}}.00</p>
+                <p class="price">₦{{product.salePrice.toFixed(2)}}</p>
             </div>
         </div>
     </div>

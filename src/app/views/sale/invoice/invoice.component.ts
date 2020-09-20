@@ -63,7 +63,7 @@ export class InvoiceComponent implements OnInit {
   getInvoice(){
     this.saleService.getInvoiceByCIDandInvoiceNo(this.invoiceNo,this.customerID).subscribe(data=>{
       this.invoice = data
-      // console.log(this.invoice)
+      console.log(this.invoice)
       this.loading = false
     },
       err=>{
@@ -81,7 +81,7 @@ export class InvoiceComponent implements OnInit {
         }
       })
       this.loadingSalesObj = false
-      // console.log(data)
+      console.log(data)
     },
       err=>{
         this.loadingSalesObj = false
@@ -112,6 +112,7 @@ export class InvoiceComponent implements OnInit {
         this.paying = false
         this.modalService.dismissAll()
         this.getInvoice()
+        this.getSalesObj()
       },
         err=>{
           this.paying = false

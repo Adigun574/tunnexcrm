@@ -32,6 +32,7 @@ export class Invoice{
     taxName: string = '';
     taxInclusive: boolean = true;
     discount: number = 0;
+    discountPercent: number = 0;
     id: number = 0;
     userCreated: number;
     userModified: number = 0;

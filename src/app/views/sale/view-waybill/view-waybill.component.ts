@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SaleService } from '../../../services/sale.service';
 import { Formats } from '../../../classes/print';
 import { ProductService } from '../../../services/product.service';
+import { CustomerService } from '../../../services/customer.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ViewWaybillComponent implements OnInit {
   waybill
   format  = new Formats()
   products:any[] = []
+  customers:any[] = []
 
 
 
@@ -25,6 +27,7 @@ export class ViewWaybillComponent implements OnInit {
     private route:ActivatedRoute,
     private saleService:SaleService,
     private productService:ProductService,
+    private customerService:CustomerService
   ) { 
     this.waybillID = +this.route.snapshot.params.id
     // console.log(this.waybillID)
@@ -33,6 +36,7 @@ export class ViewWaybillComponent implements OnInit {
   ngOnInit(): void {
     this.getProducts()
     this.getWaybills(0,0)
+    this.getCustomers()
   }
 
   getWaybills(startDate,endDate){
@@ -65,6 +69,26 @@ export class ViewWaybillComponent implements OnInit {
 
   print(){
     this.format.printDiv('toPrint')
+  }
+
+  getCustomers(){
+    this.customerService.getAllCustomers().subscribe(data=>{
+      console.log(data)
+      this.customers = <any>data
+    },
+      err=>{
+        console.log(err)
+      })
+  }
+
+  getCustomerName(id){
+    let customer = this.customers.find(x=>x.id == id)
+    if(customer){
+      return `${customer.firstName} ${customer.lastName}`
+    }
+    else{
+      return 'NIL'
+    }
   }
 
 }

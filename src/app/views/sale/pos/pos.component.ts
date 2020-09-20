@@ -111,6 +111,8 @@ export class PosComponent implements OnInit {
     this.invoiceNo = null
     this.deliveryStatus = false
     this.deliveryFee = 0
+    this.discount = 0
+    this.lpo = null
   }
 
 
@@ -244,6 +246,7 @@ export class PosComponent implements OnInit {
       }
       // this.sale.payment = this.paymentArray
       this.sale.discountPercent = this.discount
+      this.sale.invoice.discountPercent = this.discount
       this.sale.lpo = this.lpo
       console.log(this.sale)
       console.log(JSON.stringify(this.sale))
