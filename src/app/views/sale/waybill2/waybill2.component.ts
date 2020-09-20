@@ -75,7 +75,14 @@ export class Waybill2Component implements OnInit {
   }
 
   getProductName(id){
-    return this.products.find(x=> x.id == id).name
+    let product = this.products.find(x=>x.id == id)
+    if(product){
+      return product.name
+    }
+    else{
+      return 'NIL'
+    }
+    // return this.products.find(x=> x.id == id).name
   }
 
 }
