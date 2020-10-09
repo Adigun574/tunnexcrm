@@ -39,4 +39,8 @@ export class ProductService {
   saveMultipleProducts(obj){
     return this.httpClient.post(`${this.generalService.api}Product/SaveMultipleProducts`,obj)
   }
+
+  getAllAvailableProducts(){
+    return this.httpClient.get(`${this.generalService.api}Product/GetAllAvailableProducts`)
+  }
 }

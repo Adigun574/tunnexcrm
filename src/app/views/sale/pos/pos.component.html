@@ -62,7 +62,7 @@
                 </div>
       </div>
     <div class="col-6">
-                <div class="row btn-stuff mt-2">
+                <!-- <div class="row btn-stuff mt-2">
                   <div class="ol-4 mr-1">
                     <button class="btn btn-primary" (click)="paymentMethod('cash')" [disabled]="!selectedCustomer">
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
@@ -75,6 +75,16 @@
                       <small><i class="fa fa-credit-card"></i> Credit</small>
                     </button>
                   </div>
+                </div> -->
+                <div class="form-group">
+                  <label class="form-label text-danger">Payment Method</label>
+                  <ng-select
+                    [items]="paymentMethodArray"
+                    bindValue="name"
+                    bindLabel="name"
+                    (change)="paymentMethod($event)"  
+                  >
+                  </ng-select>
                 </div>
                 <div class="row btn-stuff mt-3">
                   <div class="ol-4 mr-">
@@ -86,13 +96,14 @@
                 </div>
                 <div class="row btn-stuff mt-3">
                   <div>
-                    <button class="btn btn-info" [disabled]="!selectedCustomer" (click)="paymentMethod('cheque')">
+                    <!-- <button class="btn btn-info" [disabled]="!selectedCustomer" (click)="paymentMethod('cheque')">
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCheque"></span>
                       <small><i class="fa fa-credit-card"></i> Cheque</small>
-                    </button>
+                    </button> -->
+                    <button class="btn btn-danger mr-1" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
                   </div>
                   <div>
-                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount)>0"> 
+                    <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount+totalPosAmount)>0"> 
                       <div class="spinner-border text-light" role="status" *ngIf="savingSaleInvoice">
                         <span class="sr-only">Loading...</span>
                       </div>
@@ -113,7 +124,7 @@
                       </tr> -->
                       <tr>
                         <td>Amount Due:</td>
-                        <td><code>₦{{(total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount)).toFixed(2)}}</code></td>
+                        <td><code>₦{{(total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount+totalPosAmount)).toFixed(2)}}</code></td>
                         <!-- <td>
                           <div class="form-group">
                             <label class="form-label">Discount</label>
@@ -186,6 +197,10 @@
           <div class="d-flex"
             style="position: absolute; right:0; bottom: 0; background-color: black; border-radius: 5px; padding:5px; color:white; z-index: 2;">
             <div class="form-group mr-1">
+              <label class="form-label">Reference</label>
+              <input class="form-control" type="text" [(ngModel)]="paymentReference">
+            </div>
+            <div class="form-group mr-1">
               <label class="form-label">Delivery</label>
               <input class="form-control" type="checkbox" [(ngModel)]="deliveryStatus" (change)="calculateTotal()">
             </div>
@@ -193,10 +208,10 @@
               <label class="form-label">Delivery Fee</label>
               <input class="form-control" type="number" [(ngModel)]="deliveryFee" style="width:70px" (change)="calculateTotal()" [disabled]="!deliveryStatus">
             </div>
-            <button class="btn btn-primary free-inv-btn mr-1" (click)="paymentMethod('transfer')" [disabled]="!selectedCustomer">
+            <!-- <button class="btn btn-primary free-inv-btn mr-1" (click)="paymentMethod('transfer')" [disabled]="!selectedCustomer">
               <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSale"></span>
               <small><i class="fa fa-money"></i> Transfer</small>
-            </button>
+            </button> -->
             <div class="form-group mr-1">
               <label class="form-label">Discount(%)</label>
               <input class="form-control" type="number" [(ngModel)]="discount" style="width:70px" (change)="calculateTotal()">
@@ -205,7 +220,7 @@
               <label class="form-label">LPO</label>
               <input class="form-control" type="text" [(ngModel)]="lpo" style="width:70px">
             </div>
-            <button class="btn btn-danger btn-sm mr-1 free-inv-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+            <!-- <button class="btn btn-danger btn-sm mr-1 free-inv-btn" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button> -->
             <button class="btn btn-primary free-inv-btn" (click)="generateProformaInvoice()" [disabled]="!selectedCustomer">Invoice</button>
           </div>
 

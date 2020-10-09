@@ -59,6 +59,7 @@ export class PosComponent implements OnInit {
   totalCreditAmount = 0
   totalChequeAmount = 0
   totalTransferAmount = 0
+  totalPosAmount = 0
   freeSaleActivated:boolean = false
   discount = 0
   lpo
@@ -66,6 +67,14 @@ export class PosComponent implements OnInit {
   invoiceNo
   deliveryStatus = false
   deliveryFee = 0
+  paymentMethodArray = [
+    {name:'cash'},
+    {name:'credit'},
+    {name:'pos'},
+    {name:'transfer'},
+    {name:'cheque'}
+  ]
+  paymentReference = ''
 
   
 
@@ -98,6 +107,7 @@ export class PosComponent implements OnInit {
     this.totalCashAmount = 0
     this.totalCreditAmount = 0
     this.totalTransferAmount = 0
+    this.totalPosAmount = 0
     this.disableCompleteSale = false
     this.currentPaymentMode = 'cash'
     this.paymentArray = []
@@ -119,7 +129,9 @@ export class PosComponent implements OnInit {
   
 
   paymentMethod(method){
-    this.currentPaymentMode = method
+    // this.currentPaymentMode = method
+    // this.currentAmount = 0
+    this.currentPaymentMode = method.name
     this.currentAmount = 0
   }
 
@@ -138,10 +150,12 @@ export class PosComponent implements OnInit {
     let creditArray = this.paymentArray.filter(x=>x.method == 'credit')
     let chequeArray = this.paymentArray.filter(x=>x.method == 'cheque')
     let transferArray = this.paymentArray.filter(x=>x.method == 'transfer')
+    let posArray = this.paymentArray.filter(x=>x.method == 'pos')
     this.totalCashAmount = 0
     this.totalCreditAmount = 0
     this.totalChequeAmount = 0
     this.totalTransferAmount = 0
+    this.totalPosAmount = 0
     cashArray.forEach(cash=>{
       this.totalCashAmount += cash.amount
     })
@@ -153,6 +167,9 @@ export class PosComponent implements OnInit {
     })
     transferArray.forEach(transfer=>{
       this.totalTransferAmount += transfer.amount
+    })
+    posArray.forEach(pos=>{
+      this.totalPosAmount += pos.amount
     })
   }
 
@@ -189,23 +206,7 @@ export class PosComponent implements OnInit {
         this.selectedCustomer = this.guestCustomer
       }
       this.sale.cart = null
-      // if(method=='cash'){
-      //   this.sale.payment = [
-      //     {
-      //       id: 0,
-      //       customerID: this.selectedCustomer.id,
-      //       amount: this.total,
-      //       method: 'cash',
-      //       reference: null,
-      //       // DatePaid: date(),
-      //       invoiceNo: null,
-      //       userCreated: this.currentUser.id
-      //     }
-      //   ]
-      // }
-      // else{
-      //   this.sale.payment = []
-      // }
+      
       this.sale.userCreated = this.currentUser.id
       this.sale.invoice = new Invoice()
       this.sale.invoice.cashier = new Cashier()
@@ -232,6 +233,9 @@ export class PosComponent implements OnInit {
           newPaymentArray.push(pay)
         }
       })
+      newPaymentArray.forEach(paym=>{
+        paym.reference = this.paymentReference
+      })
       this.sale.payment = newPaymentArray
       if(this.freeSaleActivated){
         this.sale.payment = [{
@@ -248,8 +252,9 @@ export class PosComponent implements OnInit {
       this.sale.discountPercent = this.discount
       this.sale.invoice.discountPercent = this.discount
       this.sale.lpo = this.lpo
-      console.log(this.sale)
-      console.log(JSON.stringify(this.sale))
+      // console.log(this.sale.payment)
+      // console.log(this.sale)
+      // // console.log(JSON.stringify(this.sale))
       this.saleService.saveSale(this.sale).subscribe(data=>{
         // console.log(data)
         this.invoiceNo = data
@@ -293,7 +298,7 @@ export class PosComponent implements OnInit {
   }
 
   getProducts(){
-    this.productService.getAllProducts().subscribe(data=>{
+    this.productService.getAllAvailableProducts().subscribe(data=>{
       this.loadProducts = false
       this.allProducts = <any[]>data
       this.products = <any[]>data
@@ -426,4 +431,3 @@ export class PosComponent implements OnInit {
   }
 
 }
-
