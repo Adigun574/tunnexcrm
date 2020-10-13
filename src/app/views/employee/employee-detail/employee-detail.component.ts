@@ -64,7 +64,22 @@ export class EmployeeDetailComponent implements OnInit {
       // position:[this.selectedEmployee.position],
       hel:[this.selectedEmployee.hel],
       qualifications:[this.selectedEmployee.qualifications],
-      id:[this.selectedEmployee.id]
+      id:[this.selectedEmployee.id],
+      //
+      dateofBirth:[this.selectedEmployee.dateofBirth],
+      gender:[this.selectedEmployee.gender],
+      dateCreated: [date()],
+      dateModified: [date()],
+      dateEmployed: [this.selectedEmployee.dateEmployed],
+      nextofKin:[this.selectedEmployee.nextofKin],
+      nextofKinAddress:[this.selectedEmployee.nextofKinAddress],
+      nextofKinPhone:[this.selectedEmployee.nextofKinPhone],
+      maidenName:[this.selectedEmployee.maidenName],
+      staffID:[this.selectedEmployee.staffID],
+      maritalStatus:[this.selectedEmployee.maritalStatus],
+      yearofMarriage:[this.selectedEmployee.yearofMarriage],
+      designation:[this.selectedEmployee.designation],
+      relationshipToNextofKin:[this.selectedEmployee.relationshipToNextofKin]
     })
     this.qualificationForm = this.fb.group({
       id: 0,
@@ -80,6 +95,7 @@ export class EmployeeDetailComponent implements OnInit {
     this.loadingDetails = true
     this.skillService.getSingleStaff(this.employeeId).subscribe(data=>{
       this.selectedEmployee = <any>data
+      // console.log(this.selectedEmployee)
       this.setForms()
       this.loadingDetails = false
     },
@@ -98,7 +114,7 @@ export class EmployeeDetailComponent implements OnInit {
     delete this.selectedEmployee.userCreated
     delete this.selectedEmployee.userModified
     this.selectedEmployee.image = ''
-    console.log(JSON.stringify(this.selectedEmployee))
+    // console.log(JSON.stringify(this.selectedEmployee))
     this.skillService.updateStaff(this.selectedEmployee).subscribe(data=>{
       this.updatingEmployee = false
     },
@@ -146,7 +162,7 @@ export class EmployeeDetailComponent implements OnInit {
 
   getStaffSkillbyStaffID(){
     this.skillService.getStaffSkillByStaffID(this.employeeId).subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.staffSkills = <any[]>data
     },
       err=>{

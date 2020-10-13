@@ -33,12 +33,14 @@
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Amount</th>
+                    <th>Unit Price</th>
                 </tr>
                 <tr *ngFor="let item of invoice.cart.items; index as i">
                     <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.amount}}</td>
+                    <td>₦{{item.amount}}</td>
+                    <td>₦{{item.amount/item.quantity}}</td>
                 </tr>
             </table>
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
@@ -104,6 +106,9 @@
           <td>
             <b>Price</b>
           </td>
+          <td>
+            <b>Unit Price</b>
+          </td>
         </thead>
         <tr *ngFor="let order of invoice.cart.items; index as i" style="border-bottom:1px dotted black">
           <td>
@@ -117,7 +122,10 @@
           </td>
           <td>
             ₦{{order.amount}}.00
-          </td>          
+          </td>    
+          <td>
+            ₦{{order.amount/order.quantity}}
+          </td>      
         </tr>
       </table>
     </div>
