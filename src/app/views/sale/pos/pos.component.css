@@ -1,71 +1,78 @@
-body{
-    margin-bottom:0 !important;
+body {
+  margin-bottom: 0 !important;
 }
-.pos-body{
-    padding-top:30px;
+.pos-body {
+  padding-top: 30px;
 }
-.nav li{
-    margin-right:10px
+.nav li {
+  margin-right: 10px;
 }
-.nav li:active{
-    background-color: blue
+.nav li:active {
+  background-color: blue;
 }
-.numbers div button{
-    background-color:rgb(235, 227, 227);
-    border:1px solid rgb(150, 148, 148);
-    height:60px;
-    width:60px
+.numbers div button {
+  background-color: rgb(235, 227, 227);
+  border: 1px solid rgb(150, 148, 148);
+  height: 60px;
+  width: 60px;
 }
-calculator{
-    position:absolute;
-    top:230px;
+calculator {
+  position: absolute;
+  top: 230px;
 }
-.orderScreen{
-    height:270px;
-    overflow-y: scroll;
-    
+.orderScreen {
+  height: 270px;
+  overflow-y: scroll;
 }
-orderScreen li:nth-child(odd){
-    background-color: red
+orderScreen li:nth-child(odd) {
+  background-color: red;
 }
-orderScreen li:nth-child(even){
-    background-color: blue
+orderScreen li:nth-child(even) {
+  background-color: blue;
 }
-.orderScreen li{
-    margin-bottom: 0;
-    margin-top: 0;
-    height:40vh
-}
-
-.calculator{
-    border-top:2px solid red;
-    background-color: rgb(226, 228, 226);
-    margin-bottom:0px;
-    /*border:5px solid red*/
-    box-shadow:2px 2px 10px 5px black;
-    position:absolute;
-    bottom:10px;
-    background-color: rgb(87, 85, 85);
+.orderScreen li {
+  margin-bottom: 0;
+  margin-top: 0;
+  height: 40vh;
 }
 
-.loader{
-    border:16px solid white;
-    border-radius: 50%;
-    border-top: 16px solid rgb(146, 146, 146);
-    border-bottom:16px solid rgb(146, 146, 146);
-    width:100px;
-    height:100px;
-    margin:20px auto;
-    animation:spin 2s linear infinite;
-    -webkit-animation:spin 2s linear infinite
+.calculator {
+  border-top: 2px solid red;
+  background-color: rgb(226, 228, 226);
+  margin-bottom: 0px;
+  /*border:5px solid red*/
+  box-shadow: 2px 2px 10px 5px black;
+  position: absolute;
+  bottom: 10px;
+  background-color: rgb(87, 85, 85);
+}
+
+.loader {
+  border: 16px solid white;
+  border-radius: 50%;
+  border-top: 16px solid rgb(146, 146, 146);
+  border-bottom: 16px solid rgb(146, 146, 146);
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  animation: spin 2s linear infinite;
+  -webkit-animation: spin 2s linear infinite;
 }
 @-webkit-keyframes spin {
-    0%{-webkit-transform:rotate(0deg)}
-    100%{-webkit-transform:rotate(360deg)}
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 @keyframes spin {
-    0%{transform:rotate(0deg)}
-    100%{transform:rotate(360deg)}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* .food, .drink, .other{
@@ -77,17 +84,18 @@ orderScreen li:nth-child(even){
     width:70% !important;
 } */
 
-.food, .drink, .other{
-    /* background-image: url('../../../../assets/img/cart.jpg'); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height:200px;
-    width:95% !important;
-    margin:auto;
-    border-radius:3px;
+.food,
+.drink,
+.other {
+  /* background-image: url('../../../../assets/img/cart.jpg'); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 95% !important;
+  margin: auto;
+  border-radius: 3px;
 }
-
 
 /* .price{
     position:absolute; 
@@ -98,52 +106,62 @@ orderScreen li:nth-child(even){
     color:white; 
     padding:0 5px
 } */
-.price{
-    position:absolute; 
-    right:20px; 
-    top:15px; 
-    background-color: rgb(143, 8, 8); 
-    border-radius:3px; 
-    color:white; 
-    padding:0 5px
+.price {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background-color: rgb(143, 8, 8);
+  border-radius: 3px;
+  color: white;
+  padding: 0 5px;
 }
-.name{
-    position:absolute; 
-    eft:0px; 
-    bottom:0px;
-    background-color: white;
-    font-weight: bolder
+.name {
+  position: absolute;
+  eft: 0px;
+  bottom: 0px;
+  background-color: white;
+  font-weight: bolder;
 }
-.order{
-    margin-bottom:0;
-    height:85vh
+.name-2 {
+  background-color: rgb(216, 215, 215);
+  font-weight: bolder;
+  border-radius: 3px;
+  padding: 3px;
+  text-align: center;
+  width: 120px;
+  margin: auto;
+  overflow-x: hidden;
 }
-.product-div{
-    width:70% !important;
+.order {
+  margin-bottom: 0;
+  height: 85vh;
 }
-.pos-top{
-    height:50px;
-    background-color:black;
-    width:100%;
+.product-div {
+  width: 70% !important;
 }
-.order-display-screen{
-    color:white;
-    background-color: black;
-    border-radius: 3px;
-    line-height: 1px;
-    padding:10px;
+.pos-top {
+  height: 50px;
+  background-color: black;
+  width: 100%;
+}
+.order-display-screen {
+  color: white;
+  background-color: black;
+  border-radius: 3px;
+  line-height: 1px;
+  padding: 10px;
 }
 /* .btn-stuff{
     width:100%;
     margin:auto;
 } */
-.btn-stuff{
-    display: flex;
-    justify-content: space-around;
+.btn-stuff {
+  display: flex;
+  justify-content: space-around;
 }
-.rcpt-btn{
-    /* width:200px; */
-    /* width:100%;
+.rcpt-btn {
+  /* width:200px; */
+  /* width:100%;
     margin:auto;
     margin-top:10px; */
 }
@@ -151,36 +169,36 @@ orderScreen li:nth-child(even){
     width:200px;
     margin:auto;
 } */
-.total-display{
-    color:white;
-    background-color:black;
-    padding:5px;
-    /* display:none; */
+.total-display {
+  color: white;
+  background-color: black;
+  padding: 5px;
+  /* display:none; */
 }
-.complete-btn{
-    width:100%;
+.complete-btn {
+  width: 100%;
 }
-.free-sale-btn{
-    position: absolute;
-    bottom:20px;
-    right:20px;
+.free-sale-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
-.free-sale-modal{
-    padding:30px;
-    text-align: center;
+.free-sale-modal {
+  padding: 30px;
+  text-align: center;
 }
-.proforma-btn{
-    position: absolute;
-    bottom:20px;
-    right:120px;
+.proforma-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 120px;
 }
-.discount-lpo{
-    position: absolute;
-    bottom:20px;
-    right:260px;
+.discount-lpo {
+  position: absolute;
+  bottom: 20px;
+  right: 260px;
 }
-.free-inv-btn{
-    height:35px;
-    position: relative;
-    top:30px;
+.free-inv-btn {
+  height: 35px;
+  position: relative;
+  top: 30px;
 }

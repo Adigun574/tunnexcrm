@@ -1,4 +1,5 @@
 <app-loader *ngIf="loadingSkills"></app-loader>
+<app-loader *ngIf="deleting"></app-loader>
 <div *ngIf="!loadingSkills">
 <div class="pt-4 d-block mb-4">
     <button mat-raised-button class="add-button" (click)="open(topModal, { windowClass: 'modal-top' })">Add A New Skill</button>
@@ -49,6 +50,10 @@
                     Enroll Staff
                 </button>
             </div>
+            <button class="btn btn-danger mt-2" (click)="deleteSkill(program.id)">
+                <i class="fa fa-trash"></i>
+                Delete
+            </button>
         </div>
     </div>
 </div>

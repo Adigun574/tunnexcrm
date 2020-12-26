@@ -25,6 +25,7 @@ export class TrainingProgramsComponent implements OnInit {
   currentUser:User
   addingStaffSkill:boolean = false
   invalidDetails:boolean = false
+  deleting:boolean = false
 
 
   constructor(
@@ -162,6 +163,18 @@ export class TrainingProgramsComponent implements OnInit {
         this.updatingSkill = false
         this.modalService.dismissAll()
       })
+  }
+
+  deleteSkill(id){
+    this.deleting = true
+    this.skillService.deleteSkillorKpi(id).subscribe(data=>{
+      this.getSkills()
+      this.deleting = false
+    },
+    err=>{
+      this.deleting = false
+    }
+    )
   }
 
   

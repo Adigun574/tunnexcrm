@@ -27,6 +27,8 @@ export class KpiComponent implements OnInit {
   addingStaffSkill:boolean = false
   invalidDetails:boolean = false
 
+  deleting:boolean = false
+
 
   constructor(
     private fb:FormBuilder,
@@ -151,6 +153,18 @@ export class KpiComponent implements OnInit {
         this.updatingSkill = false
         this.modalService.dismissAll()
       })
+  }
+
+  deleteSkill(id){
+    this.deleting = true
+    this.skillService.deleteSkillorKpi(id).subscribe(data=>{
+      this.getSkills()
+      this.deleting = false
+    },
+    err=>{
+      this.deleting = false
+    }
+    )
   }
 
 

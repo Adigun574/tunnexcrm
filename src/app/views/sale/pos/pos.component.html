@@ -100,7 +100,7 @@
                       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="savingSaleCheque"></span>
                       <small><i class="fa fa-credit-card"></i> Cheque</small>
                     </button> -->
-                    <button class="btn btn-danger mr-1" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Free Sale</button>
+                    <button class="btn btn-danger mr-1" (click)="open(freeSaleModal)" [disabled]="!selectedCustomer">Sample</button>
                   </div>
                   <div>
                     <button class="btn btn-success complete-btn" (click)="completeSale()" [disabled]="!selectedCustomer || total - (totalCashAmount+totalCreditAmount+totalChequeAmount+totalTransferAmount+totalPosAmount)>0"> 
@@ -169,10 +169,11 @@
                   <div class="col-sm-4" *ngFor="let product of products">
                       <div class="food cursor-pointer mt-3" style="height:100px; background-color:white; box-shadow:1px 3px 3px rgb(189, 189, 192); float:left; background-image: url({{product.image}});" (click)="addToCart(product)">
                           <div class="mb-2 mr-2 mt-1 product-div">
-                            <p class="name">{{product.name}}</p>
+                            <p class="name d-none">{{product.name}}</p>
                             <p class="price">₦{{product.salePrice.toFixed(2)}}</p>
                           </div>
                       </div>
+                      <p class="name-2">{{product.name}}</p>
                   </div>                                 
                 </div>
             </div>

@@ -16,6 +16,7 @@ export class Formats{
         }
         </style>
         <div class="pageToPrint">
+            <img src="../../assets/img/tunnexlab.jpeg" width="60px" height="60px">
             <div>
                 <div class="text-center mt-4 header-details">
                     <h3><b>TUNNEX LABORATORIES ENGINEERING LTD.</b></h3>

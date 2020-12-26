@@ -79,7 +79,9 @@ export class EmployeeDetailComponent implements OnInit {
       maritalStatus:[this.selectedEmployee.maritalStatus],
       yearofMarriage:[this.selectedEmployee.yearofMarriage],
       designation:[this.selectedEmployee.designation],
-      relationshipToNextofKin:[this.selectedEmployee.relationshipToNextofKin]
+      relationshipToNextofKin:[this.selectedEmployee.relationshipToNextofKin],
+      middleName:[this.selectedEmployee.middleName],
+      secondPhone:[this.selectedEmployee.secondPhone]
     })
     this.qualificationForm = this.fb.group({
       id: 0,

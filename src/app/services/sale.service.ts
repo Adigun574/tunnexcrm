@@ -84,4 +84,8 @@ export class SaleService {
   getSalesWithInvoiceNo(invoiceNo){
     return this.httpClient.get(`${this.generalService.api}Sale/GetSalewithInvoiceNo/${invoiceNo}`)
   }
+
+  convertQuotationToSale(obj,lpo,toDeliver,deliveryFee,discount){
+    return this.httpClient.post(`${this.generalService.api}Quotation/ChangeQuoteToSale?Lpo=${lpo}&ToDeliver=${toDeliver}&DeliveryFee=${deliveryFee}&discount=${discount}`,obj)
+  }
 }
