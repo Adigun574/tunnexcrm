@@ -35,6 +35,29 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Discount</label>
+                            <input class="form-control" type="number" [(ngModel)]="discountStuff">
+                          </div>
+                          <div class="form-group ml-2">
+                            <label class="form-label">Delivery</label>
+                            <input class="form-control" type="checkbox" [(ngModel)]="delivery">
+                          </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Delivery Fee</label>
+                            <input class="form-control" type="number" [(ngModel)]="deliveryFee">
+                          </div>
+                          <div class="form-group">
+                            <label class="form-label">Lpo</label>
+                            <input class="form-control" type="text" [(ngModel)]="lpo">
+                          </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-7" style="display: flex;justify-content: center;">
                 <div class="products-table">
@@ -65,11 +88,15 @@
                             <td></td>
                             <td></td>
                             <td><b>Total</b></td>
-                            <td><b>0</b></td>
+                            <td><b>{{total}}</b></td>
                         </tr>
                     </table>
                     <hr>
                     <div class="button-group">
+                        <button class="btn btn-warning mr-2" (click)="saveQuotationandSale()" [disabled]="!selectedCustomer">
+                            <span *ngIf="savingQuotationandSale" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <i class="fa fa-send"></i> Quotation and Sale                     
+                        </button>
                         <button class="btn btn-success mr-2" (click)="saveQuotation()" [disabled]="!selectedCustomer">
                             <span *ngIf="savingQuotation" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             <i class="fa fa-send"></i> Send                        
@@ -104,6 +131,13 @@
                 <td>{{item.salePrice}}</td>
                 <td>{{item.salePrice * qtyArray[i]}}</td>
                 <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><b>Total</b></td>
+                <td><b>{{total}}</b></td>
+                <td><i class="fa fa-trash"></i></td>
             </tr>
         </table>
     </div>

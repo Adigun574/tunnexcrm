@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SkillService } from '../../../services/skill.service';
 import { User } from '../../../models/user';
 import { date } from '../../../classes/date';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-training-programs',
@@ -135,11 +136,18 @@ export class TrainingProgramsComponent implements OnInit {
         supervisorID: this.currentUser.id,
         competencyValue: 0
       }
-      console.log(obj)
+      // console.log(obj)
       this.skillService.saveStaffSkill(obj).subscribe(data=>{
         this.addingStaffSkill = false
         this.modalService.dismissAll()
-        console.log(data)
+        // console.log(data)
+        if(data == 0){
+          Swal.fire(
+            'Success',
+            'Staff has already been enrolled for this skill',
+            'info'
+          )
+        }
       },
         err=>{
           this.addingStaffSkill = false

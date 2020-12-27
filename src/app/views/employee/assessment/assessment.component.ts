@@ -20,6 +20,8 @@ export class AssessmentComponent implements OnInit {
   loadedSkills:boolean = false
   invalidGrade:boolean = false
 
+  selectedStaffSkillToGrade
+
   constructor(
     private skillService:SkillService,
     private modalService:NgbModal
@@ -37,9 +39,15 @@ export class AssessmentComponent implements OnInit {
 
   getAllStaffSkill(){
     this.loading = true
-    this.skillService.getAllStaffSKil().subscribe(data=>{
-      console.log(data)
+    // this.skillService.getAllStaffSKil().subscribe(data=>{
+    this.skillService.getAllStaffBySkill().subscribe(data=>{
+      // console.log(data)
       this.staffSkills = <any[]>data
+      this.staffSkills.forEach(skill=>{
+        if(!skill.allSkillsOrKpis){
+          skill.allSkillsOrKpis = []
+        }
+      })
       this.loading = false
     },
       err=>{

@@ -5,18 +5,27 @@
         <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
       <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
         <thead>
-              <th>Staff <i class="ion text-muted ml-2"></i></th>
+              <!-- <th>Staff <i class="ion text-muted ml-2"></i></th>
               <th>Skill <i class="ion text-muted ml-2"></i></th>
               <th>Competency <i class="ion text-muted ml-2"></i></th>
+              <th>Action<i class="ion text-muted ml-2"></i></th> -->
+              <th>Staff <i class="ion text-muted ml-2"></i></th>
+              <th>No of Skills<i class="ion text-muted ml-2"></i></th>
+              <th>Overall Competence<i class="ion text-muted ml-2"></i></th>
               <th>Action<i class="ion text-muted ml-2"></i></th>
          </thead>
         <tbody>
-          <tr *ngFor="let staffSkill of staffSkills" >
+          <!-- <tr *ngFor="let staffSkill of staffSkills" >
             <td>{{getStaffName(staffSkill.staffID)}}</td>
-            <!-- <td>{{getSkillName(staffSkill.skillID)}}</td> -->
             <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
             <td>{{staffSkill.competencyValue}}%</td>
             <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
+          </tr> -->
+          <tr *ngFor="let staffSkill of staffSkills" >
+            <td>{{getStaffName(staffSkill.staffId)}}</td>
+            <td>{{staffSkill.allSkillsOrKpis.length}}</td>
+            <td>{{staffSkill.overallCompetence}}%</td>
+            <td><button class="btn btn-success" (click)="open(skillsModal); selectStaffSkill(staffSkill)">View</button></td>
           </tr>
         </tbody>
       </table>
@@ -37,4 +46,24 @@
             </button>
         </div>
     </div>
+</ng-template>
+
+
+<ng-template #skillsModal >
+  <div style="padding:50px">
+    <table class="table table-striped card-table">
+      <thead>
+            <th>Skill <i class="ion text-muted ml-2"></i></th>
+            <th>Competency<i class="ion text-muted ml-2"></i></th>
+            <th>Action<i class="ion text-muted ml-2"></i></th>
+       </thead>
+      <tbody>
+        <tr *ngFor="let staffSkill of selectedStaffSkill.allSkillsOrKpis" >
+          <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
+          <td class="text-center">{{staffSkill.competencyValue}}</td>
+          <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </ng-template>

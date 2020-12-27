@@ -6,15 +6,15 @@
             <p>41, Davies Street, Ajelogo Bus Stop, Alapere, Ketu, Lagos State</p>
             <p>+2348104403054, +2348145119334, +2348033060580</p>
             <p>www.tunnexlab.com.ng, Sales@tunnexlab.com.ng</p>
-            <h5><b>Proforma Invoice</b></h5>
+            <h5><b>Quotation</b></h5>
         </div>
         <hr>
         <div class="details-table">
             <table>
-                <tr>
+                <!-- <tr>
                     <td>Invoice No.</td>
                     <td><b>#{{invoice.invoiceNo}}</b></td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td>Date</td>
                     <td><b>{{invoice.dateCreated.split('T')[0]}}</b></td>
@@ -28,7 +28,7 @@
         <hr>
         <div>
             <table style="width:70%; text-align:center; border-collapse: collapse;">
-                <tr>
+                <!-- <tr>
                     <th>S/N</th>
                     <th>Product</th>
                     <th>Quantity</th>
@@ -41,7 +41,17 @@
                     <td>{{item.quantity}}</td>
                     <td>₦{{item.amount}}</td>
                     <td>₦{{item.amount/item.quantity}}</td>
-                </tr>
+                </tr> -->
+                <tr>
+                  <th>S/N</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+              </tr>
+              <tr *ngFor="let item of invoice.quotProducts; index as i">
+                  <td>{{i+1}}</td>
+                  <td>{{getProductName(item.productID)}}</td>
+                  <td>{{item.quantity}}</td>
+              </tr>
             </table>
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
                         TABLE FOR CART WILL BE HERE!!! -->
@@ -52,7 +62,7 @@
         <div class="mt-4">
             <button class="btn btn-primary pull-right mr-2" (click)="print()">Print</button>
             <button class="btn btn-success pull-right mr-2" [routerLink]="['/main/proforma-invoice']">Back</button>
-            <button class="btn btn-warning pull-right mr-2" (click)="open(salesModal)">Convert To Sale</button>
+            <!-- <button class="btn btn-warning pull-right mr-2" (click)="open(salesModal)">Convert To Sale</button> -->
         </div>
     </div>
 </div>
@@ -79,10 +89,10 @@
 <div id="toPrint" class="d-none" style="background-color: white; display:none;" *ngIf="!loading">
   <h4>PROFORMA INVOICE</h4>
     <table>
-        <tr>
+        <!-- <tr>
             <td>Invoice No.</td>
             <td><b>#{{invoice.invoiceNo}}</b></td>
-        </tr>
+        </tr> -->
         <tr>
             <td>Date</td>
             <td><b>{{invoice.dateCreated.split('T')[0]}}</b></td>
@@ -94,7 +104,7 @@
     </table>
     <div style="text-align:center; font-family: 'Times New Roman', Times, serif">
       <table style="width:100%; text-align:center; border-collapse: collapse;">
-        <thead style="border-bottom:1px solid black">
+        <!-- <thead style="border-bottom:1px solid black">
           <td>
             <b>S/N</b>
           </td>
@@ -127,6 +137,28 @@
           <td>
             ₦{{order.amount/order.quantity}}
           </td>      
+        </tr> -->
+        <thead style="border-bottom:1px solid black">
+          <td>
+            <b>S/N</b>
+          </td>
+          <td>
+            <b>Qty</b>
+          </td>
+          <td>
+            <b>Item</b>
+          </td>
+        </thead>
+        <tr *ngFor="let order of invoice.quotProducts; index as i" style="border-bottom:1px dotted black">
+          <td>
+              {{i+1}}
+            </td>
+          <td>
+            {{order.quantity}}
+          </td>
+          <td>
+            {{getProductName(order.productID)}}
+          </td>    
         </tr>
       </table>
     </div>

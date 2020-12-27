@@ -88,4 +88,9 @@ export class SaleService {
   convertQuotationToSale(obj,lpo,toDeliver,deliveryFee,discount){
     return this.httpClient.post(`${this.generalService.api}Quotation/ChangeQuoteToSale?Lpo=${lpo}&ToDeliver=${toDeliver}&DeliveryFee=${deliveryFee}&discount=${discount}`,obj)
   }
+
+  getQuotationByCustomerStarDateEndDate(customerID,startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}Quotation/GetQuotationByCustomerStartandEndDate/${startDate}/${endDate}?customerID=${customerID}`)
+  }
+
 }

@@ -43,16 +43,23 @@
       <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
     <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
       <thead>
-            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <!-- <th>S/N <i class="ion text-muted ml-2"></i></th>
             <th>Date <i class="ion text-muted ml-2"></i></th>
             <th>Items <i class="ion text-muted ml-2"></i></th>
             <th>Customer <i class="ion text-muted ml-2"></i></th>
             <th>Amount <i class="ion text-muted ml-2"></i></th>
             <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+            <th></th> -->
+            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Items <i class="ion text-muted ml-2"></i></th>
+            <th>Customer <i class="ion text-muted ml-2"></i></th>
+            <!-- <th>Amount <i class="ion text-muted ml-2"></i></th> -->
+            <!-- <th>Invoice No. <i class="ion text-muted ml-2"></i></th> -->
             <th></th>
        </thead>
       <tbody>
-        <tr *ngFor="let sale of sales; index as i" >
+        <!-- <tr *ngFor="let sale of sales; index as i" >
           <td>{{i+1}}</td>
           <td>{{ sale.dateCreated.split('T')[0] }}</td>
           <td style="display:inline-flex">Items
@@ -82,6 +89,37 @@
               </div>
             </div>         
           </td>
+        </tr> -->
+        <tr *ngFor="let sale of sales; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{ sale.dateCreated.split('T')[0] }}</td>
+          <td style="display:inline-flex">Items
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item" *ngFor="let item of sale.quotProducts">{{getProductName(item.productID)}}<b>({{item.quantity}})</b></a>
+              </div>
+            </div>         
+          </td>
+          <td>{{getCustomerName(sale.customerID)}}</td>
+          <!-- <td><span>&#8358;</span>{{sale.cart.amount}}.00</td> -->
+          <!-- <td>{{sale.invoiceNo}}</td> -->
+          <td style="display:inline-flex">Actions
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item cursor-pointer" (click)="openInvoice(sale.id)">View Quotation</a>
+              </div>
+            </div>         
+          </td>
         </tr>
       </tbody>
     </table>
@@ -90,15 +128,15 @@
 </div>
 
 <div id="toPrint">
-  <h4 class="d-none">PROFORMA INVOICE</h4>
+  <h4 class="d-none">QUOTATION</h4>
 <table id="tableRecordToPrint" class="d-none">
     <thead style="border-bottom: 1px solid black;">
           <th>S/N <i class="ion text-muted ml-2"></i></th>
           <th>Date <i class="ion text-muted ml-2"></i></th>
           <!-- <th>Items <i class="ion text-muted ml-2"></i></th> -->
           <th>Customer <i class="ion text-muted ml-2"></i></th>
-          <th>Amount <i class="ion text-muted ml-2"></i></th>
-          <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+          <!-- <th>Amount <i class="ion text-muted ml-2"></i></th> -->
+          <!-- <th>Invoice No. <i class="ion text-muted ml-2"></i></th> -->
      </thead>
     <tbody>
       <tr *ngFor="let sale of sales; index as i" style="border-bottom: 1px dotted black;">
@@ -108,8 +146,8 @@
           <span *ngFor="let item of sale.cart.items" class="d-block"> {{item.quantity}} X {{item.name}}</span><br>
         </td> -->
         <td>{{getCustomerName(sale.customerID)}}</td>
-        <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
-        <td>{{sale.invoiceNo}}</td>
+        <!-- <td><span>&#8358;</span>{{sale.cart.amount}}.00</td> -->
+        <!-- <td>{{sale.invoiceNo}}</td> -->
       </tr>
     </tbody>
     <!-- <small class="sss">smslsl</small> -->

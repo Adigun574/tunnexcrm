@@ -37,9 +37,14 @@ export class KpiDetailsComponent implements OnInit {
 
   getAllStaffSkill(){
     this.loading = true
-    this.skillService.getAllStaffKpi().subscribe(data=>{
-      console.log(data)
+    this.skillService.getAllStaffByKpi().subscribe(data=>{
+      // console.log(data)
       this.staffSkills = <any[]>data
+      this.staffSkills.forEach((skill,i)=>{
+        if(!skill.allSkillsOrKpis){
+          skill.allSkillsOrKpis = []
+        }
+      })
       this.loading = false
     },
       err=>{
@@ -49,7 +54,7 @@ export class KpiDetailsComponent implements OnInit {
 
   getStaffs(){
     this.skillService.getAllEmployees().subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.staff = <any[]>data
       this.loadedStaff = true
     },
@@ -62,7 +67,7 @@ export class KpiDetailsComponent implements OnInit {
     this.skillService.getAllKpi().subscribe(data=>{
       this.skills = <any[]>data
       this.loadedSkills = true
-      console.log(this.skills)
+      // console.log(this.skills)
     },
       err=>{
 

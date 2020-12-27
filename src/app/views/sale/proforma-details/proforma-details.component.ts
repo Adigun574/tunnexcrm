@@ -8,6 +8,7 @@ import { CustomerService } from '../../../services/customer.service';
 import { UserService } from '../../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-proforma-details',
@@ -27,6 +28,7 @@ export class ProformaDetailsComponent implements OnInit {
   format  = new Formats()
   invoices
   users = []
+  products = []
 
 
 
@@ -36,7 +38,8 @@ export class ProformaDetailsComponent implements OnInit {
     private customerService:CustomerService,
     private userService:UserService,
     private modalService:NgbModal,
-    private router:Router
+    private router:Router,
+    private productService:ProductService
   ) { 
     this.invoiceID = +this.route.snapshot.params.id
     this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
@@ -46,6 +49,7 @@ export class ProformaDetailsComponent implements OnInit {
     this.getCustomers()
     this.getSalesByCustStartandEndDate(0,0,0)
     this.getUsers()
+    this.getProducts()
   }
 
   open(content){
@@ -54,7 +58,8 @@ export class ProformaDetailsComponent implements OnInit {
 
   getSalesByCustStartandEndDate(customerID,startDate,endDate){
     this.loading = true
-    this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+    // this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+      this.saleService.getQuotationByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loading = false
       // console.log(data)
       this.invoices = <any[]>data
@@ -118,19 +123,23 @@ export class ProformaDetailsComponent implements OnInit {
     this.saving = true
     let obj = {
       customerID:this.invoice.customerID,
-      quotProducts:[],
+      quotProducts:this.invoice.quotProducts,
       id:0
     }
-    this.invoice.cart.items.forEach(item=>{
-      obj.quotProducts.push({
-        id:0,
-        quotationID:this.invoice.id,
-        productID:item.productID,
-        quantity:item.quantity
-      })
+    // this.invoice.cart.items.forEach(item=>{
+    //   obj.quotProducts.push({
+    //     id:0,
+    //     quotationID:this.invoice.id,
+    //     productID:item.productID,
+    //     quantity:item.quantity
+    //   })
+    // })
+    obj.quotProducts.forEach(prod=>{
+      prod.id = 0
     })
     // console.log(JSON.stringify(obj))
     // console.log(obj,this.discountStuff,this.lpo,this.deliveryFee,this.delivery)
+    // return
     this.saleService.convertQuotationToSale(obj,this.lpo,this.delivery,this.deliveryFee,this.discountStuff).subscribe(data=>{
       this.saving = false
       this.modalService.dismissAll()
@@ -145,7 +154,7 @@ export class ProformaDetailsComponent implements OnInit {
     },
       err=>{
         this.saving = false
-        // console.log(err)
+        console.log(err)
         Swal.fire(
           'Oops',
           'Something went wrong',
@@ -153,5 +162,22 @@ export class ProformaDetailsComponent implements OnInit {
         )
       })
   }
+
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = <any[]>data
+    })
+  }
+
+  getProductName(id){
+    try{
+    let product = this.products.find(x=>x.id == id)
+    return `${product.name}`
+    }
+    catch{
+      return `Guest Customer`
+    }
+  }
+
 
 }

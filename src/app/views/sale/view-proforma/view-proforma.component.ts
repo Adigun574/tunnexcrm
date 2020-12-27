@@ -3,6 +3,7 @@ import { Formats } from '../../../classes/print';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../services/customer.service';
 import { SaleService } from '../../../services/sale.service';
+import { ProductService } from '../../../services/product.service';
 
 
 @Component({
@@ -21,11 +22,13 @@ export class ViewProformaComponent implements OnInit {
   startDate = `0000-00-00`
   endDate = `0000-00-00`
   selectedCustomer
+  products = []
 
   constructor(
     private saleService:SaleService,
     private customerService:CustomerService,
-    private router:Router
+    private router:Router,
+    private productService:ProductService
   ) { 
     let d = new Date()
     let day:any = d.getDate()
@@ -45,13 +48,15 @@ export class ViewProformaComponent implements OnInit {
     // this.getSales()
     // this.getSalesByDate(this.today)
     this.getSalesByCustStartandEndDate(0,0,0)
+    this.getProducts()
   }
 
   getSalesByCustStartandEndDate(customerID,startDate,endDate){
     this.loadingReport = true
-    this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+    // this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+    this.saleService.getQuotationByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loadingReport = false
-      console.log(data)
+      // console.log(data)
       this.sales = <any[]>data
     },
       err=>{
@@ -121,6 +126,22 @@ export class ViewProformaComponent implements OnInit {
     try{
     let customer = this.customers.find(x=>x.id == id)
     return `${customer.firstName} ${customer.lastName}`
+    }
+    catch{
+      return `Guest Customer`
+    }
+  }
+
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = <any[]>data
+    })
+  }
+
+  getProductName(id){
+    try{
+    let product = this.products.find(x=>x.id == id)
+    return `${product.name}`
     }
     catch{
       return `Guest Customer`

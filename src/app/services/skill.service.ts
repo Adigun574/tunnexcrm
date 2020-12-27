@@ -77,4 +77,12 @@ export class SkillService {
     return this.httpClient.post(`${this.generalService.api}Skill/DeleteSkill/ID?ID=${id}`,null)
   }
 
+  getAllStaffBySkill(){
+    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffSkill`)
+  }
+
+  getAllStaffByKpi(){
+    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffKPI`)
+  }
+
 }
