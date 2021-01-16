@@ -30,6 +30,8 @@ export class ProformaDetailsComponent implements OnInit {
   users = []
   products = []
 
+  total = 0
+
 
 
   constructor(
@@ -177,6 +179,24 @@ export class ProformaDetailsComponent implements OnInit {
     catch{
       return `Guest Customer`
     }
+  }
+
+  getProductPrice(id){
+    try{
+      let product = this.products.find(x=>x.id == id)
+      return product.salePrice
+      }
+      catch{
+        return `0`
+      }
+  }
+
+  calculateTotal(){
+    this.total = 0
+    this.invoice.quotProducts.forEach(item=>{
+      this.total += (item.quantity*this.getProductPrice(item.productID))
+    })
+    return this.total
   }
 
 

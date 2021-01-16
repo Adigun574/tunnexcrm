@@ -46,11 +46,19 @@
                   <th>S/N</th>
                   <th>Product</th>
                   <th>Quantity</th>
+                  <th>Price</th>
               </tr>
               <tr *ngFor="let item of invoice.quotProducts; index as i">
                   <td>{{i+1}}</td>
                   <td>{{getProductName(item.productID)}}</td>
                   <td>{{item.quantity}}</td>
+                  <td>{{item.quantity * getProductPrice(item.productID)}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td><b>Total</b></td>
+                <td>{{calculateTotal()}}</td>
               </tr>
             </table>
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
@@ -62,7 +70,7 @@
         <div class="mt-4">
             <button class="btn btn-primary pull-right mr-2" (click)="print()">Print</button>
             <button class="btn btn-success pull-right mr-2" [routerLink]="['/main/proforma-invoice']">Back</button>
-            <!-- <button class="btn btn-warning pull-right mr-2" (click)="open(salesModal)">Convert To Sale</button> -->
+            <button class="btn btn-warning pull-right mr-2" (click)="open(salesModal)">Convert To Sale</button>
         </div>
     </div>
 </div>
@@ -148,6 +156,9 @@
           <td>
             <b>Item</b>
           </td>
+          <td>
+            <b>Price</b>
+          </td>
         </thead>
         <tr *ngFor="let order of invoice.quotProducts; index as i" style="border-bottom:1px dotted black">
           <td>
@@ -158,7 +169,16 @@
           </td>
           <td>
             {{getProductName(order.productID)}}
+          </td>   
+          <td>
+            {{getProductPrice(order.productID)}}
           </td>    
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>Total</b></td>
+          <td><b>{{calculateTotal()}}</b></td>
         </tr>
       </table>
     </div>
