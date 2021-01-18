@@ -46,7 +46,7 @@ export class SkillService {
   }
 
   updateStaff(obj){
-    return this.httpClient.post(`${this.generalService.api}Staff/Update`,obj)
+    return this.httpClient.post(`${this.generalService.api}Staff/UpdateStaff`,obj)
   }
 
   deleteEmployee(id){

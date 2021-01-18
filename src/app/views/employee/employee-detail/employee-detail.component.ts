@@ -5,6 +5,7 @@ import { SkillService } from '../../../services/skill.service';
 import { date } from '../../../classes/date';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-detail',
@@ -117,11 +118,22 @@ export class EmployeeDetailComponent implements OnInit {
     delete this.selectedEmployee.userModified
     this.selectedEmployee.image = ''
     // console.log(JSON.stringify(this.selectedEmployee))
-    this.skillService.updateStaff(this.selectedEmployee).subscribe(data=>{
+    // this.skillService.updateStaff(this.selectedEmployee).subscribe(data=>{
+    this.skillService.updateStaff(this.editEmployeeDetailsForm.value).subscribe(data=>{
       this.updatingEmployee = false
+      Swal.fire(
+        'Success',
+        'Staff Updated',
+        'success'
+      )
     },
       err=>{
         this.updatingEmployee = false
+        Swal.fire(
+          'Oops',
+          'Something went wrong',
+          'error'
+        )
       })
   }
 
