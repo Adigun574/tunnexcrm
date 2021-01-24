@@ -105,6 +105,14 @@
                     <label class="form-label"> Relationship to next of kin:</label>
                     <input type="text" class="form-control" formControlName="relationshipToNextofKin">
                 </div>
+                <div>
+                    <label class="form-label">Pension</label>
+                    <input type="text" class="form-control" formControlName="pension">
+                </div>
+                <div>
+                    <label class="form-label">National Identification Number[NIN]</label>
+                    <input type="text" class="form-control" formControlName="nin">
+                </div>
                 <button class="btn btn-danger mr-2 ml-2" (click)="deleteStaff()">
                     <span class="spinner-grow spinner-grow-sm" *ngIf="deletingEmployee"></span>      
                     <i class="fa fa-trash"></i>               

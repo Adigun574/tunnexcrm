@@ -82,7 +82,9 @@ export class EmployeeDetailComponent implements OnInit {
       designation:[this.selectedEmployee.designation],
       relationshipToNextofKin:[this.selectedEmployee.relationshipToNextofKin],
       middleName:[this.selectedEmployee.middleName],
-      secondPhone:[this.selectedEmployee.secondPhone]
+      secondPhone: [this.selectedEmployee.secondPhone],
+      pension: [this.selectedEmployee.pension],
+      nin: [this.selectedEmployee.nin]
     })
     this.qualificationForm = this.fb.group({
       id: 0,
