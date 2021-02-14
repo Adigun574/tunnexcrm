@@ -4,6 +4,7 @@ import { ProductService } from '../../../services/product.service' ;
 import { Product } from '../../../models/product';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-edit-product',
@@ -23,6 +24,7 @@ export class EditProductComponent implements OnInit {
     imageUrl: null
   }
   image
+  currentUser:User
 
   constructor(
     private route:ActivatedRoute,
@@ -31,6 +33,7 @@ export class EditProductComponent implements OnInit {
     private http: HttpClient
   ) { 
     this.productId = +this.route.snapshot.params.id
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
   }
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class EditProductComponent implements OnInit {
     this.product.quantity = +this.product.quantity
     this.product.salePrice = +this.product.salePrice
     this.product.costPrice = +this.product.costPrice
+    this.product.UserModified = this.currentUser.id
     // console.log(this.product)
     this.productService.updateProduct(this.product).subscribe(data=>{
       this.updating = false

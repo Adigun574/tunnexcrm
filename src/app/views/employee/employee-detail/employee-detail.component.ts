@@ -67,11 +67,11 @@ export class EmployeeDetailComponent implements OnInit {
       qualifications:[this.selectedEmployee.qualifications],
       id:[this.selectedEmployee.id],
       //
-      dateofBirth:[this.selectedEmployee.dateofBirth],
+      dateofBirth:[this.selectedEmployee.dateofBirth.split('T')[0]],
       gender:[this.selectedEmployee.gender],
       dateCreated: [date()],
       dateModified: [date()],
-      dateEmployed: [this.selectedEmployee.dateEmployed],
+      dateEmployed: [this.selectedEmployee.dateEmployed.split('T')[0]],
       nextofKin:[this.selectedEmployee.nextofKin],
       nextofKinAddress:[this.selectedEmployee.nextofKinAddress],
       nextofKinPhone:[this.selectedEmployee.nextofKinPhone],
@@ -82,7 +82,9 @@ export class EmployeeDetailComponent implements OnInit {
       designation:[this.selectedEmployee.designation],
       relationshipToNextofKin:[this.selectedEmployee.relationshipToNextofKin],
       middleName:[this.selectedEmployee.middleName],
-      secondPhone:[this.selectedEmployee.secondPhone]
+      secondPhone:[this.selectedEmployee.secondPhone],
+      nin:[this.selectedEmployee.nin],
+      pension:[this.selectedEmployee.pension]
     })
     this.qualificationForm = this.fb.group({
       id: 0,
@@ -98,7 +100,6 @@ export class EmployeeDetailComponent implements OnInit {
     this.loadingDetails = true
     this.skillService.getSingleStaff(this.employeeId).subscribe(data=>{
       this.selectedEmployee = <any>data
-      // console.log(this.selectedEmployee)
       this.setForms()
       this.loadingDetails = false
     },
@@ -176,7 +177,6 @@ export class EmployeeDetailComponent implements OnInit {
 
   getStaffSkillbyStaffID(){
     this.skillService.getStaffSkillByStaffID(this.employeeId).subscribe(data=>{
-      // console.log(data)
       this.staffSkills = <any[]>data
     },
       err=>{

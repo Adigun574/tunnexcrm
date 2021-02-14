@@ -68,7 +68,9 @@ export class EmployeesComponent implements OnInit {
       designation:[''],
       relationshipToNextofKin:[''],
       middleName:[''],
-      secondPhone:['']
+      secondPhone:[''],
+      nin:[''],
+      pension:['']
     })
   }
 

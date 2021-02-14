@@ -85,4 +85,12 @@ export class SkillService {
     return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffKPI`)
   }
 
+  getAllStaffSkillByStartDateAndEndDate(startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffSkill?sdate=${startDate}&edate=${endDate}`)
+  }
+
+  getAllStaffKPIByStartDateAndEndDate(startDate,endDate){
+    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffKPI??sdate=${startDate}&edate=${endDate}`)
+  }
+
 }

@@ -1,6 +1,24 @@
 <app-loader *ngIf="loading"></app-loader>
 <div *ngIf="!loading && loadedStaff && loadedSkills">
     <h3 class="text-center mt-4 mb-4">Staff KPI</h3>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="form-label">From Date</label>
+          <input class="form-control" type="date" [(ngModel)]="startDate">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label class="form-label">From Date</label>
+          <input class="form-control" type="date" [(ngModel)]="endDate">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-primary mt-4" (click)="filter()">Filter <i class="fa fa-filter"></i></button>
+        <button class="btn btn-success mt-4" (click)="reset()">Reset <i class="fa fa-reset"></i></button>
+      </div>
+    </div>
     <div class="table-responsive mt-2">
         <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
       <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
@@ -24,7 +42,7 @@
           <tr *ngFor="let staffSkill of staffSkills">
               <td *ngIf="staffSkill.staffId != 0">{{getStaffName(staffSkill.staffId)}}</td>
               <td *ngIf="staffSkill.staffId != 0">{{staffSkill.allSkillsOrKpis.length}}</td>
-              <td *ngIf="staffSkill.staffId != 0">{{staffSkill.overallCompetence}}</td>
+              <td *ngIf="staffSkill.staffId != 0">{{staffSkill.overallCompetence}}%</td>
               <td *ngIf="staffSkill.staffId != 0"><button class="btn btn-success" (click)="open(skillsModal); selectStaffSkill(staffSkill)">View</button></td>
             </tr>
         </tbody>

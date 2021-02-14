@@ -105,6 +105,14 @@
                     <label class="form-label"> Relationship to next of kin:</label>
                     <input type="text" class="form-control" formControlName="relationshipToNextofKin">
                 </div>
+                <div class="form-group">
+                    <label class="form-label"> NIN:</label>
+                    <input type="text" class="form-control" formControlName="nin">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"> Pension:</label>
+                    <input type="text" class="form-control" formControlName="pension">
+                </div>
                 <button class="btn btn-danger mr-2 ml-2" (click)="deleteStaff()">
                     <span class="spinner-grow spinner-grow-sm" *ngIf="deletingEmployee"></span>      
                     <i class="fa fa-trash"></i>               
@@ -163,8 +171,13 @@
                         <th>Action<i class="ion text-muted ml-2"></i></th>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let staffSkill of staffSkills" >
+                    <!-- <tr *ngFor="let staffSkill of staffSkills" >
                         <td>{{getSkillName(staffSkill.skillID)}}</td>
+                        <td>{{staffSkill.competencyValue}}%</td>
+                        <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
+                    </tr> -->
+                    <tr *ngFor="let staffSkill of staffSkills.allSkillsOrKpis" >
+                        <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
                         <td>{{staffSkill.competencyValue}}%</td>
                         <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
                     </tr>
@@ -175,8 +188,9 @@
                     <div class="card p-3">
                         <small class="text-center text-danger" *ngIf="invalidGrade">Enter a value between 0-5</small>
                         <div class="form-group">
-                            <label class="form-label">{{getSkillName(selectedStaffSkill.skillID)}} <small>(0-5)</small></label>
-                            <input type="number" class="form-control" [(ngModel)]="sas" max="5">
+                            <!-- <label class="form-label">{{getSkillName(selectedStaffSkill.skillID)}} <small>(0-5)</small></label> -->
+                            <label class="form-label">{{getSkillName(selectedStaffSkill.skillorKPIID)}} <small>(0-5)</small></label>
+                            <input type="number" class="form-control" [(ngModel)]="sas" max="5" min="1">
                         </div>
                         <div> 
                             <button class="btn btn-success pull-right" (click)="assess()">

@@ -26,7 +26,6 @@ export class QuotationComponent implements OnInit {
   selectedCustomer:Customer
   savingQuotation:boolean = false
   total = 0
-  
 
 
   constructor(
@@ -69,9 +68,11 @@ export class QuotationComponent implements OnInit {
   }
 
   quickSelect(product){
-    this.cart.push(product)
-    this.qtyArray.push(1)
-    this.calculateTotal()
+    if(product){
+      this.cart.push(product)
+      this.qtyArray.push(1)
+      this.calculateTotal()
+    }
   }
 
   deleteProduct(i){

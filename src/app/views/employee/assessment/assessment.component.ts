@@ -22,13 +22,16 @@ export class AssessmentComponent implements OnInit {
 
   selectedStaffSkillToGrade
 
+  startDate = null
+  endDate = null
+
   constructor(
     private skillService:SkillService,
     private modalService:NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.getAllStaffSkill()
+    // this.getAllStaffSkill()
     this.getStaffs()
     this.getStaffSkills()
   }
@@ -60,6 +63,7 @@ export class AssessmentComponent implements OnInit {
       // console.log(data)
       this.staff = <any[]>data
       this.loadedStaff = true
+      this.getStaffSkillByDates(0,0)
     },
       err=>{
         
@@ -117,10 +121,11 @@ export class AssessmentComponent implements OnInit {
       // console.log(this.selectedStaffSkill)
       // console.log(JSON.stringify(this.selectedStaffSkill))
       this.skillService.upDateStaffSkill(this.selectedStaffSkill).subscribe(data=>{
-        this.getAllStaffSkill()
+        // this.getAllStaffSkill()
         this.grading = false
         this.modalService.dismissAll()
         this.selectedStaffSkill.assessments = []
+        this.getStaffSkillByDates(0,0)
       },
         err=>{
           this.grading = false
@@ -128,6 +133,40 @@ export class AssessmentComponent implements OnInit {
           this.selectedStaffSkill.assessments = []
         })
     }
+  }
+
+  /////
+
+  getStaffSkillByDates(startDate,endDate){
+    this.loading = true
+    // console.log({startDate,endDate})
+    this.skillService.getAllStaffSkillByStartDateAndEndDate(startDate, endDate).subscribe(data=>{
+      // console.log(data)
+      this.staffSkills = <any[]>data
+      this.staffSkills.forEach(skill=>{
+        if(!skill.allSkillsOrKpis){
+          skill.allSkillsOrKpis = []
+        }
+      })
+      this.loading = false
+    },
+      err=>{
+        console.log(err)
+      })
+  }
+
+  filter(){
+    let a = this.startDate.split('-')
+    let newStartDate = `${a[2]}-${a[1]}-${a[0]}`
+    let b = this.endDate.split('-')
+    let newEndDate = `${b[2]}-${b[1]}-${b[0]}`
+    this.getStaffSkillByDates(newStartDate, newEndDate)
+  }
+
+  reset(){
+    this.getStaffSkillByDates(0,0)
+    this.startDate = null
+    this.endDate = null
   }
 
 }

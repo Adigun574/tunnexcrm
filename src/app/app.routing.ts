@@ -53,7 +53,7 @@ import { PurchaseOrderDetailComponent } from './views/sale/purchase-order-detail
 import { RefundComponent } from './views/sale/refund/refund.component';
 import { SpecialComponent } from './views/sale/special/special.component';
 // import { HomeComponent } from './views/home/home.component';
-
+ 
 export const routes: Routes = [
   {
     path:'',
@@ -66,9 +66,10 @@ export const routes: Routes = [
       {
         path:'',
         component:SalesReportComponent,
-        data: {
-          title: 'saleshistory'
-        }
+        // data: {
+        //   title: 'saleshistory'
+        // },
+        // canActivate:[AuthGuard]
       },
       {
         path:'customers',
@@ -148,13 +149,18 @@ export const routes: Routes = [
       },
       {
         path:'messaging',
-        component:MessagingComponent
+        component:MessagingComponent,
+        data: {
+          title: 'messages'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'training-programs',
         component:TrainingProgramsComponent,
         data: {
-          title: 'training programmes'
+          // title: 'trainingprogrammes'
+          title: 'skills'
         },
         canActivate:[AuthGuard]
       },
@@ -248,7 +254,11 @@ export const routes: Routes = [
       },
       {
         path:'showwaybills',
-        component:Waybill2Component
+        component:Waybill2Component,
+        data: {
+          title: 'waybill'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'view-waybill/:id',
@@ -309,10 +319,22 @@ export const routes: Routes = [
       {
         path:'special',
         component:SpecialComponent,
+        data: {
+          title: 'special'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'refund',
         component:RefundComponent,
+      },
+      {
+        path:'inventory',
+        component:InventoryComponent,
+        data: {
+          title: 'inventory'
+        },
+        canActivate:[AuthGuard]
       },
       {
         path:'**',

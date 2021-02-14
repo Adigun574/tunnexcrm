@@ -18,7 +18,7 @@
                   </thead>
                   <tr *ngFor="let order of orders; index as i">
                     <td>
-                      <input type="number" style="width:50px" (input)="setQuantity(quantity.value,i)" #quantity [(ngModel)]="order.quantity">
+                      <input type="number" style="width:50px" (input)="setQuantity(quantity.value,i)" #quantity [(ngModel)]="order.quantity" min="1">
                     </td>
                     <td>
                       {{order.name}}
@@ -273,7 +273,7 @@
   <table>
     <tr>
       <td>Invoice No:</td>
-      <td><b>#{{invoiceNo}}</b></td>
+      <td><b>#00000{{invoiceNo}}</b></td>
     </tr>
   </table>
   <div style="text-align:center; font-family: 'Times New Roman', Times, serif">

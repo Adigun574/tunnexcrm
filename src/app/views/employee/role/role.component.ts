@@ -75,6 +75,7 @@ export class RoleComponent implements OnInit {
       this.roles = <Role[]>data
       this.dataSource = new MatTableDataSource<Role>(this.roles);
       this.loadingRoles = false
+      // console.log(this.roles)
     },
       err=>{
         this.loadingRoles = false
@@ -90,7 +91,7 @@ export class RoleComponent implements OnInit {
         // console.log(err)
       })
   }
-
+ 
   setRoleObj(){
     this.roleObj = {
       Name: "",
@@ -229,7 +230,7 @@ export class RoleComponent implements OnInit {
           DateModified: date()
         },
         {
-          Name: "training programmes",
+          Name: "trainingprogrammes",
           Code: "",
           Read: true,
           Write: true,
@@ -374,14 +375,14 @@ export class RoleComponent implements OnInit {
   edit(role,modal){
     this.selectedRole = role
     this.open(modal)
-    console.log(this.selectedRole)
+    // console.log(this.selectedRole)
   }
 
   updateRole(){
     this.savingRole = true
-    console.log(this.selectedRole)
+    // console.log(this.selectedRole)
     this.roleService.updateRole(this.selectedRole).subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.savingRole = false
       this.getAllRoles()
       this.modalService.dismissAll()
