@@ -26,6 +26,8 @@ export class EmployeeDetailComponent implements OnInit {
   deletingEmployee:boolean = false
   staffSkills = []
   skills = []
+  staffKPIs = []
+  kpis = []
   selectedStaffSkill:any
   sas:number
   invalidGrade:boolean = false
@@ -49,6 +51,8 @@ export class EmployeeDetailComponent implements OnInit {
     this.getSingleEmployee()
     this.getStaffSkillbyStaffID()
     this.getStaffSkills()
+    this.getStaffKPIbyStaffID()
+    this.getStaffKPIs()
   }
 
   open(content){
@@ -155,7 +159,7 @@ export class EmployeeDetailComponent implements OnInit {
   deleteStaff(){
     this.deletingEmployee = true
     this.skillService.deleteEmployee(this.employeeId).subscribe(data=>{
-      console.log(data)
+      // console.log(data)
       this.deletingEmployee = false
       this.router.navigateByUrl('main/employees')
     },
@@ -175,6 +179,17 @@ export class EmployeeDetailComponent implements OnInit {
       })
   }
 
+  getStaffKPIs(){
+    this.skillService.getAllKpi().subscribe(data=>{
+      this.kpis = <any[]>data
+      this.loadedSkills = true
+      // console.log(this.kpis)
+    },
+      err=>{
+
+      })
+  }
+
   getStaffSkillbyStaffID(){
     this.skillService.getStaffSkillByStaffID(this.employeeId).subscribe(data=>{
       this.staffSkills = <any[]>data
@@ -184,6 +199,17 @@ export class EmployeeDetailComponent implements OnInit {
       })
   }
 
+  getStaffKPIbyStaffID(){
+    this.skillService.getStaffKPIByStaffID(this.employeeId).subscribe(data=>{
+      this.staffKPIs = <any[]>data
+      // console.log(this.staffKPIs)
+    },
+      err=>{
+
+      })
+  }
+  
+
   getSkillName(id){
     if(id==0){
       return `null`
@@ -191,6 +217,16 @@ export class EmployeeDetailComponent implements OnInit {
     else{
       let skill = this.skills.find(x=>x.id == id)
       return `${skill.name}`
+    }
+  }
+
+  getKPIName(id){
+    if(id==0){
+      return `null`
+    }
+    else{
+      let kpi = this.kpis.find(x=>x.id == id)
+      return `${kpi.name}`
     }
   }
 
@@ -212,6 +248,7 @@ export class EmployeeDetailComponent implements OnInit {
       })
       this.skillService.upDateStaffSkill(this.selectedStaffSkill).subscribe(data=>{
         this.getStaffSkillbyStaffID()
+        this.getStaffKPIbyStaffID()
         this.grading = false
         this.modalService.dismissAll()
         this.selectedStaffSkill.assessments = []
@@ -222,6 +259,10 @@ export class EmployeeDetailComponent implements OnInit {
           this.selectedStaffSkill.assessments = []
         })
     }
+  }
+
+  toFixed(a){
+    return a.toFixed(2)
   }
 
 

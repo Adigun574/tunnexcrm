@@ -169,4 +169,8 @@ export class AssessmentComponent implements OnInit {
     this.endDate = null
   }
 
+  toFixed(a){
+    return a.toFixed(2)
+  }
+
 }

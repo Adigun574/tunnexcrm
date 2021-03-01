@@ -65,6 +65,10 @@ export class SkillService {
     return this.httpClient.get(`${this.generalService.api}StaffSkill/GetStaffSkillsByStaffID/${id}`)
   }
 
+  getStaffKPIByStaffID(id){
+    return this.httpClient.get(`${this.generalService.api}StaffSkill/GetStaffKpisByStaffID/${id}`)
+  }
+
   getAllKpi(){
     return this.httpClient.get(`${this.generalService.api}Skill/GetAllKpis`)
   }
@@ -90,7 +94,7 @@ export class SkillService {
   }
 
   getAllStaffKPIByStartDateAndEndDate(startDate,endDate){
-    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffKPI??sdate=${startDate}&edate=${endDate}`)
+    return this.httpClient.get(`${this.generalService.api}StaffSkillorKPICompetency/GetAllbyStaffKPI?sdate=${startDate}&edate=${endDate}`)
   }
 
 }

@@ -178,7 +178,7 @@
                     </tr> -->
                     <tr *ngFor="let staffSkill of staffSkills.allSkillsOrKpis" >
                         <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
-                        <td>{{staffSkill.competencyValue}}%</td>
+                        <td>{{toFixed(staffSkill.competencyValue)}}%</td>
                         <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
                     </tr>
                     </tbody>
@@ -190,6 +190,42 @@
                         <div class="form-group">
                             <!-- <label class="form-label">{{getSkillName(selectedStaffSkill.skillID)}} <small>(0-5)</small></label> -->
                             <label class="form-label">{{getSkillName(selectedStaffSkill.skillorKPIID)}} <small>(0-5)</small></label>
+                            <input type="number" class="form-control" [(ngModel)]="sas" max="5" min="1">
+                        </div>
+                        <div> 
+                            <button class="btn btn-success pull-right" (click)="assess()">
+                                <span class="spinner-grow spinner-grow-sm" *ngIf="grading"></span>                                 
+                                Grade
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </ng-template>
+    </ngb-tab>   
+    <ngb-tab title="Staff KPI">
+        <ng-template ngbTabContent>
+            <div>
+                <table class="table table-striped card-table" id="tableRecord">
+                    <thead>
+                        <th>KPI <i class="ion text-muted ml-2"></i></th>
+                        <th>Competency <i class="ion text-muted ml-2"></i></th>
+                        <th>Action<i class="ion text-muted ml-2"></i></th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let staffSkill of staffKPIs.allSkillsOrKpis" >
+                        <td>{{getKPIName(staffSkill.skillorKPIID)}}</td>
+                        <td>{{toFixed(staffSkill.competencyValue)}}%</td>
+                        <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <ng-template #grade>
+                    <div class="card p-3">
+                        <small class="text-center text-danger" *ngIf="invalidGrade">Enter a value between 0-5</small>
+                        <div class="form-group">
+                            <label class="form-label">{{getKPIName(selectedStaffSkill.skillorKPIID)}} <small>(0-5)</small></label>
                             <input type="number" class="form-control" [(ngModel)]="sas" max="5" min="1">
                         </div>
                         <div> 

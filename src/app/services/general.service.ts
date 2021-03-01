@@ -7,9 +7,11 @@ export class GeneralService {
 
   // public api = `https://api.tunnexlabcrm.com/api/`
 
-  public api = `http://kolatcode-001-site1.ctempurl.com/api/`
+  // public api = `http://kolatcode-001-site1.ctempurl.com/api/`
 
   // public api = 'http://kolat55-001-site1.gtempurl.com/api/'
+
+  public api = 'http://sunkan-001-site1.btempurl.com/api/'
 
   constructor() { }
 }

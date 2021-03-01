@@ -165,5 +165,9 @@ export class KpiDetailsComponent implements OnInit {
     this.getStaffSkillByDates(0,0)
   }
 
+  toFixed(a){
+    return a.toFixed(2)
+  }
+
 
 }

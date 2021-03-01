@@ -74,7 +74,7 @@
       <tbody>
         <tr *ngFor="let staffSkill of selectedStaffSkill.allSkillsOrKpis" >
           <td>{{getSkillName(staffSkill.skillorKPIID)}}</td>
-          <td class="text-center">{{staffSkill.competencyValue}}</td>
+          <td class="text-center">{{toFixed(staffSkill.competencyValue)}}%</td>
           <td><button class="btn btn-success" (click)="open(grade); selectStaffSkill(staffSkill)">Grade</button></td>
         </tr>
       </tbody>

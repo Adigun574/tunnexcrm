@@ -69,7 +69,7 @@ export class KpiComponent implements OnInit {
     }
     else{
       this.saving = true
-      console.log(this.addProgramForm.value)
+      // console.log(this.addProgramForm.value)
       this.skillService.saveSkill(this.addProgramForm.value).subscribe(data=>{
         this.saving = false
         this.getSkills()
