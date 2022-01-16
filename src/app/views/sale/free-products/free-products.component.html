@@ -52,7 +52,7 @@
                 <td>{{getCustomerName(debtor.customerID)}}</td>
                 <td>{{debtor.datePaid.split('T')[0]}}</td>
                 <td>{{debtor.invoiceNo}}</td>  
-                <td>‎₦{{debtor.amount}}</td>  
+                <td>‎₦{{debtor.amount | number}}</td>  
                 <td style="display:inline-flex" *ngIf="specialAccess">Actions
                     <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
                       <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 

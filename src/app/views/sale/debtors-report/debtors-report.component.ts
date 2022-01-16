@@ -64,7 +64,7 @@ export class DebtorsReportComponent implements OnInit {
     this.customerService.getAllCustomers().subscribe(data=>{
       this.customers = <Customer[]>data
       this.customers.forEach(cust=>{
-        cust.fullName = `${cust.firstName} ${cust.lastName}`
+        cust.fullName = `${cust?.firstName} ${cust?.lastName}`
       })
       // console.log(this.customers)
       this.loadingReport = false
@@ -79,7 +79,7 @@ export class DebtorsReportComponent implements OnInit {
       return `Guest Customer`
     }
     let cust = this.customers.find(x=>x.id == id)
-    return `${cust.firstName} ${cust.lastName}`
+    return `${cust?.firstName} ${cust?.lastName}`
   }
 
   print(){

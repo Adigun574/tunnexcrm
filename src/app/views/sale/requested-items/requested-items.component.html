@@ -22,7 +22,7 @@
         <tr *ngFor="let product of products; index as i" >
             <td>{{i+1}}</td>
             <td>{{product.name}}</td>
-            <td>‎₦{{product.salePrice}}</td>
+            <td>‎₦{{product.salePrice | number}}</td>
             <td>{{product.totalSold}}</td>    
         </tr>
         </tbody>

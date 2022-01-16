@@ -80,15 +80,15 @@
                                 >
                             </td>
                             <td>{{item.name}}</td>
-                            <td>{{item.salePrice}}</td>
-                            <td>{{item.salePrice * qtyArray[i]}}</td>
+                            <td>{{item.salePrice | number}}</td>
+                            <td>{{item.salePrice * qtyArray[i] | number}}</td>
                             <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td><b>Total</b></td>
-                            <td><b>{{total}}</b></td>
+                            <td><b>{{total | number}}</b></td>
                         </tr>
                     </table>
                     <hr>
@@ -128,15 +128,15 @@
             <tr *ngFor="let item of cart; index as i" style="border-bottom: 1px dotted black;">
                 <td>{{qtyArray[i]}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.salePrice}}</td>
-                <td>{{item.salePrice * qtyArray[i]}}</td>
+                <td>{{item.salePrice | number}}</td>
+                <td>{{item.salePrice * qtyArray[i] | number}}</td>
                 <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td><b>Total</b></td>
-                <td><b>{{total}}</b></td>
+                <td><b>{{total | number}}</b></td>
                 <td><i class="fa fa-trash"></i></td>
             </tr>
         </table>

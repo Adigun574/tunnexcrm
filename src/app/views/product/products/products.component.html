@@ -27,9 +27,10 @@
         </div> -->
         <div class="col-sm-3" *ngFor="let product of displayedProducts" (click)="viewProduct(product.id)">
             <div class="mb-2 mr-2 mt-1 inner-card product-card" style="background-image: url({{product.image}});">
-                <small class="low-text" *ngIf="product.quantity<20">Low</small>
+                <small class="low-text" *ngIf="product.quantity<20 && product.quantity>0">Low</small>
+                <small class="low-text" *ngIf="product.quantity == 0">Out of Stock</small>
                 <p class="name d-none">{{product.name}}</p>
-                <p class="price">₦{{product.salePrice.toFixed(2)}}</p>
+                <p class="price">₦{{product.salePrice | number }}</p>
             </div>
             <p class="name-2">{{product.name}}</p>
         </div>

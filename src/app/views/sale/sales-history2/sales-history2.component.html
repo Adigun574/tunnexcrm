@@ -68,7 +68,7 @@
             </div>         
           </td>
           <td>{{getCustomerName(sale.customerID)}}</td>
-          <td><span>&#8358;</span>{{sale.cart.amount.toFixed(2)}}</td>
+          <td><span>&#8358;</span>{{sale.cart.amount | number}}</td>
           <td>{{sale.invoice.invoiceNo}}</td>
           <td style="display:inline-flex">Actions
             <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">

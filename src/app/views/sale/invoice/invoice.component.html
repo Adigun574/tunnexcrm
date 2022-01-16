@@ -32,7 +32,7 @@
             <table>
                 <tr>
                   <td>Delivery fee</td>
-                  <td><b>₦{{invoice.deliveryFee}}</b></td>
+                  <td><b>₦{{invoice.deliveryFee | number}}</b></td>
                 </tr>
                 <tr>
                   <td>Discount(%)</td>
@@ -40,15 +40,15 @@
                 </tr>
                 <tr>
                     <td>Amount.</td>
-                    <td><b>₦{{invoice.amount}}</b></td>
+                    <td><b>₦{{invoice.amount | number}}</b></td>
                 </tr>
                 <tr>
                     <td>Amount Paid</td>
-                    <td><b>₦{{invoice.amountPaid}}</b></td>
+                    <td><b>₦{{invoice.amountPaid | number}}</b></td>
                 </tr>
                 <tr>
                     <td>Balance</td>
-                    <td><b>₦{{invoice.balance}}</b></td>
+                    <td><b>₦{{invoice.balance | number}}</b></td>
                 </tr>
             </table>
         </div>
@@ -65,7 +65,7 @@
                     <td>{{i+1}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.quantity}}</td>
-                    <td>{{item.amount}}</td>
+                    <td>{{item.amount | number}}</td>
                 </tr>
             </table>
             <!--returned stock below-->
@@ -83,7 +83,7 @@
                       <td>{{i+1}}</td>
                       <td>{{item.name}}</td>
                       <td>{{item.quantity}}</td>
-                      <td>{{item.amount}}</td>
+                      <td>{{item.amount | number}}</td>
                   </tr>
                 </table>
               </div>
@@ -101,7 +101,7 @@
                   </tr>
                   <tr *ngFor="let item of salesObj.payment; index as i">
                       <td>{{i+1}}</td>
-                      <td>{{item.amount}}</td>
+                      <td>{{item.amount | number}}</td>
                       <td>{{item.method}}</td>
                       <td>{{item.reference}}</td>
                       <td>{{item.datePaid.split('T')[0]}}</td>
@@ -196,7 +196,7 @@
             {{order.name}}
           </td>
           <td>
-            ₦{{order.amount}}.00
+            ₦{{order.amount | number}}
           </td>          
         </tr>
         <tr style="border-bottom:1px dotted black">
@@ -210,7 +210,7 @@
               Total Amount
             </td>
             <td>
-              ₦{{invoice.amount}}.00
+              ₦{{invoice.amount | number}}
             </td>          
           </tr>
           <tr style="border-bottom:1px dotted black">
@@ -224,7 +224,7 @@
               Amount Paid
             </td>
             <td>
-              ₦{{invoice.amountPaid}}.00
+              ₦{{invoice.amountPaid | number}}
             </td>          
           </tr>
           <tr style="border-bottom:1px dotted black" *ngFor="let pay of salesObj.payment">
@@ -238,7 +238,7 @@
               {{pay.method}} ({{pay.datePaid.split('T')[0]}})
             </td>
             <td>
-              ₦{{pay.amount}}.00
+              ₦{{pay.amount | number}}
             </td>          
           </tr>
           <tr style="border-bottom:1px dotted black">
@@ -252,7 +252,7 @@
               Balance
             </td>
             <td>
-              ₦{{invoice.balance}}.00
+              ₦{{invoice.balance | number}}
             </td>          
           </tr>
       </table>

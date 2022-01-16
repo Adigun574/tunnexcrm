@@ -72,9 +72,9 @@
                 <td>{{getCustomerName(debtor.customerID)}}</td>
                 <td>{{debtor.invoiceDate.split('T')[0]}}</td>
                 <td>{{debtor.invoiceNo}}</td>  
-                <td>‎₦{{debtor.amount}}</td>  
-                <td>‎₦{{debtor.amountPaid}}</td>
-                <td>‎₦{{debtor.balance}}</td>
+                <td>‎₦{{debtor.amount | number}}</td>  
+                <td>‎₦{{debtor.amountPaid | number}}</td>
+                <td>‎₦{{debtor.balance | number}}</td>
             </tr>
         <!-- </ng-template> -->
         </tbody>
