@@ -101,7 +101,9 @@
           <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
      </thead>
     <tbody>
-      <tr *ngFor="let sale of sales; index as i" style="border-bottom: 1px dotted black;">
+      <!--paginate-->
+      <!---paginate: config;-->
+      <tr *ngFor="let sale of sales; index as i"  style="border-bottom: 1px dotted black;">
         <td>{{i+1}}</td>
         <td>{{ sale.dateCreated.split('T')[0] }}</td>
         <!-- <td>
@@ -112,6 +114,23 @@
         <td>{{sale.invoice.invoiceNo}}</td>
       </tr>
     </tbody>
-    <!-- <small class="sss">smslsl</small> -->
 </table>
-</div>
+
+<!--paginate-->
+<!-- <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<!-- <div class="course">
+
+  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+      <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
+      ....
+  </mat-table>
+
+  <mat-paginator [length]="course?.lessonsCount" [pageSize]="3"
+                 [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+
+</div>-->
+
+</div> -->

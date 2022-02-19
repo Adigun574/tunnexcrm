@@ -3,6 +3,8 @@ import { SaleService } from '../../../services/sale.service';
 import { CustomerService } from '../../../services/customer.service';
 import { Customer } from '../../../models/customer';
 import { Formats } from '../../../classes/print';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-debtors-report',
@@ -22,7 +24,8 @@ export class DebtorsReportComponent implements OnInit {
 
   constructor(
     private saleService:SaleService,
-    private customerService:CustomerService
+    private customerService:CustomerService,
+    private router:Router,
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +43,11 @@ export class DebtorsReportComponent implements OnInit {
       err=>{
         this.loadingReport = false
       })
+  }
+
+  openInvoice(customerID,invoiceNo){
+    // console.log(customerID,invoiceNo)
+    this.router.navigateByUrl(`/main/invoice/${customerID}/${invoiceNo}`)
   }
 
   filterReport(){

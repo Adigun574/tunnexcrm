@@ -113,7 +113,13 @@
             <!-- TABLE FOR CART WILL BE HERE!!!<br>
                         TABLE FOR CART WILL BE HERE!!! -->
         <p>You were served by <b>{{ getUserName(invoice.userCreated)}}</b></p>
+        
         </div>
+        <div class="mt-2">
+          <app-totals></app-totals>
+        </div>
+        
+        
         <div class="mt-4">
             <button class="btn btn-primary pull-right mr-2" (click)="print()">Print</button>
             <button class="btn btn-primary pull-right mr-2" (click)="open(payment)" [disabled]="invoice.balance<1">Add Payment</button>
@@ -277,6 +283,7 @@
           </tr>
       </table>
     </div>
+    
     <p>You were served by <b>{{ getUserName(invoice.userCreated)}}</b></p>
     <p>Thanks for your patronage</p>
   </div>

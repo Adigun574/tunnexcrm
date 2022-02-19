@@ -65,8 +65,9 @@ export class ProformaDetailsComponent implements OnInit {
       this.loading = false
       // console.log(data)
       this.invoices = <any[]>data
+      console.log(this.invoices)
       this.invoice = this.invoices.find(x=>x.id == this.invoiceID)
-      // console.log(this.invoice)
+      console.log(this.invoice)
     },
       err=>{
         this.loading = false
@@ -194,7 +195,7 @@ export class ProformaDetailsComponent implements OnInit {
   calculateTotal(){
     this.total = 0
     this.invoice.quotProducts.forEach(item=>{
-      this.total += (item.quantity*this.getProductPrice(item.productID))
+      this.total += (item.quantity*item.unitPrice)
     })
     return this.total
   }

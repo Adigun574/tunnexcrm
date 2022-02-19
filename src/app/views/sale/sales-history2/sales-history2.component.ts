@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './sales-history2.component.html',
   styleUrls: ['./sales-history2.component.css']
 })
-export class SalesHistory2Component implements OnInit {
 
+export class SalesHistory2Component implements OnInit {
+  saleCount:number=0;
   sales:any[] = []
   customers:any[] = []
   loadingReport:boolean = false
@@ -21,7 +22,8 @@ export class SalesHistory2Component implements OnInit {
   endDate = `0000-00-00`
   selectedCustomer
   specialAccess:boolean = false
-
+ config:any;
+  
   constructor(
     private saleService:SaleService,
     private customerService:CustomerService,
@@ -41,6 +43,9 @@ export class SalesHistory2Component implements OnInit {
     if(this.router.url.includes('special')){
       this.specialAccess = true
     }
+
+    
+   // console.log(this.saleCount)
   }
 
   ngOnInit(): void {
@@ -48,14 +53,41 @@ export class SalesHistory2Component implements OnInit {
     // this.getSales()
     // this.getSalesByDate(this.today)
     this.getSalesByCustStartandEndDate(0,0,0)
+    
+
+    console.log("onInit function, ln61" +" "+ this.saleCount);
   }
+
+  onChangePage(sales: Array<any>) {
+    // update current page of items
+    this.sales = sales;
+  }
+
+  pageChanged(event){
+    console.log("page changed "+event);
+    this.config.currentPage = event;
+
+  }
+  
+  
+  
 
   getSalesByCustStartandEndDate(customerID,startDate,endDate){
     this.loadingReport = true
     this.saleService.getSalesHistoryByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loadingReport = false
       // console.log(data)
+      
       this.sales = <any[]>data
+
+      //paginate
+      // this.saleCount=this.sales.length;
+      // this.config = {
+      //   itemsPerPage: 10,
+      //   currentPage: 2,
+      //   totalItems: 420
+      // };
+      // console.log("main function" +" "+ this.saleCount);
     },
       err=>{
         this.loadingReport = false

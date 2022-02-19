@@ -26,12 +26,14 @@ import { PurchaseOrderReportComponent } from './purchase-order-report/purchase-o
 import { PurchaseOrderDetailComponent } from './purchase-order-detail/purchase-order-detail.component';
 import { RefundComponent } from './refund/refund.component';
 import { SpecialComponent } from './special/special.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TotalsComponent } from './invoice/totals/totals.component';
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent, RefundComponent, SpecialComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent, RefundComponent, SpecialComponent, TotalsComponent],
   imports: [
+    NgxPaginationModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,

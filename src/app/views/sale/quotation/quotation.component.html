@@ -28,8 +28,9 @@
                 <div>
                     <div class="row">
                         <div class="col-sm-6" *ngFor="let product of products" (click)="addToCart(product)">
+                            
                             <div class="product-card">
-                                <!-- <p class="item-price">₦{{product.salePrice}}</p> -->
+                                <small class="low-text bg-danger">{{product.quantity}}</small>
                                 <p class="item-name">{{product.name}}</p>
                             </div>
                         </div>
@@ -80,15 +81,21 @@
                                 >
                             </td>
                             <td>{{item.name}}</td>
-                            <td>{{item.salePrice | number}}</td>
-                            <td>{{item.salePrice * qtyArray[i] | number}}</td>
+                            <td>
+                                <input type="number" 
+                                    style="width:50px"
+                                    [(ngModel)]="priceArray[i]"
+                                    (change)="calculateTotal()"
+                                >
+                            </td>
+                            <td>{{priceArray[i] * qtyArray[i] | number:'1.2-3'}}</td>
                             <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td><b>Total</b></td>
-                            <td><b>{{total | number}}</b></td>
+                            <td><b>{{total | number:'1.2-3'}}</b></td>
                         </tr>
                     </table>
                     <hr>
@@ -128,8 +135,8 @@
             <tr *ngFor="let item of cart; index as i" style="border-bottom: 1px dotted black;">
                 <td>{{qtyArray[i]}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.salePrice | number}}</td>
-                <td>{{item.salePrice * qtyArray[i] | number}}</td>
+                <td>{{priceArray[i]}}</td>
+                <td>{{priceArray[i] * qtyArray[i] | number}}</td>
                 <td><i class="fa fa-trash" (click)="deleteProduct(i)"></i></td>
             </tr>
             <tr>

@@ -20,6 +20,7 @@ export class QuotationComponent implements OnInit {
   products:Product[]
   cart = []
   qtyArray = []
+  priceArray=[]
   loading:boolean = false
   format  = new Formats()
   customers=[]
@@ -44,7 +45,8 @@ export class QuotationComponent implements OnInit {
     this.loading = true
     this.prodcutService.getAllProducts().subscribe(data=>{
       this.loading = false
-      this.products = <Product[]>data
+      let prods = <Product[]>data
+      this.products=prods.filter(x=>x.quantity > 0)
       // console.log(data)
     },
       err=>{
@@ -64,6 +66,7 @@ export class QuotationComponent implements OnInit {
   addToCart(product){
     this.cart.push(product)
     this.qtyArray.push(1)
+    this.priceArray.push(0)
     this.calculateTotal()
   }
 
@@ -71,6 +74,7 @@ export class QuotationComponent implements OnInit {
     if(product){
       this.cart.push(product)
       this.qtyArray.push(1)
+      this.priceArray.push(0)
       this.calculateTotal()
     }
   }
@@ -78,19 +82,25 @@ export class QuotationComponent implements OnInit {
   deleteProduct(i){
     this.cart.splice(i,1)
     this.qtyArray.splice(i,0)
+    this.priceArray.splice(i,0)
     this.calculateTotal()
   }
 
   reset(){
     this.cart = []
     this.qtyArray = []
+    this.priceArray = []
   }
 
   calculateTotal(){
     this.total = 0
+    
     this.cart.forEach((car,i)=>{
-      this.total += (car.salePrice * this.qtyArray[i])
+      this.total += ( this.priceArray[i]* this.qtyArray[i])
+      console.log("price is "+this.priceArray[i])
+      console.log("qty is "+this.qtyArray[i])
     })
+    console.log("total is "+ this.total)
   }
 
   print(){
@@ -107,18 +117,21 @@ export class QuotationComponent implements OnInit {
       userModified: 0,
     }
     let quotProducts = []
-    this.cart.forEach(item=>{
+
+    this.cart.forEach((item,i)=>{
       quotProducts.push({
-        productID:item.id
+        productID:item.id,
+        quantity:this.qtyArray[i],
+        unitPrice:this.priceArray[i]
       })
     })
     obj.quotProducts = quotProducts
     obj.customerID = this.selectedCustomer.id
-    // console.log(obj)
+     console.log(obj.quotProducts)
     // console.log(JSON.stringify(obj))
     this.saleService.saveQuotation(obj).subscribe(data=>{
       this.savingQuotation = false
-      console.log(data)
+      //console.log(data)
       Swal.fire(
         'Success',
         'Quotation Saved',
@@ -157,7 +170,8 @@ export class QuotationComponent implements OnInit {
     this.cart.forEach((item,i)=>{
       quotProducts.push({
         productID:item.id,
-        quantity:this.qtyArray[i]
+        quantity:this.qtyArray[i],
+        unitPrice:this.priceArray[i]
       })
     })
     obj.quotProducts = quotProducts

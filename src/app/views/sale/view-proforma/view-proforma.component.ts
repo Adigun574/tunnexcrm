@@ -58,6 +58,7 @@ export class ViewProformaComponent implements OnInit {
       this.loadingReport = false
       // console.log(data)
       this.sales = <any[]>data
+       console.log(this.sales)
     },
       err=>{
         this.loadingReport = false

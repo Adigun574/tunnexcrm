@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -52,6 +52,10 @@ import { EmployeeModule } from './views/employee/employee.module';
 import { MessagingComponent } from './views/messaging/messaging.component';
 import { LoginComponent } from './views/login/login.component';
 import { ProductModule } from './views/product/product.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+//import { TotalsComponent } from './views/sale/invoice/totals/totals.component';
+
+
 
 @NgModule({
   imports: [
@@ -77,13 +81,15 @@ import { ProductModule } from './views/product/product.module';
     CustomerModule,
     SaleModule,
     EmployeeModule,
-    ProductModule
+    ProductModule,
+    NgxPaginationModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     MessagingComponent,
     LoginComponent,
+   // TotalsComponent,
     // P404Component,
     // P500Component,
     // LoginComponent,
@@ -91,6 +97,9 @@ import { ProductModule } from './views/product/product.module';
   ],
   entryComponents: [
     // DialogBoxComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
 
   providers: [

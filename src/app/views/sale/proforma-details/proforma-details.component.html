@@ -52,13 +52,13 @@
                   <td>{{i+1}}</td>
                   <td>{{getProductName(item.productID)}}</td>
                   <td>{{item.quantity}}</td>
-                  <td>{{item.quantity * getProductPrice(item.productID) | number}}</td>
+                  <td>{{item.unitPrice | number:'1.2-3'}}</td>
               </tr>
               <tr>
                 <td></td>
                 <td></td>
                 <td><b>Total</b></td>
-                <td>{{calculateTotal() | number}}</td>
+                <td>{{calculateTotal() | number:'1.2-3'}}</td>
               </tr>
             </table>
             <!-- TABLE FOR CART WILL BE HERE!!!<br>

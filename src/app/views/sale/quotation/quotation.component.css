@@ -7,6 +7,15 @@
     display: flex;
     justify-content: flex-end;
 }
+.low-text {
+    color: white;
+    background-color: rgb(216, 27, 27);
+    border-radius: 3px;
+    padding: 3px;
+    display: inline-block;
+    margin:0;
+  }
+  
 .product-card{
     background-color:white;
     color:black;
@@ -15,6 +24,8 @@
     border-radius:5px;
     box-shadow:2px 2px 2px #555;
     padding:5px;
+    padding-left: 0;
+    padding-top: 0;
     margin:5px;
     display: flex;
     justify-content: center;

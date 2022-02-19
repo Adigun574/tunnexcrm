@@ -24,6 +24,8 @@ export class PurchaseOrderDetailComponent implements OnInit {
   fetchingCustomers:boolean = true
   format  = new Formats()
   users:User[] = []
+  nairaAmount=0
+  foreignAmount=0
 
 
 
@@ -53,7 +55,13 @@ export class PurchaseOrderDetailComponent implements OnInit {
       // console.log(data)
       let invoices = <any[]>data
       this.invoice = invoices.find(x=>x.id == this.purchaseID)
-      console.log(this.invoice)
+      let inv=invoices.filter(x=>x.supplierID == this.invoice.supplierID)
+      
+      for(let i=0;i<inv.length;i++)
+      {
+          this.nairaAmount+=inv[i].totalAmountNaira;
+          this.foreignAmount+=inv[i].totalAmountForeign;
+      }
     },
       err=>{
         this.loading = false

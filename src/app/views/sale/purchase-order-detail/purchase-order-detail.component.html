@@ -55,6 +55,23 @@
             </table>
        
         </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <td class="mr-2"><h4> Total Amount In Naira </h4></td>
+                <td> <h4>Total Amount Paid in {{invoice.exchangeCurrency}}</h4></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mr-2"><h2 class="text-warning">₦{{nairaAmount|number}}</h2></td>
+                <td ><h2 class="text-success">{{getCurrencySymbol(invoice.exchangeCurrency)}}{{foreignAmount|number}}</h2></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+        
         <div class="mt-4">
             <button class="btn btn-primary pull-right mr-2" (click)="print()">Print</button>
             <button class="btn btn-success pull-right mr-2" [routerLink]="['/main/purchase-report']">Back</button>
