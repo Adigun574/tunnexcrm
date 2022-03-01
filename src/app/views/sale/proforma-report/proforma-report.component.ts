@@ -1,17 +1,21 @@
+
 import { Component, OnInit } from '@angular/core';
-import { SaleService } from '../../../services/sale.service';
-import { CustomerService } from '../../../services/customer.service';
 import { Formats } from '../../../classes/print';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../../services/customer.service';
+import { SaleService } from '../../../services/sale.service';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
-  selector: 'app-sales-history2',
-  templateUrl: './sales-history2.component.html',
-  styleUrls: ['./sales-history2.component.css']
+  selector: 'app-proforma-report',
+  templateUrl: './proforma-report.component.html',
+  styleUrls: ['./proforma-report.component.css']
 })
 
-export class SalesHistory2Component implements OnInit {
-  saleCount:number=0;
+
+
+export class ProformaReportComponent implements OnInit {
+
   sales:any[] = []
   customers:any[] = []
   loadingReport:boolean = false
@@ -21,13 +25,13 @@ export class SalesHistory2Component implements OnInit {
   startDate = `0000-00-00`
   endDate = `0000-00-00`
   selectedCustomer
-  specialAccess:boolean = false
- config:any;
-  
+  products = []
+
   constructor(
     private saleService:SaleService,
     private customerService:CustomerService,
-    private router:Router
+    private router:Router,
+    private productService:ProductService
   ) { 
     let d = new Date()
     let day:any = d.getDate()
@@ -40,12 +44,6 @@ export class SalesHistory2Component implements OnInit {
       month = `0${month}`
     }
     this.today = `${day}-${month}-${year}`
-    if(this.router.url.includes('special')){
-      this.specialAccess = true
-    }
-
-    
-   // console.log(this.saleCount)
   }
 
   ngOnInit(): void {
@@ -53,41 +51,16 @@ export class SalesHistory2Component implements OnInit {
     // this.getSales()
     // this.getSalesByDate(this.today)
     this.getSalesByCustStartandEndDate(0,0,0)
-    
-
-    console.log("onInit function, ln61" +" "+ this.saleCount);
+    this.getProducts()
   }
-
-  onChangePage(sales: Array<any>) {
-    // update current page of items
-    this.sales = sales;
-  }
-
-  pageChanged(event){
-    console.log("page changed "+event);
-    this.config.currentPage = event;
-
-  }
-  
-  
-  
 
   getSalesByCustStartandEndDate(customerID,startDate,endDate){
     this.loadingReport = true
-    this.saleService.getSalesHistoryByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+    this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       this.loadingReport = false
       // console.log(data)
-      
       this.sales = <any[]>data
-
-      //paginate
-      this.saleCount=this.sales.length;
-      this.config = {
-        itemsPerPage: 10,
-        currentPage: 2,
-        totalItems: 420
-      };
-      // console.log("main function" +" "+ this.saleCount);
+       console.log(this.sales)
     },
       err=>{
         this.loadingReport = false
@@ -162,22 +135,30 @@ export class SalesHistory2Component implements OnInit {
     }
   }
 
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = <any[]>data
+    })
+  }
+
+  getProductName(id){
+    try{
+    let product = this.products.find(x=>x.id == id)
+    return `${product.name}`
+    }
+    catch{
+      return `Guest Customer`
+    }
+  }
+
   print(id){
     this.format.printDiv(id)
   }
 
-  openInvoice(customerID,invoiceNo){
-    // console.log(customerID,invoiceNo)
-    this.router.navigateByUrl(`/main/invoice/${customerID}/${invoiceNo}`)
+  openInvoice(id){
+    this.router.navigateByUrl(`/main/view-proforma-detail/${id}`)
   }
 
-  deleteSale(invoiceNo){
-    // console.log(invoiceNo)
-    this.saleService.deleteSale(invoiceNo).subscribe(data=>{
-      this.getSalesByCustStartandEndDate(0,0,0)
-    },
-      err=>{
-      })
-  }
+
 
 }

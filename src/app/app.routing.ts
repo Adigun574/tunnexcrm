@@ -47,7 +47,9 @@ import { KpiComponent } from './views/employee/kpi/kpi.component';
 import { KpiDetailsComponent } from './views/employee/kpi-details/kpi-details.component';
 import { PurchaseComponent } from './views/sale/purchase/purchase.component';
 import { ViewProformaComponent } from './views/sale/view-proforma/view-proforma.component';
+import { ProformaReportComponent } from './views/sale/proforma-report/proforma-report.component';
 import { ProformaDetailsComponent } from './views/sale/proforma-details/proforma-details.component';
+import { ViewProformaDetailComponent } from './views/sale/view-proforma-detail/view-proforma-detail.component';
 import { PurchaseOrderReportComponent } from './views/sale/purchase-order-report/purchase-order-report.component';
 import { PurchaseOrderDetailComponent } from './views/sale/purchase-order-detail/purchase-order-detail.component';
 import { RefundComponent } from './views/sale/refund/refund.component';
@@ -307,6 +309,14 @@ export const routes: Routes = [
       {
         path:'proforma-details/:id',
         component:ProformaDetailsComponent,
+      },
+      {
+        path:'view-proforma-detail/:id',
+        component:ViewProformaDetailComponent,
+      },
+      {
+        path:'proforma-report',
+        component:ProformaReportComponent,
       },
       {
         path:'purchase-report',

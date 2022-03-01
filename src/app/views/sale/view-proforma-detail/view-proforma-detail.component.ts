@@ -1,0 +1,216 @@
+import { Component, OnInit } from '@angular/core';
+import { User } from '../../../models/user';
+import { Customer } from '../../../models/customer';
+import { Formats } from '../../../classes/print';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SaleService } from '../../../services/sale.service';
+import { CustomerService } from '../../../services/customer.service';
+import { UserService } from '../../../services/user.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import Swal from 'sweetalert2';
+import { ProductService } from '../../../services/product.service';
+
+@Component({
+  selector: 'app-view-proforma-detail',
+  templateUrl: './view-proforma-detail.component.html',
+  styleUrls: ['./view-proforma-detail.component.css']
+})
+
+
+export class ViewProformaDetailComponent implements OnInit {
+
+  invoiceID
+  invoice
+  loading:boolean = true
+  amount
+  currentUser:User
+  paying:boolean = false
+  customers:Customer[] = []
+  fetchingCustomers:boolean = true
+  format  = new Formats()
+  invoices
+  users = []
+  products = []
+  obj
+  total = 0
+
+
+
+  constructor(
+    private route:ActivatedRoute,
+    private saleService:SaleService,
+    private customerService:CustomerService,
+    private userService:UserService,
+    private modalService:NgbModal,
+    private router:Router,
+    private productService:ProductService
+  ) { 
+    this.invoiceID = +this.route.snapshot.params.id
+    this.currentUser = JSON.parse(localStorage.getItem("tunnexcrmuser"))
+  }
+
+  ngOnInit(): void {
+    this.getCustomers()
+    this.getSalesByCustStartandEndDate(0,0,0)
+    this.getUsers()
+    this.getProducts()
+  }
+
+  open(content){
+    this.modalService.open(content,{centered:true})
+  }
+
+  getSalesByCustStartandEndDate(customerID,startDate,endDate){
+    this.loading = true
+      this.saleService.getProformaInvoiceByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+     // this.saleService.getQuotationByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
+      this.loading = false
+       console.log(data)
+      this.invoices = <any[]>data
+      console.log(this.invoices)
+      this.invoice = this.invoices.find(x=>x.id == this.invoiceID)
+      console.log(this.invoice)
+    },
+      err=>{
+        this.loading = false
+        console.log(err)
+      })
+  }
+
+
+  getCustomers(){
+    this.customerService.getAllCustomers().subscribe(data=>{
+      this.customers = <Customer[]>data
+      this.fetchingCustomers = false
+    },
+      err=>{
+
+      })
+  }
+
+  getCustomerName(id){
+    let cust = this.customers.find(x=>x.id == id)
+    if(!cust){
+      return `Guest Customer`
+    }
+    return `${cust.firstName} ${cust.lastName}`
+  }
+
+  getUsers(){
+    this.userService.getUsers().subscribe(data=>{
+      // console.log(data)
+      this.users = <any[]>data
+    },
+    err=>{
+      console.log(err)
+    })
+  }
+
+  getUserName(id){
+    let user = this.users.find(x=>x.id == id)
+    if(!user){
+      user = this.users[0]
+    }
+    return `${user.name}`
+  }
+
+  print(){
+    this.format.printDiv('toPrint')
+  }
+
+  discountStuff = 0
+  lpo = ''
+  deliveryFee = 0
+  delivery = false
+  saving:boolean = false
+
+  completeSale(){
+    this.saving = true
+    // let obj = {
+    //   customerID:this.invoice.customerID,
+    //   quotProducts:this.invoice.quotProducts,
+    //   id:0
+    // }
+    this.obj = {
+      customerID:this.invoice.customerID,
+      quotProducts:[]
+    }
+    this.invoice.cart.items.forEach(item=>{
+      this.obj.quotProducts.push({
+        id:0,
+        quotationID:this.invoice.id,
+        productID:item.productID,
+        quantity:item.quantity
+      })
+    })
+    this.obj.quotProducts.forEach(prod=>{
+      prod.id = 0
+    })
+    // console.log(JSON.stringify(obj))
+    // console.log(obj,this.discountStuff,this.lpo,this.deliveryFee,this.delivery)
+    // return
+    this.saleService.convertQuotationToSale(this.obj,this.lpo,this.delivery,this.deliveryFee,this.discountStuff).subscribe(data=>{
+      this.saving = false
+      this.modalService.dismissAll()
+      // console.log(data)
+      Swal.fire(
+        'Success',
+        'Sale Completed',
+        'success'
+      ).then((result) => {
+        this.router.navigateByUrl('/main/pos')
+      })
+    },
+      err=>{
+        this.saving = false
+        console.log(err)
+        Swal.fire(
+          'Oops',
+          'Something went wrong',
+          'error'
+        )
+      })
+  }
+
+  getProducts(){
+    this.productService.getAllProducts().subscribe(data=>{
+      this.products = <any[]>data
+    })
+  }
+
+  getProductName(id){
+    try{
+    let product = this.products.find(x=>x.id == id)
+    return `${product.name}`
+    }
+    catch{
+      return `Guest Customer`
+    }
+  }
+
+  getProductPrice(id){
+    try{
+      let product = this.products.find(x=>x.id == id)
+      return product.salePrice
+      }
+      catch{
+        return `0`
+      }
+  }
+
+  calculateTotal(){
+    this.total = 0
+    
+    this.invoice.cart.items.forEach(item=>{
+      //console.log(item.ProductID);
+      this.total += (item.quantity * this.getProductPrice(item.productID))
+      //console.log(item.quantity);
+      //console.log(this.getProductPrice(item.ProductID));
+      //this.total += (item.quantity*item.unitPrice)
+    })
+    return this.total
+  }
+
+
+}
+

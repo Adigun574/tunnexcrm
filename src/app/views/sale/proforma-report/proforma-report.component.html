@@ -2,7 +2,7 @@
 
 <div *ngIf="!loadingReport">
   <div class="mt-2 mb-4">
-    <h3 class="text-center text-muted">SALES REPORT <small>{{today}}</small></h3>
+    <h3 class="text-center text-muted">PROFORMA REPORT</h3>
   </div>
   
   <div> 
@@ -39,20 +39,27 @@
           </a>
         </div>
       </div>
-  <div class="table-responsive mt-2" id="toprint" style="padding-bottom:70px">
+  <div class="table-responsive mt-2" id="toprint">
       <img *ngIf="loading" src="assets/img/loader.gif" style="width:30%;margin-left:30%;">
     <table  *ngIf="!loading" class="table table-striped card-table" id="tableRecord">
       <thead>
-            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <!-- <th>S/N <i class="ion text-muted ml-2"></i></th>
             <th>Date <i class="ion text-muted ml-2"></i></th>
             <th>Items <i class="ion text-muted ml-2"></i></th>
             <th>Customer <i class="ion text-muted ml-2"></i></th>
             <th>Amount <i class="ion text-muted ml-2"></i></th>
             <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+            <th></th> -->
+            <th>S/N <i class="ion text-muted ml-2"></i></th>
+            <th>Date <i class="ion text-muted ml-2"></i></th>
+            <th>Items <i class="ion text-muted ml-2"></i></th>
+            <th>Customer <i class="ion text-muted ml-2"></i></th>
+            <!-- <th>Amount <i class="ion text-muted ml-2"></i></th> -->
+            <!-- <th>Invoice No. <i class="ion text-muted ml-2"></i></th> -->
             <th></th>
        </thead>
       <tbody>
-        <tr *ngFor="let sale of sales|paginate: config; index as i" >
+        <!-- <tr *ngFor="let sale of sales; index as i" >
           <td>{{i+1}}</td>
           <td>{{ sale.dateCreated.split('T')[0] }}</td>
           <td style="display:inline-flex">Items
@@ -68,8 +75,8 @@
             </div>         
           </td>
           <td>{{getCustomerName(sale.customerID)}}</td>
-          <td><span>&#8358;</span>{{sale.cart.amount | number}}</td>
-          <td>{{sale.invoice.invoiceNo}}</td>
+          <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
+          <td>{{sale.invoiceNo}}</td>
           <td style="display:inline-flex">Actions
             <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
               <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
@@ -78,9 +85,39 @@
                   </button>   
               </div>
               <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
-                  <a class="dropdown-item cursor-pointer" (click)="openInvoice(sale.customerID,sale.invoice.invoiceNo)">View Invoice</a>
-                  <a class="dropdown-item cursor-pointer" (click)="deleteSale(sale.invoice.invoiceNo)" *ngIf="specialAccess">Delete Sale</a>
-                </div>
+                  <a class="dropdown-item cursor-pointer" (click)="openInvoice(sale.id)">View Invoice</a>
+              </div>
+            </div>         
+          </td>
+        </tr> -->
+        <tr *ngFor="let sale of sales; index as i" >
+          <td>{{i+1}}</td>
+          <td>{{ sale.dateCreated.split('T')[0] }}</td>
+          <td style="display:inline-flex">Items
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item" *ngFor="let item of sale.quotProducts">{{getProductName(item.productID)}}<b>({{item.quantity}})</b></a>
+              </div>
+            </div>         
+          </td>
+          <td>{{getCustomerName(sale.customerID)}}</td>
+          <!-- <td><span>&#8358;</span>{{sale.cart.amount}}.00</td> -->
+          <!-- <td>{{sale.invoiceNo}}</td> -->
+          <td style="display:inline-flex">Actions
+            <div class="contacts-dropdown side-ellipsis dropdown-div" ngbDropdown [placement]="!isRTL ? 'bottom-right' : 'bottom-left'">
+              <div ngbDropdownToggle style="width:7px" class="cursor-pointer"> 
+                  <button class="btn btn btn-sm btn-default icon-btn borderless btn-round md-btn-flat hide-arrow">
+                  <span class="fa fa-ellipsis-v"></span>
+                  </button>   
+              </div>
+              <div ngbDropdownMenu [class.dropdown-menu-right]="!isRTL">
+                  <a class="dropdown-item cursor-pointer" (click)="openInvoice(sale.id)">View Quotation</a>
+              </div>
             </div>         
           </td>
         </tr>
@@ -91,46 +128,28 @@
 </div>
 
 <div id="toPrint">
+  <h4 class="d-none">QUOTATION</h4>
 <table id="tableRecordToPrint" class="d-none">
     <thead style="border-bottom: 1px solid black;">
           <th>S/N <i class="ion text-muted ml-2"></i></th>
           <th>Date <i class="ion text-muted ml-2"></i></th>
           <!-- <th>Items <i class="ion text-muted ml-2"></i></th> -->
           <th>Customer <i class="ion text-muted ml-2"></i></th>
-          <th>Amount <i class="ion text-muted ml-2"></i></th>
-          <th>Invoice No. <i class="ion text-muted ml-2"></i></th>
+          <!-- <th>Amount <i class="ion text-muted ml-2"></i></th> -->
+          <!-- <th>Invoice No. <i class="ion text-muted ml-2"></i></th> -->
      </thead>
     <tbody>
-      <!--paginate-->
-      
-      <tr *ngFor="let sale of sales; index as i"  style="border-bottom: 1px dotted black;">
+      <tr *ngFor="let sale of sales; index as i" style="border-bottom: 1px dotted black;">
         <td>{{i+1}}</td>
         <td>{{ sale.dateCreated.split('T')[0] }}</td>
         <!-- <td>
           <span *ngFor="let item of sale.cart.items" class="d-block"> {{item.quantity}} X {{item.name}}</span><br>
         </td> -->
         <td>{{getCustomerName(sale.customerID)}}</td>
-        <td><span>&#8358;</span>{{sale.cart.amount}}.00</td>
-        <td>{{sale.invoice.invoiceNo}}</td>
+        <!-- <td><span>&#8358;</span>{{sale.cart.amount}}.00</td> -->
+        <!-- <td>{{sale.invoiceNo}}</td> -->
       </tr>
     </tbody>
+    <!-- <small class="sss">smslsl</small> -->
 </table>
-
-<!--paginate-->
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
-<!-- <div class="course">
-
-  <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-      <mat-spinner></mat-spinner>
-  </div>
-
-  <mat-table class="lessons-table mat-elevation-z8" [dataSource]="dataSource">
-      ....
-  </mat-table>
-
-  <mat-paginator [length]="course?.lessonsCount" [pageSize]="3"
-                 [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
-
-</div>-->
-
 </div>

@@ -28,10 +28,12 @@ import { RefundComponent } from './refund/refund.component';
 import { SpecialComponent } from './special/special.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TotalsComponent } from './invoice/totals/totals.component';
+import { ProformaReportComponent } from './proforma-report/proforma-report.component';
+import { ViewProformaDetailComponent } from './view-proforma-detail/view-proforma-detail.component';
 
 
 @NgModule({
-  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent, RefundComponent, SpecialComponent, TotalsComponent],
+  declarations: [SalesReportComponent, InventoryComponent, RequestedItemsComponent, PosComponent, SalesHistoryComponent, InvoiceComponent, DebtorsReportComponent, QuotationComponent, WaybillComponent, SalesHistory2Component, Waybill2Component, ViewWaybillComponent, FreeProductsComponent, SupplierComponent, PurchaseComponent, ViewProformaComponent, ProformaDetailsComponent, PurchaseOrderReportComponent, PurchaseOrderDetailComponent, RefundComponent, SpecialComponent, TotalsComponent, ProformaReportComponent, ViewProformaDetailComponent],
   imports: [
     NgxPaginationModule,
     CommonModule,

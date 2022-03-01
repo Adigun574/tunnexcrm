@@ -38,7 +38,7 @@ customerID
     this.saleService.getSalesHistoryByCustomerStarDateEndDate(customerID,startDate,endDate).subscribe(data=>{
       //this.loadingReport = false
       this.sales = <Sale[]>data
-      console.log(data);
+     // console.log(data);
       for(let i=0;i<this.sales.length-1;i++)
       {
         this.totalAmount+=this.sales[i].invoice.amount;
